@@ -64,7 +64,9 @@ namespace StarterAssets
 		private float _jumpTimeoutDelta;
 		private float _fallTimeoutDelta;
 
-	
+		// check game status
+		private bool isPaused;
+
 #if ENABLE_INPUT_SYSTEM
 		private PlayerInput _playerInput;
 #endif
@@ -115,6 +117,7 @@ namespace StarterAssets
 			JumpAndGravity();
 			GroundedCheck();
 			Move();
+			CheckAction();
 		}
 
 		private void LateUpdate()
@@ -264,5 +267,31 @@ namespace StarterAssets
 			// when selected, draw a gizmo in the position of, and matching radius of, the grounded collider
 			Gizmos.DrawSphere(new Vector3(transform.position.x, transform.position.y - GroundedOffset, transform.position.z), GroundedRadius);
 		}
-	}
+
+		private void CheckAction()
+		{
+			isPaused = GameObject.Find("GameManager").GetComponent<GameManager>().getIsPaused();
+
+            if (Input.GetKey(KeyCode.Q) && !isPaused)
+			{
+				// check inventory
+			}
+
+            if (Input.GetKey(KeyCode.F) && !isPaused)
+            {
+                // pick up tool
+            }
+
+            if (Input.GetKey(KeyCode.E) && !isPaused)
+            {
+                // interact with objects
+            }
+
+            if (Input.GetKey(KeyCode.Mouse1) && !isPaused)  // right click of mouse
+            {
+                // use tool
+            }
+        }
+
+    }
 }
