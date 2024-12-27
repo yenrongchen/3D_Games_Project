@@ -1,7 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
+using Unity.VisualScripting.Antlr3.Runtime;
 using UnityEngine;
-//using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
@@ -17,14 +18,23 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private float rotationSpeed = 1.0f;
 
-    [SerializeField]
-    private Transform cameraTransform;
+    //[SerializeField]
+    //private Transform cameraTransform;
 
     private bool isGround = true;
     private bool isWalking = true;
     private bool isPaused = false;
+    private bool onGround;
+
     private CharacterController controller;
-    //private PlayerInput playerInput;
+    private Vector3 playerVelocity;
+    private float gravityValue = -9.8f;
+
+    private float rotationX = 0;
+    public float lookSpeed = 2f;
+    public float lookXLimit = 45f;
+    //public Camera playerCamera;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -36,47 +46,70 @@ public class PlayerController : MonoBehaviour
     {
         isPaused = GameObject.Find("GameManager").GetComponent<GameManager>().getIsPaused();
         Move(isPaused, isWalking);
-        //rotateView();
+        rotateView(isPaused);
         CheckAction(isPaused);
     }
 
     private void Move(bool paused, bool state)
     {
-        float speed;
-        if (isWalking)
-        {
-            speed = walkSpeed;
-        }
-        else
-        {
-            speed = sprintSpeed;
-        }
-        
         if (!paused)
         {
-            float horizontal = Input.GetAxis("Horizontal");
-            float vertical = Input.GetAxis("Vertical");
-            transform.position = new Vector3(horizontal, 0, vertical) * speed * Time.deltaTime;
+            if (Input.GetKey(KeyCode.LeftShift))
+            {
+                if (isWalking)
+                {
+                    isWalking = false;
+                }
+                else
+                {
+                    isWalking = true;
+                }
+            }
 
-            Vector3 moveDirection = cameraTransform.forward * vertical + cameraTransform.right * horizontal;
-            moveDirection.y = 0f;
-            moveDirection.Normalize();
+            float speed;
+            if (isWalking)
+            {
+                speed = walkSpeed;
+            }
+            else
+            {
+                speed = sprintSpeed;
+            }
 
-            controller.Move(moveDirection * speed * Time.deltaTime);
+            onGround = controller.isGrounded;
+            if (onGround && playerVelocity.y < 0)
+            {
+                playerVelocity.y = 0f;
+            }
+
+            Vector3 move = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
+            controller.Move(move * Time.deltaTime * speed);
+
+            if (move != Vector3.zero)
+            {
+                gameObject.transform.forward = move;
+            }
+
+            // Makes the player jump
+            if (Input.GetKey(KeyCode.Space) && onGround)
+            {
+                playerVelocity.y += Mathf.Sqrt(jumpHeight * -2.0f * gravityValue);
+            }
+
+            playerVelocity.y += gravityValue * Time.deltaTime;
+            controller.Move(playerVelocity * Time.deltaTime);
         }
     }
 
-    private void rotateView()
+    private void rotateView(bool paused)
     {
-        float mouseX = Input.GetAxis("Mouse X") * rotationSpeed * Time.deltaTime;
-        float mouseY = Input.GetAxis("Mouse Y") * rotationSpeed * Time.deltaTime; 
-
-        Vector3 cameraEuler = cameraTransform.localEulerAngles;
-        cameraEuler.x -= mouseY;
-        cameraEuler.x = Mathf.Clamp(cameraEuler.x, -80f, 80f);
-        cameraTransform.localEulerAngles = cameraEuler;
-
-        transform.Rotate(0f, mouseX, 0f);
+        if (!paused)
+        {
+            rotationX += -Input.GetAxis("Mouse Y") * lookSpeed;
+            rotationX = Mathf.Clamp(rotationX, -lookXLimit, lookXLimit);
+            //playerCamera.transform.localRotation = Quaternion.Euler(rotationX, 0, 0);
+            transform.rotation *= Quaternion.Euler(0, Input.GetAxis("Mouse X") * lookSpeed, 0);
+        }
     }
 
     private void CheckAction(bool paused)
