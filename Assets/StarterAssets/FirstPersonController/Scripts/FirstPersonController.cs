@@ -59,6 +59,7 @@ namespace StarterAssets
 		private float _rotationVelocity;
 		private float _verticalVelocity;
 		private float _terminalVelocity = 53.0f;
+		private bool isWalking;
 
 		// timeout deltatime
 		private float _jumpTimeoutDelta;
@@ -114,15 +115,27 @@ namespace StarterAssets
 
 		private void Update()
 		{
-			JumpAndGravity();
-			GroundedCheck();
-			Move();
-			CheckAction();
+            isPaused = GameObject.Find("GameManager").GetComponent<GameManager>().getIsPaused();
+			if (!isPaused)
+			{
+                if (Input.GetKeyDown(KeyCode.LeftShift))
+                {
+					isWalking = !isWalking;
+                }
+
+                JumpAndGravity();
+				GroundedCheck();
+				Move(isWalking);
+				CheckAction();
+			}
 		}
 
 		private void LateUpdate()
 		{
-			CameraRotation();
+			if (!isPaused)
+			{
+				CameraRotation();
+			}
 		}
 
 		private void GroundedCheck()
@@ -154,16 +167,24 @@ namespace StarterAssets
 			}
 		}
 
-		private void Move()
+		private void Move(bool isWalking)
 		{
-			// set target speed based on move speed, sprint speed and if sprint is pressed
-			float targetSpeed = _input.sprint ? SprintSpeed : MoveSpeed;
+            // set target speed based on move or sprint
+            float targetSpeed = isWalking ? MoveSpeed : SprintSpeed;
+            //if (isWalking)
+            //{
+            //    targetSpeed = SprintSpeed;
+            //}
+            //else
+            //{
+            //    targetSpeed = MoveSpeed;
+            //}
 
-			// a simplistic acceleration and deceleration designed to be easy to remove, replace, or iterate upon
+            // a simplistic acceleration and deceleration designed to be easy to remove, replace, or iterate upon
 
-			// note: Vector2's == operator uses approximation so is not floating point error prone, and is cheaper than magnitude
-			// if there is no input, set the target speed to 0
-			if (_input.move == Vector2.zero) targetSpeed = 0.0f;
+            // note: Vector2's == operator uses approximation so is not floating point error prone, and is cheaper than magnitude
+            // if there is no input, set the target speed to 0
+            if (_input.move == Vector2.zero) targetSpeed = 0.0f;
 
 			// a reference to the players current horizontal velocity
 			float currentHorizontalSpeed = new Vector3(_controller.velocity.x, 0.0f, _controller.velocity.z).magnitude;
