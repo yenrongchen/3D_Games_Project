@@ -1840,7 +1840,7 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: f5574628d3fe36644abc27cb43fc5485,
         type: 3}
       propertyPath: m_Name
-      value: maze lv0
+      value: maze lv1
       objectReference: {fileID: 0}
     - target: {fileID: 1167243984323965579, guid: f5574628d3fe36644abc27cb43fc5485,
         type: 3}
