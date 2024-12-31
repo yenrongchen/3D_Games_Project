@@ -20,6 +20,7 @@ public class GameManager : MonoBehaviour
             {
                 Time.timeScale = 0; // pause the game
                 isPaused = true;
+                // TODO: show menu
             }
             else
             {
