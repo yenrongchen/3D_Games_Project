@@ -833,11 +833,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-<<<<<<< HEAD:Assets/Scenes/New Scene.unity
 --- !u!1001 &383132342
-=======
---- !u!1001 &259095319
->>>>>>> yen:Assets/Scenes/WaitingRoom.unity
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -845,7 +841,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-<<<<<<< HEAD:Assets/Scenes/New Scene.unity
     - target: {fileID: -8679921383154817045, guid: 99c0894f30b77e34c8bca5fde5ce55be,
         type: 3}
       propertyPath: m_LocalScale.x
@@ -896,83 +891,26 @@ PrefabInstance:
       propertyPath: m_LocalRotation.z
       value: -0.49999997
       objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 99c0894f30b77e34c8bca5fde5ce55be,
-=======
-    - target: {fileID: 1095943361971676667, guid: 7d094d2796cb0a14db1f0ceb4ed986e4,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1095943361971676667, guid: 7d094d2796cb0a14db1f0ceb4ed986e4,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1095943361971676667, guid: 7d094d2796cb0a14db1f0ceb4ed986e4,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1095943361971676667, guid: 7d094d2796cb0a14db1f0ceb4ed986e4,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1095943361971676667, guid: 7d094d2796cb0a14db1f0ceb4ed986e4,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1095943361971676667, guid: 7d094d2796cb0a14db1f0ceb4ed986e4,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1095943361971676667, guid: 7d094d2796cb0a14db1f0ceb4ed986e4,
-        type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1095943361971676667, guid: 7d094d2796cb0a14db1f0ceb4ed986e4,
->>>>>>> yen:Assets/Scenes/WaitingRoom.unity
-        type: 3}
+    - target: {fileID: -8679921383154817045, guid: 99c0894f30b77e34c8bca5fde5ce55be, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: 0
       objectReference: {fileID: 0}
-<<<<<<< HEAD:Assets/Scenes/New Scene.unity
-    - target: {fileID: -8679921383154817045, guid: 99c0894f30b77e34c8bca5fde5ce55be,
-=======
-    - target: {fileID: 1095943361971676667, guid: 7d094d2796cb0a14db1f0ceb4ed986e4,
->>>>>>> yen:Assets/Scenes/WaitingRoom.unity
-        type: 3}
+    - target: {fileID: -8679921383154817045, guid: 99c0894f30b77e34c8bca5fde5ce55be, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
       value: 0
       objectReference: {fileID: 0}
-<<<<<<< HEAD:Assets/Scenes/New Scene.unity
-    - target: {fileID: -8679921383154817045, guid: 99c0894f30b77e34c8bca5fde5ce55be,
-=======
-    - target: {fileID: 1095943361971676667, guid: 7d094d2796cb0a14db1f0ceb4ed986e4,
->>>>>>> yen:Assets/Scenes/WaitingRoom.unity
-        type: 3}
+    - target: {fileID: -8679921383154817045, guid: 99c0894f30b77e34c8bca5fde5ce55be, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-<<<<<<< HEAD:Assets/Scenes/New Scene.unity
     - target: {fileID: 919132149155446097, guid: 99c0894f30b77e34c8bca5fde5ce55be,
         type: 3}
       propertyPath: m_Name
       value: 796b3b0283794320bc74bbccf8578115.fbx
-=======
-    - target: {fileID: 8490623835577622212, guid: 7d094d2796cb0a14db1f0ceb4ed986e4,
-        type: 3}
-      propertyPath: m_Name
-      value: GameManager
->>>>>>> yen:Assets/Scenes/WaitingRoom.unity
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-<<<<<<< HEAD:Assets/Scenes/New Scene.unity
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 99c0894f30b77e34c8bca5fde5ce55be,
         type: 3}
@@ -1097,10 +1035,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 85.804, y: 89.312, z: 116.861}
-=======
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 7d094d2796cb0a14db1f0ceb4ed986e4, type: 3}
->>>>>>> yen:Assets/Scenes/WaitingRoom.unity
 --- !u!850595691 &535118670
 LightingSettings:
   m_ObjectHideFlags: 0
@@ -2226,11 +2160,7 @@ MonoBehaviour:
   m_LightCookieSize: {x: 1, y: 1}
   m_LightCookieOffset: {x: 0, y: 0}
   m_SoftShadowQuality: 0
-<<<<<<< HEAD:Assets/Scenes/New Scene.unity
 --- !u!1001 &1989231004
-=======
---- !u!1001 &1795101117007651411
->>>>>>> yen:Assets/Scenes/WaitingRoom.unity
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -2238,7 +2168,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-<<<<<<< HEAD:Assets/Scenes/New Scene.unity
     - target: {fileID: -8679921383154817045, guid: 2c3e9dffcd9607f4ab0cd637db593f1e,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2298,77 +2227,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: SM_Door_low
-=======
-    - target: {fileID: 7687140078049129808, guid: 513497ad19e6fc047ba80992c19744af,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 1.12
-      objectReference: {fileID: 0}
-    - target: {fileID: 7687140078049129808, guid: 513497ad19e6fc047ba80992c19744af,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.65
-      objectReference: {fileID: 0}
-    - target: {fileID: 7687140078049129808, guid: 513497ad19e6fc047ba80992c19744af,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 7.89
-      objectReference: {fileID: 0}
-    - target: {fileID: 7687140078049129808, guid: 513497ad19e6fc047ba80992c19744af,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0.7071068
-      objectReference: {fileID: 0}
-    - target: {fileID: 7687140078049129808, guid: 513497ad19e6fc047ba80992c19744af,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7687140078049129808, guid: 513497ad19e6fc047ba80992c19744af,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0.7071068
-      objectReference: {fileID: 0}
-    - target: {fileID: 7687140078049129808, guid: 513497ad19e6fc047ba80992c19744af,
-        type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7687140078049129808, guid: 513497ad19e6fc047ba80992c19744af,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7687140078049129808, guid: 513497ad19e6fc047ba80992c19744af,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: -90
-      objectReference: {fileID: 0}
-    - target: {fileID: 7687140078049129808, guid: 513497ad19e6fc047ba80992c19744af,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8205176753124263466, guid: 513497ad19e6fc047ba80992c19744af,
-        type: 3}
-      propertyPath: m_Name
-      value: Bed
->>>>>>> yen:Assets/Scenes/WaitingRoom.unity
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-<<<<<<< HEAD:Assets/Scenes/New Scene.unity
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 2c3e9dffcd9607f4ab0cd637db593f1e,
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 1469993166}
   m_SourcePrefab: {fileID: 100100000, guid: 2c3e9dffcd9607f4ab0cd637db593f1e, type: 3}
-=======
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 513497ad19e6fc047ba80992c19744af, type: 3}
->>>>>>> yen:Assets/Scenes/WaitingRoom.unity
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -2378,7 +2246,6 @@ SceneRoots:
   - {fileID: 492295181}
   - {fileID: 1671667124}
   - {fileID: 224177539}
-<<<<<<< HEAD:Assets/Scenes/New Scene.unity
   - {fileID: 1989231004}
   - {fileID: 1699378837}
   - {fileID: 383132342}
@@ -2388,7 +2255,3 @@ SceneRoots:
   - {fileID: 998001397}
   - {fileID: 909448969}
   - {fileID: 1907236590}
-=======
-  - {fileID: 1795101117007651411}
-  - {fileID: 259095319}
->>>>>>> yen:Assets/Scenes/WaitingRoom.unity
