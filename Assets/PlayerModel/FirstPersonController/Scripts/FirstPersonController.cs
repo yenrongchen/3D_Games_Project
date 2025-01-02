@@ -71,6 +71,12 @@ namespace StarterAssets
 		// animation
 		private Animator animator;
 
+        // HP
+        [Header("HP")]
+		public int HP = 3;
+
+		private int hp;
+
 #if ENABLE_INPUT_SYSTEM
 		private PlayerInput _playerInput;
 #endif
@@ -116,6 +122,8 @@ namespace StarterAssets
 			_fallTimeoutDelta = FallTimeout;
 
 			animator = this.GetComponentInChildren<Animator>();
+
+			hp = HP;
 		}
 
 		private void Update()
@@ -127,13 +135,16 @@ namespace StarterAssets
                 {
 					isWalking = !isWalking;
                 }
-
                 JumpAndGravity();
 				GroundedCheck();
 				Move(isWalking);
 				CheckAction();
 			}
-		}
+			if (GameOver())
+			{
+                // Game Over
+            }
+        }
 
 		private void LateUpdate()
 		{
@@ -323,5 +334,24 @@ namespace StarterAssets
             }
         }
 
+		public Vector3 getPosition()
+		{
+			return transform.position;
+		}
+
+		public void Hurt()
+		{
+			hp--;
+		}
+
+		public int getHP()
+		{
+			return hp;
+		}
+
+		private bool GameOver()
+		{
+			return hp == 0;
+		}
     }
 }
