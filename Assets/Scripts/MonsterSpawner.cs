@@ -1,15 +1,16 @@
-using Fungus;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerBackpack : MonoBehaviour
+public class MonsterSpawner : MonoBehaviour
 {
-    public int almondFirstTime;
+    public int level;
+
     // Start is called before the first frame update
     void Start()
     {
-        almondFirstTime = 0;
+        
     }
 
     // Update is called once per frame
@@ -17,6 +18,4 @@ public class PlayerBackpack : MonoBehaviour
     {
         
     }
-
-
 }

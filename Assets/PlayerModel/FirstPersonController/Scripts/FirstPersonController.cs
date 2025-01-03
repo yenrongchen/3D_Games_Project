@@ -339,9 +339,10 @@ namespace StarterAssets
 			return transform.position;
 		}
 
-		public void Hurt()
+		public void Hurt(int damage)
 		{
-			hp--;
+			hp -= damage;
+			print(hp);
 		}
 
 		public int getHP()
@@ -351,7 +352,7 @@ namespace StarterAssets
 
 		private bool GameOver()
 		{
-			return hp == 0;
+			return hp <= 0;
 		}
     }
 }

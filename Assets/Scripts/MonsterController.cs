@@ -1,7 +1,6 @@
 using StarterAssets;
 using System.Collections;
 using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
 
 public class MonsterController : MonoBehaviour
@@ -10,36 +9,53 @@ public class MonsterController : MonoBehaviour
 
     private Vector3 rayStart;
     private Vector3 playerPosition;
-    private Vector3 offset = new(0f, 0.5f, 0f);
+    private Vector3 offsetPlayer = new(0f, 0.5f, 0f);
+    private Vector3 offsetMonster;
     private Vector3 direction;
     private float distance;
 
     [SerializeField]
-    private float initAtkCD = 35f / 30f;
+    private float MonsterEyeHeight = 4f;
 
     [SerializeField]
-    private float wholeAtkCD = 79f / 30f;
+    private float initialAttackCDFrame = 35f;
+
+    [SerializeField]
+    private float wholeAttackCDFrame = 79f;
 
     private float cd;
+    private float initAtkCD;
+    private float wholeAtkCD;
+
+    [SerializeField]
+    private float attackRange = 1.2f;
+
+    [SerializeField]
+    private int attackDamage = 1;
 
     // Start is called before the first frame update
     void Start()
     {
         animator = GetComponent<Animator>();
         animator.SetInteger("state", 0);
+
+        initAtkCD = initialAttackCDFrame / 30f;
+        wholeAtkCD = wholeAttackCDFrame / 30f;
         cd = initAtkCD;
+
+        offsetMonster = new Vector3(0f, MonsterEyeHeight - 1.9f, 0f);
     }
 
     // Update is called once per frame
     void Update()
     {
-        playerPosition = GameObject.Find("Player").GetComponent<FirstPersonController>().getPosition() + offset;
+        playerPosition = GameObject.Find("Player").GetComponent<FirstPersonController>().getPosition() + offsetPlayer;
 
-        rayStart = new Vector3(transform.position.x, 1f, transform.position.z);
+        rayStart = transform.position + offsetMonster;
         direction = (playerPosition - rayStart).normalized;
-
-        distance = Mathf.Sqrt(Mathf.Pow(transform.position.x - playerPosition.x, 2f) + Mathf.Pow(transform.position.z - playerPosition.z, 2f));
         
+        distance = Mathf.Sqrt(Mathf.Pow(transform.position.x - playerPosition.x, 2f) + Mathf.Pow(transform.position.z - playerPosition.z, 2f));
+
         Ray ray = new(rayStart, direction);
         RaycastHit hit;
 
@@ -50,7 +66,7 @@ public class MonsterController : MonoBehaviour
                 // facing player
                 transform.LookAt(playerPosition);
 
-                if (distance <= 1.2f)
+                if (distance <= attackRange)
                 {
                     // attack player
                     animator.SetInteger("state", 2);
@@ -63,7 +79,7 @@ public class MonsterController : MonoBehaviour
                     else
                     {
                         // attack
-                        GameObject.Find("Player").GetComponent<FirstPersonController>().Hurt();
+                        GameObject.Find("Player").GetComponent<FirstPersonController>().Hurt(attackDamage);
                         cd = wholeAtkCD;
                     }
                 }

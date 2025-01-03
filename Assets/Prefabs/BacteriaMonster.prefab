@@ -219,6 +219,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e819565f099a9204f955bdaad1678cee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  MonsterEyeHeight: 4
+  initialAttackCDFrame: 35
+  wholeAttackCDFrame: 79
+  attackRange: 1.2
+  attackDamage: 1
 --- !u!65 &241611028966350290
 BoxCollider:
   m_ObjectHideFlags: 0
