@@ -1456,7 +1456,7 @@ MonoBehaviour:
   initialAttackCDFrame: 35
   wholeAttackCDFrame: 79
   attackRange: 1.2
-  attackDamage: 1
+  attackDamage: 3
 --- !u!65 &2750602370734245406
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1503,7 +1503,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 14
   m_CollisionDetection: 0
 --- !u!1 &5868259768587607468
 GameObject:
