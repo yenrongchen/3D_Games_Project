@@ -3,9 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Door : MonoBehaviour
+public class Doors : MonoBehaviour
 {
-    public PlayerController p;
     private bool isInsideTrigger = false;
     // Start is called before the first frame update
     void Start()
@@ -18,23 +17,14 @@ public class Door : MonoBehaviour
     {
         if (isInsideTrigger && Input.GetMouseButtonDown(0))
         {
-            if (p.getKey == true)
-            {
-                TriggerEventAction0();
-            }
-            else
-            {
-                TriggerEventAction1(); // ©I¥sÄ²µo¨Æ¥ó
-            }
+
+                TriggerEventAction1();
+
             
         }
     }
 
-    private void TriggerEventAction0()
-    {
-        Flowchart.BroadcastFungusMessage("getKey1");
 
-    }
 
     private void TriggerEventAction1()
     {

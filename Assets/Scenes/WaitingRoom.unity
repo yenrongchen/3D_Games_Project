@@ -96,7 +96,8 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
-  m_LightingDataAsset: {fileID: 0}
+  m_LightingDataAsset: {fileID: 112000000, guid: e7cbc3f75655f6548b17ce94efe2a951,
+    type: 2}
   m_LightingSettings: {fileID: 535118670}
 --- !u!196 &4
 NavMeshSettings:
@@ -342,7 +343,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   version: 1
-  scrollPos: {x: 0, y: 0}
+  scrollPos: {x: -68.66669, y: -238.66666}
   variablesScrollPos: {x: 0, y: 0}
   variablesExpanded: 1
   blockViewHeight: 280
@@ -354,7 +355,7 @@ MonoBehaviour:
     width: 1114
     height: 859
   selectedBlocks:
-  - {fileID: 196281572}
+  - {fileID: 196281584}
   selectedCommands: []
   variables: []
   description: 
@@ -398,7 +399,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: 242
     y: 263
-    width: 72
+    width: 72.666664
     height: 40
   tint: {r: 1, g: 1, b: 1, a: 1}
   useCustomTint: 0
@@ -606,7 +607,7 @@ MonoBehaviour:
   message: Bed
 --- !u!114 &196281581
 MonoBehaviour:
-  m_ObjectHideFlags: 0
+  m_ObjectHideFlags: 2
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
@@ -691,7 +692,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: 308
     y: 425
-    width: 76
+    width: 76.666664
     height: 40
   tint: {r: 1, g: 1, b: 1, a: 1}
   useCustomTint: 0
@@ -767,8 +768,8 @@ MonoBehaviour:
   nodeRect:
     serializedVersion: 2
     x: 303
-    y: 372
-    width: 85
+    y: 373.33334
+    width: 86.66667
     height: 40
   tint: {r: 1, g: 1, b: 1, a: 1}
   useCustomTint: 0
@@ -796,8 +797,8 @@ MonoBehaviour:
   indentLevel: 0
   storyText: "\u8981\u96E2\u958B\u4E86\u55CE?"
   description: 
-  character: {fileID: 0}
-  portrait: {fileID: 0}
+  character: {fileID: 797952649}
+  portrait: {fileID: 21300000, guid: 3c64e30cbefbe4e768ef68d85c85061e, type: 3}
   voiceOverClip: {fileID: 0}
   showAlways: 1
   showCount: 1
@@ -2646,6 +2647,24 @@ MonoBehaviour:
     m_DisabledTrigger: Disabled
   m_Interactable: 0
   m_TargetGraphic: {fileID: 0}
+--- !u!1 &1325502276 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6743955688915589206, guid: 4e4fce29fd6aa7f448d779cadee187b2,
+    type: 3}
+  m_PrefabInstance: {fileID: 7609997829647478470}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1325502280
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1325502276}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ba6935d49bd435342879863496fbf19f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1435974116
 GameObject:
   m_ObjectHideFlags: 0
@@ -3639,10 +3658,15 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: -90
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 6214954556910519737, guid: 4e4fce29fd6aa7f448d779cadee187b2, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 6743955688915589206, guid: 4e4fce29fd6aa7f448d779cadee187b2,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1325502280}
   m_SourcePrefab: {fileID: 100100000, guid: 4e4fce29fd6aa7f448d779cadee187b2, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
