@@ -1392,8 +1392,9 @@ GameObject:
   m_Component:
   - component: {fileID: 7534120376872156510}
   - component: {fileID: 8254334096959473055}
-  - component: {fileID: 2750602370734245406}
   - component: {fileID: -1250049587903873048}
+  - component: {fileID: 2750602370734245406}
+  - component: {fileID: -7712865181728417842}
   m_Layer: 0
   m_Name: NeedleMonster
   m_TagString: Untagged
@@ -1439,6 +1440,23 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &-1250049587903873048
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5751515525964739907}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e819565f099a9204f955bdaad1678cee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MonsterEyeHeight: 3.9
+  initialAttackCDFrame: 35
+  wholeAttackCDFrame: 79
+  attackRange: 1.2
+  attackDamage: 1
 --- !u!65 &2750602370734245406
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1460,23 +1478,33 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.51259804, y: 1.2852117, z: 0.5158539}
   m_Center: {x: 0.023962975, y: 0.6487786, z: 0.18030548}
---- !u!114 &-1250049587903873048
-MonoBehaviour:
+--- !u!54 &-7712865181728417842
+Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5751515525964739907}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e819565f099a9204f955bdaad1678cee, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  MonsterEyeHeight: 3.9
-  initialAttackCDFrame: 35
-  wholeAttackCDFrame: 79
-  attackRange: 1.2
-  attackDamage: 1
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &5868259768587607468
 GameObject:
   m_ObjectHideFlags: 0

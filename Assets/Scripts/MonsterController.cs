@@ -96,7 +96,7 @@ public class MonsterController : MonoBehaviour
                 // close to player => approaching slowly
                 transform.LookAt(playerPosition);
                 animator.SetInteger("state", 1);
-                this.transform.position += new Vector3(direction.x * Time.deltaTime / 4, 0f, direction.z * Time.deltaTime / 4);
+                this.transform.position += new Vector3(direction.x * Time.deltaTime / 2, 0f, direction.z * Time.deltaTime / 2);
                 cd = initAtkCD;
             }
             else

@@ -131,19 +131,20 @@ namespace StarterAssets
             isPaused = GameObject.Find("GameManager").GetComponent<GameManager>().getIsPaused();
 			if (!isPaused)
 			{
-                if (Input.GetKeyDown(KeyCode.LeftShift))
-                {
+				if (Input.GetKeyDown(KeyCode.LeftShift))
+				{
 					isWalking = !isWalking;
-                }
-                JumpAndGravity();
+				}
+				JumpAndGravity();
 				GroundedCheck();
 				Move(isWalking);
 				CheckAction();
 			}
-			if (GameOver())
-			{
-                // Game Over
-            }
+
+   //         if (hp <= 0)
+			//{
+   //             // Game Over
+   //         }
         }
 
 		private void LateUpdate()
@@ -342,17 +343,12 @@ namespace StarterAssets
 		public void Hurt(int damage)
 		{
 			hp -= damage;
-			print(hp);
+			//print(hp);
 		}
 
 		public int getHP()
 		{
 			return hp;
-		}
-
-		private bool GameOver()
-		{
-			return hp <= 0;
 		}
     }
 }
