@@ -1412,7 +1412,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -11.406, y: 1.89, z: -21.963}
-  m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
+  m_LocalScale: {x: 1.6, y: 1.6, z: 1.6}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6772855785990090595}
@@ -1429,7 +1429,7 @@ Animator:
   m_GameObject: {fileID: 5751515525964739907}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: eb046a33f950ad945b916d9ebc2978e2, type: 3}
-  m_Controller: {fileID: 9100000, guid: 2c25b9f1dcc75b048b9c4586d00ca450, type: 2}
+  m_Controller: {fileID: 9100000, guid: d4e90cbfc7b942b45b7c0a068d6263bb, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -1452,9 +1452,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e819565f099a9204f955bdaad1678cee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MonsterEyeHeight: 3.9
-  initialAttackCDFrame: 35
-  wholeAttackCDFrame: 79
+  speed: 1
+  monsterEyeHeight: 3.8
+  initialAttackCDFrame: 60
+  wholeAttackCDFrame: 136
   attackRange: 1.2
   attackDamage: 3
 --- !u!65 &2750602370734245406

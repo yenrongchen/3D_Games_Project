@@ -15,7 +15,10 @@ public class MonsterController : MonoBehaviour
     private float distance;
 
     [SerializeField]
-    private float MonsterEyeHeight = 4f;
+    private float speed = 1f;
+
+    [SerializeField]
+    private float monsterEyeHeight = 4f;
 
     [SerializeField]
     private float initialAttackCDFrame = 35f;
@@ -43,7 +46,7 @@ public class MonsterController : MonoBehaviour
         wholeAtkCD = wholeAttackCDFrame / 30f;
         cd = initAtkCD;
 
-        offsetMonster = new Vector3(0f, MonsterEyeHeight - 1.9f, 0f);
+        offsetMonster = new Vector3(0f, monsterEyeHeight - 1.9f, 0f);
     }
 
     // Update is called once per frame
@@ -61,7 +64,7 @@ public class MonsterController : MonoBehaviour
 
         if (Physics.Raycast(ray, out hit))
         {
-            if (hit.transform.name == "Player" && distance <= 20f)
+            if (hit.transform.name == "Player")
             {
                 // facing player
                 transform.LookAt(playerPosition);
@@ -87,7 +90,7 @@ public class MonsterController : MonoBehaviour
                 {
                     // chasing
                     animator.SetInteger("state", 1);
-                    this.transform.position += new Vector3(direction.x * Time.deltaTime, 0f, direction.z * Time.deltaTime);
+                    this.transform.position += new Vector3(direction.x * speed * Time.deltaTime, 0f, direction.z * speed * Time.deltaTime);
                     cd = initAtkCD;
                 }
             }
@@ -96,7 +99,7 @@ public class MonsterController : MonoBehaviour
                 // close to player => approaching slowly
                 transform.LookAt(playerPosition);
                 animator.SetInteger("state", 1);
-                this.transform.position += new Vector3(direction.x * Time.deltaTime / 2, 0f, direction.z * Time.deltaTime / 2);
+                this.transform.position += new Vector3(direction.x * speed / 2 * Time.deltaTime, 0f, direction.z * speed / 2 * Time.deltaTime);
                 cd = initAtkCD;
             }
             else
@@ -111,6 +114,11 @@ public class MonsterController : MonoBehaviour
             // keep idle
             animator.SetInteger("state", 0);
             cd = initAtkCD;
+        }
+
+        if (Input.GetKey(KeyCode.M))
+        {
+            animator.SetInteger("state", 3);
         }
     }
 }
