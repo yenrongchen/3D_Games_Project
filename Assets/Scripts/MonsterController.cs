@@ -6,6 +6,8 @@ using UnityEngine;
 public class MonsterController : MonoBehaviour
 {
     private Animator animator;
+    private bool isParalyzed = false;
+    private float parTime;
 
     private Vector3 rayStart;
     private Vector3 playerPosition;
@@ -36,6 +38,12 @@ public class MonsterController : MonoBehaviour
     [SerializeField]
     private int attackDamage = 1;
 
+    [SerializeField]
+    private float detectRange = 5f;
+
+    [SerializeField]
+    private float paralyzedTime = 2f;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -47,60 +55,80 @@ public class MonsterController : MonoBehaviour
         cd = initAtkCD;
 
         offsetMonster = new Vector3(0f, monsterEyeHeight - 1.9f, 0f);
+        parTime = paralyzedTime;
     }
 
     // Update is called once per frame
     void Update()
     {
-        playerPosition = GameObject.Find("Player").GetComponent<FirstPersonController>().getPosition() + offsetPlayer;
-
-        rayStart = transform.position + offsetMonster;
-        direction = (playerPosition - rayStart).normalized;
-        
-        distance = Mathf.Sqrt(Mathf.Pow(transform.position.x - playerPosition.x, 2f) + Mathf.Pow(transform.position.z - playerPosition.z, 2f));
-
-        Ray ray = new(rayStart, direction);
-        RaycastHit hit;
-
-        if (Physics.Raycast(ray, out hit))
+        if (isParalyzed)
         {
-            if (hit.transform.name == "Player")
+            animator.SetInteger("state", 3);
+            if (parTime > 0)
             {
-                // facing player
-                transform.LookAt(playerPosition);
+                parTime -= Time.deltaTime;
+            }
+            else
+            {
+                isParalyzed = false;
+                parTime = paralyzedTime;
+            }
+        }
+        else
+        {
+            playerPosition = GameObject.Find("Player").GetComponent<FirstPersonController>().getPosition() + offsetPlayer;
 
-                if (distance <= attackRange)
+            rayStart = transform.position + offsetMonster;
+            direction = (playerPosition - rayStart).normalized;
+
+            distance = Mathf.Sqrt(Mathf.Pow(transform.position.x - playerPosition.x, 2f) + Mathf.Pow(transform.position.z - playerPosition.z, 2f));
+
+            Ray ray = new(rayStart, direction);
+            RaycastHit hit;
+
+            if (Physics.Raycast(ray, out hit))
+            {
+                if (hit.transform.name == "Player")
                 {
-                    // attack player
-                    animator.SetInteger("state", 2);
+                    // facing player
+                    transform.LookAt(playerPosition);
 
-                    // check attack cd
-                    if (cd > 0)
+                    if (distance <= attackRange)
                     {
-                        cd -= Time.deltaTime;
+                        // attack player
+                        animator.SetInteger("state", 2);
+                        if (cd > 0)
+                        {
+                            cd -= Time.deltaTime;
+                        }
+                        else
+                        {
+                            GameObject.Find("Player").GetComponent<FirstPersonController>().Hurt(attackDamage);
+                            cd = wholeAtkCD;
+                        }
                     }
                     else
                     {
-                        // attack
-                        GameObject.Find("Player").GetComponent<FirstPersonController>().Hurt(attackDamage);
-                        cd = wholeAtkCD;
+                        // chasing
+                        animator.SetInteger("state", 1);
+                        this.transform.position += new Vector3(direction.x * speed * Time.deltaTime, 0f, direction.z * speed * Time.deltaTime);
+                        cd = initAtkCD;
                     }
+                }
+                else if (distance <= detectRange)
+                {
+                    // close to player => approaching slowly
+                    transform.LookAt(playerPosition);
+                    animator.SetInteger("state", 1);
+                    this.transform.position += new Vector3(direction.x * speed / 2 * Time.deltaTime, 0f, direction.z * speed / 2 * Time.deltaTime);
+                    cd = initAtkCD;
                 }
                 else
                 {
-                    // chasing
-                    animator.SetInteger("state", 1);
-                    this.transform.position += new Vector3(direction.x * speed * Time.deltaTime, 0f, direction.z * speed * Time.deltaTime);
+                    // keep idle
+                    animator.SetInteger("state", 0);
                     cd = initAtkCD;
                 }
-            }
-            else if (distance <= 5)
-            {
-                // close to player => approaching slowly
-                transform.LookAt(playerPosition);
-                animator.SetInteger("state", 1);
-                this.transform.position += new Vector3(direction.x * speed / 2 * Time.deltaTime, 0f, direction.z * speed / 2 * Time.deltaTime);
-                cd = initAtkCD;
             }
             else
             {
@@ -109,16 +137,10 @@ public class MonsterController : MonoBehaviour
                 cd = initAtkCD;
             }
         }
-        else
-        {
-            // keep idle
-            animator.SetInteger("state", 0);
-            cd = initAtkCD;
-        }
+    }
 
-        if (Input.GetKey(KeyCode.M))
-        {
-            animator.SetInteger("state", 3);
-        }
+    public void paralyzed()
+    {
+        isParalyzed = true;
     }
 }

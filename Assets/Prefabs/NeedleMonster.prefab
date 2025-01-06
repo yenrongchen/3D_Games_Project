@@ -1453,7 +1453,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 1
-  monsterEyeHeight: 3.8
+  monsterEyeHeight: 4
   initialAttackCDFrame: 60
   wholeAttackCDFrame: 136
   attackRange: 1.2
@@ -1477,8 +1477,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.51259804, y: 1.2852117, z: 0.5158539}
-  m_Center: {x: 0.023962975, y: 0.6487786, z: 0.18030548}
+  m_Size: {x: 0.44202447, y: 1.4735844, z: 0.38499308}
+  m_Center: {x: 0.02141893, y: 0.74296486, z: 0.11487508}
 --- !u!54 &-7712865181728417842
 Rigidbody:
   m_ObjectHideFlags: 0

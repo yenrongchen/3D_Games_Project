@@ -1728,7 +1728,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e819565f099a9204f955bdaad1678cee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MonsterEyeHeight: 4
+  speed: 1
+  monsterEyeHeight: 4
   initialAttackCDFrame: 35
   wholeAttackCDFrame: 79
   attackRange: 1.2
@@ -1752,8 +1753,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 2.7433012, y: 5.734465, z: 1.634481}
-  m_Center: {x: -0.09074673, y: 2.9129326, z: 0.1358378}
+  m_Size: {x: 2.4041843, y: 6.035683, z: 1.4406896}
+  m_Center: {x: -0.07957339, y: 3.0635417, z: 0.0389421}
 --- !u!54 &8263663919547739840
 Rigidbody:
   m_ObjectHideFlags: 0

@@ -17,7 +17,7 @@ namespace StarterAssets
 		[Tooltip("Sprint speed of the character in m/s")]
 		public float SprintSpeed = 6.0f;
 		[Tooltip("Rotation speed of the character")]
-		public float RotationSpeed = 1.0f;
+		public float RotationSpeed = 1.5f;
 		[Tooltip("Acceleration and deceleration")]
 		public float SpeedChangeRate = 10.0f;
 
@@ -27,9 +27,11 @@ namespace StarterAssets
 		[Tooltip("Useful for rough ground")]
 		public float GroundedOffset = -0.14f;
 		[Tooltip("The radius of the grounded check. Should match the radius of the CharacterController")]
-		public float GroundedRadius = 0.5f;
+		public float GroundedRadius = 0.4f;
+        [Tooltip("What layers the character uses as ground")]
+        public LayerMask GroundLayers;
 
-		[Header("Cinemachine")]
+        [Header("Cinemachine")]
 		[Tooltip("The follow target set in the Cinemachine Virtual Camera that the camera will follow")]
 		public GameObject CinemachineCameraTarget;
 		[Tooltip("How far in degrees can you move the camera up")]
@@ -112,7 +114,8 @@ namespace StarterAssets
 				{
 					isWalking = !isWalking;
 				}
-				Move(isWalking);
+				GroundedCheck();
+                Move(isWalking);
 				CheckAction();
 			}
 
@@ -152,7 +155,14 @@ namespace StarterAssets
 			}
 		}
 
-		private void Move(bool isWalking)
+        private void GroundedCheck()
+        {
+            // set sphere position, with offset
+            Vector3 spherePosition = new Vector3(transform.position.x, transform.position.y - GroundedOffset, transform.position.z);
+            Grounded = Physics.CheckSphere(spherePosition, GroundedRadius, GroundLayers, QueryTriggerInteraction.Ignore);
+        }
+
+        private void Move(bool isWalking)
 		{
 			// set target speed based on move or sprint
 			float targetSpeed;
