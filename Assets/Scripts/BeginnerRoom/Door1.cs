@@ -17,10 +17,7 @@ public class Doors : MonoBehaviour
     {
         if (isInsideTrigger && Input.GetMouseButtonDown(0))
         {
-
-                TriggerEventAction1();
-
-            
+            TriggerEventAction1();
         }
     }
 

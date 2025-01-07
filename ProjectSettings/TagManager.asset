@@ -8,6 +8,12 @@ TagManager:
   - Laser
   - Enemy
   - AlmondWater
+  - BeginDoor
+  - Door
+  - Bed
+  - TableandChair
+  - CrateBox
+  - Key
   layers:
   - Default
   - TransparentFX
