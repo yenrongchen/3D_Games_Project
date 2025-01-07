@@ -1,18 +1,24 @@
-using Fungus;
+ï»¿using Fungus;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerInteractionField : MonoBehaviour
 {
-    private bool isInsideTrigger = false;
-    // Start is called before the first frame update
-    void Start()
-    {
+        private bool isInsideTrigger = false;
+        // Start is called before the first frame update
+        void Start()
+        {
 
+        }
+
+    private void Update()
+    {
+        
     }
 
     // Update is called once per frame
+    /*
     void Update()
     {
         if (isInsideTrigger && Input.GetMouseButtonDown(0))
@@ -40,8 +46,18 @@ public class PlayerInteractionField : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        // ½T»{ª±®a¬O§_Â÷¶}¥ú°é
+        // ç¢ºèªç©å®¶æ˜¯å¦é›¢é–‹å…‰åœˆ
         isInsideTrigger = false;
         Debug.Log("Player left the" + other.gameObject.tag + "trigger zone!");
+    }*/
+
+    private void OnTriggerEnter(Collider other)
+    {
+        // æ£€æŸ¥è¿›å…¥çš„ç‰©ä»¶æ˜¯å¦æœ‰ ObjectTrigger è„šæœ¬
+        ObjectTrigger objectTrigger = other.GetComponent<ObjectTrigger>();
+        if (objectTrigger != null)
+        {
+            objectTrigger.OnPlayerTriggerEnter();
+        }
     }
 }

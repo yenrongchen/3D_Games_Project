@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 #if ENABLE_INPUT_SYSTEM
 using UnityEngine.InputSystem;
+using Fungus;
 #endif
 
 namespace StarterAssets
@@ -47,9 +48,10 @@ namespace StarterAssets
 		private float _rotationVelocity;
 		private float _verticalVelocity;
 		private bool isWalking = true;
+        private bool canMove = true;
 
-		// check game status
-		private bool isPaused;
+        // check game status
+        private bool isPaused;
 
 		// animation
 		private Animator animator;
@@ -99,8 +101,8 @@ namespace StarterAssets
 #else
 			Debug.LogError( "Starter Assets package is missing dependencies. Please use Tools/Starter Assets/Reinstall Dependencies to fix it");
 #endif
-
-			animator = this.GetComponentInChildren<Animator>();
+            
+            animator = this.GetComponentInChildren<Animator>();
 
 			hp = HP;
 		}
@@ -110,7 +112,11 @@ namespace StarterAssets
             isPaused = GameObject.Find("GameManager").GetComponent<GameManager>().getIsPaused();
 			if (!isPaused)
 			{
-				if (Input.GetKeyDown(KeyCode.LeftShift))
+                if (!canMove)
+                {
+                    return;  // 禁止移动
+                }
+                if (Input.GetKeyDown(KeyCode.LeftShift))
 				{
 					isWalking = !isWalking;
 				}
@@ -125,7 +131,17 @@ namespace StarterAssets
 			}
 		}
 
-		private void LateUpdate()
+        public void EnableMovement()
+        {
+            canMove = true;
+        }
+
+        public void DisableMovement()
+        {
+            canMove = false;
+        }
+
+        private void LateUpdate()
 		{
 			if (!isPaused)
 			{
