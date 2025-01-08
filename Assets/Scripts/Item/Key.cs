@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Fungus;
+//using Fungus;
 
 public class Key : MonoBehaviour
 {
@@ -30,7 +30,7 @@ public class Key : MonoBehaviour
 
     private void TriggerEventAction()
     {
-        Flowchart.BroadcastFungusMessage("Key1");
+        //Flowchart.BroadcastFungusMessage("Key1");
 
     }
 

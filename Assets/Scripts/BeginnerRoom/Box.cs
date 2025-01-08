@@ -1,4 +1,4 @@
-using Fungus;
+//using Fungus;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -23,7 +23,7 @@ public class NewBehaviourScript : MonoBehaviour
 
     private void TriggerEventAction()
     {
-        Flowchart.BroadcastFungusMessage("Box");
+        //Flowchart.BroadcastFungusMessage("Box");
 
     }
 

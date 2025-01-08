@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 #if ENABLE_INPUT_SYSTEM
 using UnityEngine.InputSystem;
-using Fungus;
+//using Fungus;
 #endif
 
 namespace StarterAssets

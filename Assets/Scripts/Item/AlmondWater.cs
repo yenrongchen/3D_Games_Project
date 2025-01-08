@@ -1,4 +1,4 @@
-using Fungus;
+//using Fungus;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -28,11 +28,11 @@ public class AlmondWater : MonoBehaviour
     {
         if (backpack.almondFirstTime == 0)
         {
-            Flowchart.BroadcastFungusMessage("GetAlmondWaterF");
+            //Flowchart.BroadcastFungusMessage("GetAlmondWaterF");
         }
         else
         {
-            Flowchart.BroadcastFungusMessage("Pickornot");
+            //Flowchart.BroadcastFungusMessage("Pickornot");
         }
     }
 

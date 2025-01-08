@@ -1,4 +1,4 @@
-using Fungus;
+//using Fungus;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -32,13 +32,13 @@ public class Door : MonoBehaviour
 
     private void TriggerEventAction0()
     {
-        Flowchart.BroadcastFungusMessage("getKey1");
+        //Flowchart.BroadcastFungusMessage("getKey1");
 
     }
 
     private void TriggerEventAction1()
     {
-        Flowchart.BroadcastFungusMessage("Door");
+        //Flowchart.BroadcastFungusMessage("Door");
 
     }
 

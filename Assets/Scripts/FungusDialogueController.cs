@@ -13,8 +13,8 @@ public class Fungus : MonoBehaviour
         playerController = FindObjectOfType<FirstPersonController>();
 
         // 订阅 Fungus 的对话事件
-        FungusManager.Instance.DialogueStarted += OnDialogueStarted;
-        FungusManager.Instance.DialogueEnded += OnDialogueEnded;
+        //FungusManager.Instance.DialogueStarted += OnDialogueStarted;
+        //FungusManager.Instance.DialogueEnded += OnDialogueEnded;
     }
 
     void OnDialogueStarted()
@@ -38,7 +38,7 @@ public class Fungus : MonoBehaviour
     void OnDestroy()
     {
         // 取消订阅事件
-        FungusManager.Instance.DialogueStarted -= OnDialogueStarted;
-        FungusManager.Instance.DialogueEnded -= OnDialogueEnded;
+        //FungusManager.Instance.DialogueStarted -= OnDialogueStarted;
+        //FungusManager.Instance.DialogueEnded -= OnDialogueEnded;
     }
 }
