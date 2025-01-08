@@ -1841,8 +1841,10 @@ MonoBehaviour:
   monsterEyeHeight: 4.1
   initialAttackCDFrame: 30
   wholeAttackCDFrame: 82
+  typeID: 2
   attackRange: 1.2
-  attackDamage: 1
+  detectRange: 5
+  paralyzedTime: 2
 --- !u!65 &5827677190012785969
 BoxCollider:
   m_ObjectHideFlags: 0
