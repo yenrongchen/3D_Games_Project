@@ -1454,10 +1454,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 1
   monsterEyeHeight: 4
-  initialAttackCDFrame: 60
+  initialAttackCDFrame: 31
   wholeAttackCDFrame: 136
+  typeID: 3
   attackRange: 1.2
-  attackDamage: 3
+  detectRange: 5
+  paralyzedTime: 2
 --- !u!65 &2750602370734245406
 BoxCollider:
   m_ObjectHideFlags: 0

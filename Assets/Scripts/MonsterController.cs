@@ -33,10 +33,10 @@ public class MonsterController : MonoBehaviour
     private float wholeAtkCD;
 
     [SerializeField]
-    private float attackRange = 1.2f;
+    private int typeID = 1;
 
     [SerializeField]
-    private int attackDamage = 1;
+    private float attackRange = 1.2f;
 
     [SerializeField]
     private float detectRange = 5f;
@@ -103,7 +103,7 @@ public class MonsterController : MonoBehaviour
                         }
                         else
                         {
-                            GameObject.Find("Player").GetComponent<FirstPersonController>().Hurt(attackDamage);
+                            Attack(typeID);
                             cd = wholeAtkCD;
                         }
                     }
@@ -139,7 +139,28 @@ public class MonsterController : MonoBehaviour
         }
     }
 
-    public void paralyzed()
+    private void Attack(int type)
+    {
+        if (type == 3)
+        {
+            StartCoroutine(AttackWithInterval());
+        }
+        else
+        {
+            GameObject.Find("Player").GetComponent<FirstPersonController>().Hurt();
+        }
+    }
+
+    IEnumerator AttackWithInterval()
+    {
+        GameObject.Find("Player").GetComponent<FirstPersonController>().Hurt();
+        yield return new WaitForSeconds(1f);
+        GameObject.Find("Player").GetComponent<FirstPersonController>().Hurt();
+        yield return new WaitForSeconds(1f);
+        GameObject.Find("Player").GetComponent<FirstPersonController>().Hurt();
+    }
+
+    public void Paralyzed()
     {
         isParalyzed = true;
     }

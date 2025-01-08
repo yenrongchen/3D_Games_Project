@@ -270,9 +270,9 @@ namespace StarterAssets
 			return transform.position;
 		}
 
-		public void Hurt(int damage)
+		public void Hurt()
 		{
-			hp -= damage;
+			hp--;
 			//print(hp);
 		}
 
