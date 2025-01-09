@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 8660564100731027576}
   - component: {fileID: 6578936103978813849}
   - component: {fileID: 6441182988949403545}
+  - component: {fileID: -9209486146742642439}
   m_Layer: 0
   m_Name: Lv3Key
   m_TagString: Untagged
@@ -83,3 +84,16 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &-9209486146742642439
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5993809652573592627}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fb8fdca6f6e58f44da04e79bc6466ef2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rotateAngle: 60
