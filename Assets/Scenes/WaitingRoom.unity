@@ -327,6 +327,11 @@ GameObject:
   - component: {fileID: 196281591}
   - component: {fileID: 196281596}
   - component: {fileID: 196281597}
+  - component: {fileID: 196281598}
+  - component: {fileID: 196281602}
+  - component: {fileID: 196281601}
+  - component: {fileID: 196281600}
+  - component: {fileID: 196281599}
   m_Layer: 0
   m_Name: Flowchart
   m_TagString: Untagged
@@ -347,11 +352,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   version: 1
-  scrollPos: {x: -27.917492, y: -107.94062}
+  scrollPos: {x: 5.9060917, y: -35.12123}
   variablesScrollPos: {x: 0, y: 0}
   variablesExpanded: 1
   blockViewHeight: 280
-  zoom: 0.85000014
+  zoom: 1
   scrollViewRect:
     serializedVersion: 2
     x: -343
@@ -403,14 +408,14 @@ MonoBehaviour:
     serializedVersion: 2
     x: 255.93939
     y: 247.00006
-    width: 71.960785
+    width: 72
     height: 40
   tint: {r: 1, g: 1, b: 1, a: 1}
   useCustomTint: 0
   itemId: 6
   blockName: Bed
   description: 
-  eventHandler: {fileID: 0}
+  eventHandler: {fileID: 196281601}
   commandList:
   - {fileID: 196281579}
   suppressAllAutoSelections: 0
@@ -551,9 +556,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nodeRect:
     serializedVersion: 2
-    x: 219
-    y: 173.24243
-    width: 73.5294
+    x: 62
+    y: 211.24243
+    width: 74
     height: 40
   tint: {r: 1, g: 1, b: 1, a: 1}
   useCustomTint: 0
@@ -681,7 +686,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: 308
     y: 424
-    width: 75.88235
+    width: 76
     height: 40
   tint: {r: 1, g: 1, b: 1, a: 1}
   useCustomTint: 0
@@ -759,7 +764,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: 303.24243
     y: 373.33334
-    width: 85.29411
+    width: 85
     height: 40
   tint: {r: 1, g: 1, b: 1, a: 1}
   useCustomTint: 0
@@ -814,14 +819,14 @@ MonoBehaviour:
     serializedVersion: 2
     x: 174.75757
     y: 391
-    width: 108.82352
+    width: 109
     height: 40
   tint: {r: 1, g: 1, b: 1, a: 1}
   useCustomTint: 0
   itemId: 8
   blockName: BeginDoor
   description: 
-  eventHandler: {fileID: 0}
+  eventHandler: {fileID: 196281599}
   commandList:
   - {fileID: 196281588}
   - {fileID: 196281586}
@@ -896,15 +901,15 @@ MonoBehaviour:
   nodeRect:
     serializedVersion: 2
     x: 144.36974
-    y: 291.47888
-    width: 101.764694
+    y: 290.47888
+    width: 102
     height: 40
   tint: {r: 1, g: 1, b: 1, a: 1}
   useCustomTint: 0
   itemId: 18
   blockName: CrateBox
   description: 
-  eventHandler: {fileID: 0}
+  eventHandler: {fileID: 196281602}
   commandList:
   - {fileID: 196281592}
   - {fileID: 196281591}
@@ -925,8 +930,8 @@ MonoBehaviour:
   indentLevel: 0
   storyText: "\u770B\u770B\u90A3\u4E9B\u79D1\u5B78\u5BB6\u6709\u6C92\u6709\u7D66\u6211\u751A\u9EBC\u6771\u897F..."
   description: 
-  character: {fileID: 0}
-  portrait: {fileID: 0}
+  character: {fileID: 797952649}
+  portrait: {fileID: 21300000, guid: 3c64e30cbefbe4e768ef68d85c85061e, type: 3}
   voiceOverClip: {fileID: 0}
   showAlways: 1
   showCount: 1
@@ -951,16 +956,17 @@ MonoBehaviour:
   nodeRect:
     serializedVersion: 2
     x: 284.70886
-    y: 319.1082
-    width: 133.13724
+    y: 320.1082
+    width: 133
     height: 40
   tint: {r: 1, g: 1, b: 1, a: 1}
   useCustomTint: 0
   itemId: 21
   blockName: TableandChair
   description: 
-  eventHandler: {fileID: 0}
-  commandList: []
+  eventHandler: {fileID: 196281600}
+  commandList:
+  - {fileID: 196281598}
   suppressAllAutoSelections: 0
 --- !u!114 &196281597
 MonoBehaviour:
@@ -977,6 +983,93 @@ MonoBehaviour:
   scope: 2
   key: playerCanMove
   value: 1
+--- !u!114 &196281598
+MonoBehaviour:
+  m_ObjectHideFlags: 2
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 196281566}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec422cd568a9c4a31ad7c36d0572b9da, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemId: 22
+  indentLevel: 0
+  storyText: "\u73FE\u5728\u4E0D\u662F\u5750\u8457\u7684\u6642\u5019"
+  description: 
+  character: {fileID: 797952649}
+  portrait: {fileID: 21300000, guid: 3c64e30cbefbe4e768ef68d85c85061e, type: 3}
+  voiceOverClip: {fileID: 0}
+  showAlways: 1
+  showCount: 1
+  extendPrevious: 0
+  fadeWhenDone: 1
+  waitForClick: 1
+  stopVoiceover: 1
+  waitForVO: 0
+  setSayDialog: {fileID: 0}
+--- !u!114 &196281599
+MonoBehaviour:
+  m_ObjectHideFlags: 2
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 196281566}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d7d417659cd54a6787f70f763950c34, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  parentBlock: {fileID: 196281590}
+  suppressBlockAutoSelect: 0
+  message: BeginDoor
+--- !u!114 &196281600
+MonoBehaviour:
+  m_ObjectHideFlags: 2
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 196281566}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d7d417659cd54a6787f70f763950c34, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  parentBlock: {fileID: 196281596}
+  suppressBlockAutoSelect: 0
+  message: TableandChair
+--- !u!114 &196281601
+MonoBehaviour:
+  m_ObjectHideFlags: 2
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 196281566}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d7d417659cd54a6787f70f763950c34, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  parentBlock: {fileID: 196281572}
+  suppressBlockAutoSelect: 0
+  message: Bed
+--- !u!114 &196281602
+MonoBehaviour:
+  m_ObjectHideFlags: 2
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 196281566}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d7d417659cd54a6787f70f763950c34, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  parentBlock: {fileID: 196281594}
+  suppressBlockAutoSelect: 0
+  message: CrateBox
 --- !u!1 &224177533
 GameObject:
   m_ObjectHideFlags: 0
@@ -1636,6 +1729,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b46ec80f97d93d4d800115ed0d53177, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  flowchart: {fileID: 196281569}
 --- !u!1 &369478842
 GameObject:
   m_ObjectHideFlags: 0
@@ -1905,6 +1999,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b46ec80f97d93d4d800115ed0d53177, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  flowchart: {fileID: 196281569}
 --- !u!1 &475196208
 GameObject:
   m_ObjectHideFlags: 0
@@ -2515,6 +2610,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b46ec80f97d93d4d800115ed0d53177, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  flowchart: {fileID: 196281569}
 --- !u!1 &1260498156
 GameObject:
   m_ObjectHideFlags: 0
@@ -2766,6 +2862,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b46ec80f97d93d4d800115ed0d53177, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  flowchart: {fileID: 196281569}
 --- !u!1 &1435974116
 GameObject:
   m_ObjectHideFlags: 0
@@ -3634,6 +3731,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b46ec80f97d93d4d800115ed0d53177, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  flowchart: {fileID: 196281569}
 --- !u!1 &2078047669 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5534576426513401023, guid: 7bdb120c647149e4b893d57650f6b1a8,
