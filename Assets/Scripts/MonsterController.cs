@@ -44,6 +44,9 @@ public class MonsterController : MonoBehaviour
     [SerializeField]
     private float paralyzedTime = 2f;
 
+    // to be deleted //
+    //LineRenderer lr;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -56,6 +59,12 @@ public class MonsterController : MonoBehaviour
 
         offsetMonster = new Vector3(0f, monsterEyeHeight - 1.9f, 0f);
         parTime = paralyzedTime;
+
+        // to be deleted //
+        //lr = GetComponent<LineRenderer>();
+        //lr.endWidth = 0.05f;
+        //lr.startWidth = 0.05f;
+        //lr.positionCount = 2;
     }
 
     // Update is called once per frame
@@ -88,7 +97,7 @@ public class MonsterController : MonoBehaviour
 
             if (Physics.Raycast(ray, out hit))
             {
-                if (hit.transform.name == "Player")
+                if (hit.transform.tag == "Player")
                 {
                     // facing player
                     transform.LookAt(playerPosition);
@@ -129,6 +138,11 @@ public class MonsterController : MonoBehaviour
                     animator.SetInteger("state", 0);
                     cd = initAtkCD;
                 }
+
+                // to be deleted //
+                //lr.enabled = true;  // if hit object then show the line
+                //lr.SetPosition(0, rayStart);  //line start 
+                //lr.SetPosition(1, hit.point);       // line end
             }
             else
             {
@@ -143,7 +157,11 @@ public class MonsterController : MonoBehaviour
     {
         if (type == 3)
         {
-            StartCoroutine(AttackWithInterval());
+            StartCoroutine(NeedleAttackWithInterval());
+        }
+        else if (type == 2)
+        {
+            StartCoroutine(SmilerAttackWithInterval());
         }
         else
         {
@@ -151,12 +169,19 @@ public class MonsterController : MonoBehaviour
         }
     }
 
-    IEnumerator AttackWithInterval()
+    IEnumerator NeedleAttackWithInterval()
     {
         GameObject.Find("Player").GetComponent<FirstPersonController>().Hurt();
         yield return new WaitForSeconds(1f);
         GameObject.Find("Player").GetComponent<FirstPersonController>().Hurt();
         yield return new WaitForSeconds(1f);
+        GameObject.Find("Player").GetComponent<FirstPersonController>().Hurt();
+    }
+
+    IEnumerator SmilerAttackWithInterval()
+    {
+        GameObject.Find("Player").GetComponent<FirstPersonController>().Hurt();
+        yield return new WaitForSeconds(0.8f);
         GameObject.Find("Player").GetComponent<FirstPersonController>().Hurt();
     }
 

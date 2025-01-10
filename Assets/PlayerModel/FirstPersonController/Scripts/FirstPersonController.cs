@@ -289,7 +289,7 @@ namespace StarterAssets
 		public void Hurt()
 		{
 			hp--;
-			//print(hp);
+			print(hp);
 		}
 
 		public int getHP()
