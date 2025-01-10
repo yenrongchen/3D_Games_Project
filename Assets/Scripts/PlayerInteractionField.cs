@@ -1,26 +1,22 @@
-﻿//using Fungus;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Fungus;
 
 public class PlayerInteractionField : MonoBehaviour
 {
-        private bool isInsideTrigger = false;
+    private bool isInsideTrigger = false;
+    private string tag;
         // Start is called before the first frame update
-        void Start()
-        {
-
-        }
-
-    private void Update()
+    void Start()
     {
-        
+        tag = null;
     }
-
     // Update is called once per frame
-    /*
+    
     void Update()
     {
+
         if (isInsideTrigger && Input.GetMouseButtonDown(0))
         {
             TriggerEventAction(tag);
@@ -39,7 +35,7 @@ public class PlayerInteractionField : MonoBehaviour
         if (!notUntag && !notPlayer)
         {
             isInsideTrigger = true;
-            string tag = other.gameObject.tag;       
+            tag = other.gameObject.tag;       
             Debug.Log("Player enter" + other.gameObject.tag + "trigger zone!");
         }
     }
@@ -49,15 +45,5 @@ public class PlayerInteractionField : MonoBehaviour
         // 確認玩家是否離開光圈
         isInsideTrigger = false;
         Debug.Log("Player left the" + other.gameObject.tag + "trigger zone!");
-    }*/
-
-    private void OnTriggerEnter(Collider other)
-    {
-        // 检查进入的物件是否有 ObjectTrigger 脚本
-        ObjectTrigger objectTrigger = other.GetComponent<ObjectTrigger>();
-        if (objectTrigger != null)
-        {
-            objectTrigger.OnPlayerTriggerEnter();
-        }
     }
 }

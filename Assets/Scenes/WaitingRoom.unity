@@ -363,7 +363,8 @@ MonoBehaviour:
     y: -340
     width: 1114
     height: 859
-  selectedBlocks: []
+  selectedBlocks:
+  - {fileID: 196281596}
   selectedCommands: []
   variables:
   - {fileID: 196281597}
@@ -1729,7 +1730,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b46ec80f97d93d4d800115ed0d53177, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  flowchart: {fileID: 196281569}
 --- !u!1 &369478842
 GameObject:
   m_ObjectHideFlags: 0
@@ -1999,7 +1999,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b46ec80f97d93d4d800115ed0d53177, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  flowchart: {fileID: 196281569}
 --- !u!1 &475196208
 GameObject:
   m_ObjectHideFlags: 0
@@ -2610,7 +2609,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b46ec80f97d93d4d800115ed0d53177, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  flowchart: {fileID: 196281569}
 --- !u!1 &1260498156
 GameObject:
   m_ObjectHideFlags: 0
@@ -2862,7 +2860,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b46ec80f97d93d4d800115ed0d53177, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  flowchart: {fileID: 196281569}
 --- !u!1 &1435974116
 GameObject:
   m_ObjectHideFlags: 0
@@ -3391,6 +3388,31 @@ PrefabInstance:
       propertyPath: m_TagString
       value: BeginDoor
       objectReference: {fileID: 0}
+    - target: {fileID: 5975023935854034789, guid: ce7f569fd92302e409db6058dd845a26,
+        type: 3}
+      propertyPath: m_Size.x
+      value: 0.013862045
+      objectReference: {fileID: 0}
+    - target: {fileID: 5975023935854034789, guid: ce7f569fd92302e409db6058dd845a26,
+        type: 3}
+      propertyPath: m_Size.z
+      value: 0.02324257
+      objectReference: {fileID: 0}
+    - target: {fileID: 5975023935854034789, guid: ce7f569fd92302e409db6058dd845a26,
+        type: 3}
+      propertyPath: m_Center.x
+      value: 0.0061856615
+      objectReference: {fileID: 0}
+    - target: {fileID: 5975023935854034789, guid: ce7f569fd92302e409db6058dd845a26,
+        type: 3}
+      propertyPath: m_Center.y
+      value: -0.0000000017881393
+      objectReference: {fileID: 0}
+    - target: {fileID: 5975023935854034789, guid: ce7f569fd92302e409db6058dd845a26,
+        type: 3}
+      propertyPath: m_Center.z
+      value: 0.00051118014
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 7286542271024634158, guid: ce7f569fd92302e409db6058dd845a26, type: 3}
     m_RemovedGameObjects:
@@ -3731,7 +3753,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b46ec80f97d93d4d800115ed0d53177, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  flowchart: {fileID: 196281569}
 --- !u!1 &2078047669 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5534576426513401023, guid: 7bdb120c647149e4b893d57650f6b1a8,
@@ -3983,6 +4004,31 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4445736660801403360, guid: b467303c6bd5bf74a9404bc3c141bf9a,
+        type: 3}
+      propertyPath: m_Size.x
+      value: 0.9650456
+      objectReference: {fileID: 0}
+    - target: {fileID: 4445736660801403360, guid: b467303c6bd5bf74a9404bc3c141bf9a,
+        type: 3}
+      propertyPath: m_Size.y
+      value: 0.9709921
+      objectReference: {fileID: 0}
+    - target: {fileID: 4445736660801403360, guid: b467303c6bd5bf74a9404bc3c141bf9a,
+        type: 3}
+      propertyPath: m_Center.x
+      value: 0.19609948
+      objectReference: {fileID: 0}
+    - target: {fileID: 4445736660801403360, guid: b467303c6bd5bf74a9404bc3c141bf9a,
+        type: 3}
+      propertyPath: m_Center.y
+      value: -0.18991625
+      objectReference: {fileID: 0}
+    - target: {fileID: 4445736660801403360, guid: b467303c6bd5bf74a9404bc3c141bf9a,
+        type: 3}
+      propertyPath: m_Center.z
+      value: 0.3500983
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -4160,6 +4206,26 @@ PrefabInstance:
         type: 3}
       propertyPath: m_TagString
       value: Bed
+      objectReference: {fileID: 0}
+    - target: {fileID: 7151634056961020949, guid: 513497ad19e6fc047ba80992c19744af,
+        type: 3}
+      propertyPath: m_Size.x
+      value: 23.661345
+      objectReference: {fileID: 0}
+    - target: {fileID: 7151634056961020949, guid: 513497ad19e6fc047ba80992c19744af,
+        type: 3}
+      propertyPath: m_Size.z
+      value: 15.774788
+      objectReference: {fileID: 0}
+    - target: {fileID: 7151634056961020949, guid: 513497ad19e6fc047ba80992c19744af,
+        type: 3}
+      propertyPath: m_Center.x
+      value: -1.712821
+      objectReference: {fileID: 0}
+    - target: {fileID: 7151634056961020949, guid: 513497ad19e6fc047ba80992c19744af,
+        type: 3}
+      propertyPath: m_Center.z
+      value: -2.7139192
       objectReference: {fileID: 0}
     - target: {fileID: 7151634056961020949, guid: 513497ad19e6fc047ba80992c19744af,
         type: 3}
