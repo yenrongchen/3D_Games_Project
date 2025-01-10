@@ -1397,7 +1397,7 @@ GameObject:
   - component: {fileID: 3452140484678511037}
   m_Layer: 8
   m_Name: InteractionField
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2254,7 +2254,7 @@ GameObject:
   - component: {fileID: 6554465389246281681}
   m_Layer: 0
   m_Name: soldier
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

@@ -6,7 +6,7 @@ using Fungus;
 public class PlayerInteractionField : MonoBehaviour
 {
     private bool isInsideTrigger = false;
-    private string tag;
+    private new string tag;
         // Start is called before the first frame update
     void Start()
     {
