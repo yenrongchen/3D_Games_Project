@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 51834440678171781}
   - component: {fileID: 5393930617544588069}
   - component: {fileID: 9056452999736421978}
+  - component: {fileID: 7325766842410415302}
   m_Layer: 0
   m_Name: Jammer
   m_TagString: Untagged
@@ -106,6 +107,19 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.005656989, y: 0.0060593933, z: 0.009468207}
   m_Center: {x: 0.000013987068, y: 0.00006616117, z: -0.0000068773534}
+--- !u!114 &7325766842410415302
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4490465197478282416}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d61bc992d6f137419227a3e9b24adaf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  item: {fileID: 11400000, guid: 797230df3a39d654b92715662c919bda, type: 2}
 --- !u!1 &7870617385649458966
 GameObject:
   m_ObjectHideFlags: 0

@@ -148,6 +148,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6468011802303816105}
   - component: {fileID: 8716019698897803186}
+  - component: {fileID: 8356165005026498564}
   m_Layer: 0
   m_Name: AlmondWater
   m_TagString: Untagged
@@ -193,3 +194,16 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 5.653167, y: 11.780568, z: 6.223583}
   m_Center: {x: -0.121023655, y: 0.89201033, z: 0.12690783}
+--- !u!114 &8356165005026498564
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6410564937674912964}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d61bc992d6f137419227a3e9b24adaf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  item: {fileID: 11400000, guid: 9ec53f98381c9dd4382018b01ae0a707, type: 2}

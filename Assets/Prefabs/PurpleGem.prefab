@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 1664678383164651218}
   - component: {fileID: 427290614169306678}
   - component: {fileID: 9202809281605722378}
+  - component: {fileID: 2958696337900529031}
   m_Layer: 0
   m_Name: PurpleGem
   m_TagString: Untagged
@@ -83,3 +84,16 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &2958696337900529031
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7678737815849674162}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d61bc992d6f137419227a3e9b24adaf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  item: {fileID: 11400000, guid: c723fd7f9250b8a4e89f62a76b6f22c0, type: 2}

@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 2768801418597306715}
   - component: {fileID: 756213797939226844}
   - component: {fileID: 1177653832608615283}
+  - component: {fileID: -8237309673510436892}
   m_Layer: 0
   m_Name: OrangeGem
   m_TagString: Untagged
@@ -83,3 +84,16 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &-8237309673510436892
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3268163182884463369}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d61bc992d6f137419227a3e9b24adaf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  item: {fileID: 11400000, guid: bbfc6b2a2e966f4499a751926a248063, type: 2}

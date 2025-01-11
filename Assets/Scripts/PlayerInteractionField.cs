@@ -5,19 +5,20 @@ using Fungus;
 
 public class PlayerInteractionField : MonoBehaviour
 {
+    private PlayerBackpack b;
     private bool isInsideTrigger = false;
     private new string tag;
         // Start is called before the first frame update
     void Start()
     {
         tag = null;
+        b = GetComponent<PlayerBackpack>();
     }
     // Update is called once per frame
     
     void Update()
     {
-
-        if (isInsideTrigger && Input.GetMouseButtonDown(0))
+        if (isInsideTrigger) //&& Input.GetMouseButtonDown(0))
         {
             TriggerEventAction(tag);
         }
