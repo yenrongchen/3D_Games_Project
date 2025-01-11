@@ -1,6 +1,9 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEditor.PackageManager;
+using UnityEngine;
 #if ENABLE_INPUT_SYSTEM
 using UnityEngine.InputSystem;
+using UnityEngine.ProBuilder;
 //using Fungus;
 #endif
 
@@ -39,9 +42,16 @@ namespace StarterAssets
 		public float TopClamp = 90.0f;
 		[Tooltip("How far in degrees can you move the camera down")]
 		public float BottomClamp = -90.0f;
+        [Tooltip("Main Camera for obtaining current viewport")]
+        public Camera mainCamera;
 
-		// cinemachine
-		private float _cinemachineTargetPitch;
+        [Header("HP")]
+        public int HP = 3;
+
+        private int hp;
+
+        // cinemachine
+        private float _cinemachineTargetPitch;
 
 		// player
 		private float _speed;
@@ -56,18 +66,26 @@ namespace StarterAssets
 		// animation
 		private Animator animator;
 
-        // HP
-        [Header("HP")]
-		public int HP = 3;
+		// line renderer (for debug)
+        //private LineRenderer lr;
 
-		private int hp;
+        // portal
+        [Header("Portal")]
+        public GameObject portalPrefab;
+        private List<GameObject> portals = new List<GameObject>();
+        private Vector3 previousPortalPos;
+        private int portalCount = 0;
+        private bool isHoldingPortal = true;
+
+		// shoes
+		private bool isWearingShoes = false;
+
 
 #if ENABLE_INPUT_SYSTEM
-		private PlayerInput _playerInput;
+        private PlayerInput _playerInput;
 #endif
 		private CharacterController _controller;
 		private StarterAssetsInputs _input;
-		private GameObject _mainCamera;
 
 		private const float _threshold = 0.01f;
 
@@ -86,9 +104,9 @@ namespace StarterAssets
 		private void Awake()
 		{
 			// get a reference to our main camera
-			if (_mainCamera == null)
+			if (mainCamera == null)
 			{
-				_mainCamera = GameObject.FindGameObjectWithTag("MainCamera");
+				mainCamera = Camera.main;
 			}
 		}
 
@@ -105,9 +123,14 @@ namespace StarterAssets
             animator = this.GetComponentInChildren<Animator>();
 
 			hp = HP;
+
+			//lr = GetComponent<LineRenderer>();
+			//lr.endWidth = 0.05f;
+			//lr.startWidth = 0.05f;
+			//lr.positionCount = 2;
 		}
 
-		private void Update()
+        private void Update()
 		{
             isPaused = GameObject.Find("GameManager").GetComponent<GameManager>().getIsPaused();
 			if (!isPaused)
@@ -123,13 +146,15 @@ namespace StarterAssets
 				GroundedCheck();
                 Move(isWalking);
 				CheckAction();
-			}
+				//ShowRayInfo();
+				PortalAction();
+            }
 
 			if (hp <= 0)
 			{
 				// Game Over
 			}
-		}
+        }
 
         public void EnableMovement()
         {
@@ -199,6 +224,11 @@ namespace StarterAssets
 			{
 				targetSpeed = SprintSpeed;
                 animator.SetInteger("state", 2);
+            }
+
+			if (isWearingShoes)
+			{
+				targetSpeed += 2f;
             }
 
 			// a reference to the players current horizontal velocity
@@ -296,5 +326,83 @@ namespace StarterAssets
 		{
 			return hp;
 		}
+
+		private void ShowRayInfo()
+		{
+            Vector3 rayPos;
+            RaycastHit hit;
+            rayPos = mainCamera.ViewportToWorldPoint(new Vector3(0.5f, 0.5f, 0f));
+            if (Physics.Raycast(rayPos, mainCamera.transform.forward, out hit, 99))
+            {
+                //print(hit.transform.tag);
+				//lr.enabled = true;
+				//lr.SetPosition(0, rayPos);
+				//lr.SetPosition(1, hit.point);
+			}
+        }
+
+		private void PortalAction()
+		{
+            // take portal
+            // TODO: Take portal key bind
+            if (Input.GetKeyDown(KeyCode.B))
+			{
+                // TODO: destroy target portal (maybe use raycast?)
+                //Destroy(targetPortal);
+
+                GameObject[] portalsInScene = GameObject.FindGameObjectsWithTag("Portal");
+				if (portalsInScene.Length % 2 == 1)
+				{
+					portalsInScene[^1].GetComponent<PortalController>().disableTeleport();
+                }
+
+				// TODO: portal inventory increase 1
+            }
+
+			// place portal
+			// TODO: Place portal key bind
+			if (isHoldingPortal && Input.GetKeyDown(KeyCode.T))
+			{
+				// TODO: Portal placed position and check angle
+				Vector3 portalPos = new(transform.position.x, -1.7f, transform.position.z - 2f);
+				GameObject portal = Instantiate(portalPrefab, portalPos, Quaternion.Euler(0, 180, 0));
+				portals.Add(portal);
+				portalCount++;
+
+				if (portalCount % 2 == 1)
+				{
+					previousPortalPos = transform.position;
+				}
+				else
+				{
+                    portal.GetComponent<PortalController>().setTeleportPos(previousPortalPos);
+                    portals[^2].GetComponent<PortalController>().setTeleportPos(transform.position);
+                }
+			}
+
+            // retrieve portal
+            // TODO: Retrieve portal key bind
+            if (Input.GetKeyDown(KeyCode.G))
+			{
+                if (portalCount > 0)
+				{
+                    Destroy(portals[^1]);
+                    portals.RemoveAt(portalCount - 1);
+                    portalCount--;
+
+                    if (portalCount % 2 == 1)
+                    {
+                        portals[^1].GetComponent<PortalController>().disableTeleport();
+                    }
+                }
+            }
+		}
+
+		public void teleport(Vector3 targetPosition)
+		{
+			_controller.enabled = false;
+            _controller.transform.position = targetPosition;
+            _controller.enabled = true;
+        }
     }
 }

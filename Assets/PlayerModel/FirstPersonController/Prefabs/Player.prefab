@@ -1395,7 +1395,9 @@ GameObject:
   m_Component:
   - component: {fileID: 3467273528454218015}
   - component: {fileID: 3452140484678511037}
-  m_Layer: 8
+  - component: {fileID: 8379575161357047021}
+  - component: {fileID: 5256197596902341760}
+  m_Layer: 0
   m_Name: InteractionField
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -1436,10 +1438,49 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.56865036
-  m_Height: 2.5867236
+  m_Radius: 0.48
+  m_Height: 2.4
   m_Direction: 1
   m_Center: {x: 0.06865037, y: 0.7933608, z: 0}
+--- !u!54 &8379575161357047021
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4639358307565184303}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 126
+  m_CollisionDetection: 0
+--- !u!114 &5256197596902341760
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4639358307565184303}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a4c8c862029620b4a89be0f63fbe2a97, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5010127106209413009
 GameObject:
   m_ObjectHideFlags: 0
@@ -1584,7 +1625,7 @@ GameObject:
   - component: {fileID: 8454222941935300450}
   - component: {fileID: 3415311854012492113}
   - component: {fileID: 5860006640494211146}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -1660,7 +1701,10 @@ MonoBehaviour:
   CinemachineCameraTarget: {fileID: 7958388483546926679}
   TopClamp: 89
   BottomClamp: -89
+  mainCamera: {fileID: 0}
   HP: 3
+  portalPrefab: {fileID: 8878502152022807178, guid: 996489511e2e6b648a086007ad5c7d5f,
+    type: 3}
 --- !u!114 &8454222941935300450
 MonoBehaviour:
   m_ObjectHideFlags: 0

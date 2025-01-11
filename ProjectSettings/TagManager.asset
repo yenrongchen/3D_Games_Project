@@ -14,6 +14,8 @@ TagManager:
   - TableandChair
   - CrateBox
   - Key
+  - Portal
+  - Barrier
   layers:
   - Default
   - TransparentFX
