@@ -14,9 +14,10 @@ GameObject:
   - component: {fileID: 9056452999736421978}
   - component: {fileID: 7325766842410415302}
   - component: {fileID: 9137042534553493381}
+  - component: {fileID: -301092595638661198}
   m_Layer: 0
   m_Name: Jammer
-  m_TagString: Props
+  m_TagString: Jammer
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -33,8 +34,7 @@ Transform:
   m_LocalPosition: {x: -3.972673, y: 3.438, z: -9.617378}
   m_LocalScale: {x: 100, y: 100, z: 100}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 2667896404174322869}
+  m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &51834440678171781
@@ -140,58 +140,15 @@ MonoBehaviour:
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
---- !u!1 &7870617385649458966
-GameObject:
+--- !u!114 &-301092595638661198
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2667896404174322869}
-  - component: {fileID: 4240607728019084789}
-  m_Layer: 0
-  m_Name: GameObject
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &2667896404174322869
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7870617385649458966}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.1373, y: -1.56548, z: 0.3575}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 4052017715105232067}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!136 &4240607728019084789
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7870617385649458966}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
+  m_GameObject: {fileID: 4490465197478282416}
   m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.007214086
-  m_Height: 0.014428172
-  m_Direction: 1
-  m_Center: {x: -0.13696651, y: 1.5651056, z: -0.35581914}
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09675e01b63c2bf47b4e15291a69c47b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

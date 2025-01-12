@@ -18,6 +18,10 @@ TagManager:
   - Barrier
   - Props
   - OnHandProps
+  - Key1
+  - Key2
+  - Key3
+  - Jammer
   layers:
   - Default
   - TransparentFX

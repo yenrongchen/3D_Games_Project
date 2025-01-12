@@ -1,5 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
+using Unity.VisualScripting.Antlr3.Runtime.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem.XR;
 
@@ -20,7 +22,7 @@ public class PlayerActionController : MonoBehaviour
     //private LineRenderer lr;
 
     // props
-    private List<string> tags = new() { "Props" };
+    private List<string> tags = new() { "Props", "Jammer" };
 
     // jammer
     private GameObject crosshair;
@@ -30,12 +32,13 @@ public class PlayerActionController : MonoBehaviour
     private List<GameObject> portals = new List<GameObject>();
     private Vector3 previousPortalPos;
     private int portalCount = 0;
-    private bool isHoldingPortal = true;  // should be false initially
+    private bool isHoldingPortal = false;
 
     void Start()
     {
         controller = GetComponent<CharacterController>();
         crosshair = Instantiate(crosshairPrefab, Vector3.zero, Quaternion.identity);
+        crosshair.SetActive(false);
         //lr = GetComponent<LineRenderer>();
         //lr.endWidth = 0.05f;
         //lr.startWidth = 0.05f;
@@ -48,7 +51,7 @@ public class PlayerActionController : MonoBehaviour
         // clear outlines of all objects
         CancelAllOutlines();
 
-        // show props outlines and jammer's action
+        // raycast along with viewpoint
         RaycastHit hit;
         Vector3 rayPosition;
         rayPosition = mainCamera.ViewportToWorldPoint(new Vector3(0.5f, 0.5f, 0f));
@@ -57,23 +60,31 @@ public class PlayerActionController : MonoBehaviour
             //lr.enabled = true;
             //lr.SetPosition(0, rayPos);
             //lr.SetPosition(1, hit.point);
+
+            // show props outlines
             ShowOutline(hit);
+
+            // jammer's action
             JammerAction(hit);
             ShowCrosshair(isHoldingJammer, hit);
+
+            // portal's action
+            PortalAction(hit);
         }
 
-        // portal's action
-        PortalAction();
+        // check whether to place on-hand props
+        PlaceProps();
     }
 
     private void JammerAction(RaycastHit hit)
     {
-        // TODO: take jammer
-        if (Input.GetKeyDown(KeyCode.I) && hit.transform.CompareTag("Jammer") && !isHoldingJammer)
+        // pick jammer
+        if (Input.GetKeyDown(KeyCode.F) && hit.transform.CompareTag("Jammer") && !isHoldingJammer)
         {
-            //Destroy(targetJammer);
+            GameObject targetJammer = hit.transform.gameObject;
+            Destroy(targetJammer);
 
-            // jammer inventory +1
+            // TODO: jammer inventory +1
         }
 
         // hold jammer
@@ -99,49 +110,65 @@ public class PlayerActionController : MonoBehaviour
             // TODO: jammer inventory decrease 1
         }
 
-        // place jammer
-        if (isHoldingJammer && Input.GetKeyDown(KeyCode.U))
+        // place jammer when raycast hit something
+        if (Input.GetKeyDown(KeyCode.Mouse1) && isHoldingJammer)
         {
+            Vector3 temp = transform.position + transform.forward * 1.5f;
+            Vector3 jammerPos = new(temp.x, transform.position.y + 0.47f, temp.z);
+            Quaternion jammerRot = Quaternion.Euler(-90f, this.transform.rotation.eulerAngles.y, 0f);
+            GameObject jammer = Instantiate(jammerPrefab, jammerPos, jammerRot);
+
             if (hit.transform.tag == "Barrier")
             {
                 // set barrier to invisible
                 hit.transform.GetComponent<MeshRenderer>().enabled = false;
                 hit.transform.GetComponent<MeshCollider>().enabled = false;
+                jammer.GetComponent<JammerController>().setTargetBarrier(hit.transform.gameObject);
             }
-
-            Vector3 jammerPos = new(transform.position.x, 0.45f, transform.position.z - 2f);
-            Instantiate(jammerPrefab, jammerPos, Quaternion.Euler(-90f, this.transform.rotation.eulerAngles.y, 0f));
 
             GameObject holdedJammer = GameObject.Find("onHandJammer");
             Destroy(holdedJammer);
             isHoldingJammer = false;
+
+            // TODO: jammer inventory -1
         }
 
         // retrieve jammer
-        if (Input.GetKeyDown(KeyCode.M))
+        if (Input.GetKeyDown(KeyCode.M) && hit.transform.CompareTag("Jammer"))
         {
-            // TODO: retrieve jammer
+            // retrieve jammer
+            GameObject jammer = hit.transform.gameObject;
+            Destroy(jammer);
 
             // set barrier to visible
-            //hit.transform.GetComponent<MeshRenderer>().enabled = true;
-            //hit.transform.GetComponent<MeshCollider>().enabled = true;
+            GameObject barrier = jammer.GetComponent<JammerController>().getTargetBarrier();
+            if (barrier != null)
+            {
+                barrier.GetComponent<MeshRenderer>().enabled = true;
+                barrier.GetComponent<MeshCollider>().enabled = true;
+            }
+
+            // TODO: jammer inventory +1
         }
 
-        // TODO: paralyze monster
-        if (isHoldingJammer && Input.GetKeyDown(KeyCode.Mouse0))
+        // paralyze monster
+        if (Input.GetKeyDown(KeyCode.Mouse0) && isHoldingJammer && hit.transform.CompareTag("Enemy"))
         {
+            // TODO: attack cd
 
+            GameObject monster = hit.transform.gameObject;
+            monster.GetComponent<MonsterController>().Paralyzed();
         }
     }
 
-    private void PortalAction()
+    private void PortalAction(RaycastHit hit)
     {
-        // take portal
-        if (Input.GetKeyDown(KeyCode.B))
+        // pick portal
+        if (Input.GetKeyDown(KeyCode.F) && hit.transform.CompareTag("Portal") && !isHoldingPortal)
         {
-            // TODO: destroy target portal (maybe use raycast?)
-            //Destroy(targetPortal);
-
+            GameObject targetPortal = hit.transform.gameObject;
+            Destroy(targetPortal);
+            
             GameObject[] portalsInScene = GameObject.FindGameObjectsWithTag("Portal");
             if (portalsInScene.Length % 2 == 1)
             {
@@ -151,29 +178,26 @@ public class PlayerActionController : MonoBehaviour
             // TODO: portal inventory increase 1
         }
 
-        // TODO: hold portal
-
-
-        // place portal
-        if (isHoldingPortal && Input.GetKeyDown(KeyCode.T))
+        // hold portal
+        if (Input.GetKeyDown(KeyCode.B) && !isHoldingPortal)
         {
-            // TODO: Portal placed position and check angle
-            Vector3 portalPos = new(transform.position.x, -1.7f, transform.position.z - 2f);
-            GameObject portal = Instantiate(portalPrefab, portalPos, Quaternion.Euler(0, 180, 0));
-            portals.Add(portal);
-            portalCount++;
+            GameObject portal = Instantiate(portalPrefab, mainCamera.transform);
 
-            if (portalCount % 2 == 1)
-            {
-                previousPortalPos = transform.position;
-            }
-            else
-            {
-                portal.GetComponent<PortalController>().setTeleportPos(previousPortalPos);
-                portals[^2].GetComponent<PortalController>().setTeleportPos(transform.position);
-            }
+            // position (right-bottom corner of the screen)
+            Vector3 screenPosition = new(Screen.width * 0.8f, Screen.height * -0.25f, 0.8f);
+            Vector3 portalPosition = mainCamera.ScreenToWorldPoint(screenPosition);
+            portal.transform.position = portalPosition;
 
-            // TODO: portal inventory decrease 1
+            // rotation
+            portal.transform.rotation = Quaternion.Euler(-90f, this.transform.rotation.eulerAngles.y, 0f);
+
+            // other settings
+            portal.name = "onHandPortal";
+            portal.transform.gameObject.GetComponent<BoxCollider>().enabled = false;
+
+            isHoldingPortal = true;
+
+            // TODO: jammer inventory decrease 1
         }
 
         // retrieve portal
@@ -195,6 +219,50 @@ public class PlayerActionController : MonoBehaviour
         }
     }
 
+    private void PlaceProps()
+    {
+        // place jammer when raycast doesn't hit anything
+        if (Input.GetKeyDown(KeyCode.Mouse1) && isHoldingJammer)
+        {
+            Vector3 temp = transform.position + transform.forward * 1.5f;
+            Vector3 jammerPos = new(temp.x, transform.position.y + 0.47f, temp.z);
+            Quaternion jammerRot = Quaternion.Euler(-90f, this.transform.rotation.eulerAngles.y, 0f);
+            GameObject jammer = Instantiate(jammerPrefab, jammerPos, jammerRot);
+
+            GameObject holdedJammer = GameObject.Find("onHandJammer");
+            Destroy(holdedJammer);
+            isHoldingJammer = false;
+
+            // TODO: jammer inventory -1
+        }
+
+        // place portal
+        if (Input.GetKeyDown(KeyCode.Mouse1) && isHoldingPortal)
+        {
+            // TODO: Portal placed position and check angle
+            Vector3 portalPos = new(transform.position.x, -1.7f, transform.position.z - 2f);
+            GameObject portal = Instantiate(portalPrefab, portalPos, Quaternion.Euler(0, 180, 0));
+            portals.Add(portal);
+            portalCount++;
+
+            if (portalCount % 2 == 1)
+            {
+                previousPortalPos = transform.position;
+            }
+            else
+            {
+                portal.GetComponent<PortalController>().setTeleportPos(previousPortalPos);
+                portals[^2].GetComponent<PortalController>().setTeleportPos(transform.position);
+            }
+
+            GameObject holdedProtal = GameObject.Find("onHandPortal");
+            Destroy(holdedProtal);
+            isHoldingPortal = false;
+
+            // TODO: portal inventory decrease 1
+        }
+    }
+
     private void ShowOutline(RaycastHit hit)
     {
         if (tags.Contains(hit.transform.tag))
@@ -211,18 +279,29 @@ public class PlayerActionController : MonoBehaviour
 
     private void CancelAllOutlines()
     {
-        GameObject[] allProps = GameObject.FindGameObjectsWithTag("Props");
-        foreach (GameObject props in allProps)
+        foreach (string tag in tags)
         {
-            var outline = props.GetComponent<Outline>();
-            outline.enabled = false;
+            GameObject[] allProps = GameObject.FindGameObjectsWithTag(tag);
+            foreach (GameObject props in allProps)
+            {
+                var outline = props.GetComponent<Outline>();
+                outline.enabled = false;
+            }
         }
+
         GameObject[] allOnHandProps = GameObject.FindGameObjectsWithTag("OnHandProps");
         foreach (GameObject onhandprops in allOnHandProps)
         {
             var outline = onhandprops.GetComponent<Outline>();
             outline.enabled = false;
         }
+
+        if (GameObject.Find("onHandPortal") != null)
+        {
+            var outline = GameObject.Find("onHandPortal").GetComponentInChildren<Outline>();
+            outline.enabled = false;
+        }
+
         GameObject[] allPortals = GameObject.FindGameObjectsWithTag("Portal");
         foreach (GameObject port in allPortals)
         {

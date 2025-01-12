@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 5397565537197631179}
   - component: {fileID: 3839480708525240387}
   m_Layer: 0
-  m_Name: RedGem
+  m_Name: Lv2Gem
   m_TagString: Props
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

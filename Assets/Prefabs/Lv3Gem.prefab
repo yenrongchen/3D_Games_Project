@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 4405442381390202209}
   - component: {fileID: 3365937664817744666}
   m_Layer: 0
-  m_Name: PurpleGem
+  m_Name: Lv3Gem
   m_TagString: Props
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
