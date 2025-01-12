@@ -12,6 +12,8 @@ GameObject:
   - component: {fileID: 756213797939226844}
   - component: {fileID: 1177653832608615283}
   - component: {fileID: -8237309673510436892}
+  - component: {fileID: 4745213943449915341}
+  - component: {fileID: 2579840484746833961}
   m_Layer: 0
   m_Name: OrangeGem
   m_TagString: Props
@@ -97,9 +99,70 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   item: {fileID: 11400000, guid: bbfc6b2a2e966f4499a751926a248063, type: 2}
+  isIn: 0
+--- !u!114 &4745213943449915341
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3268163182884463369}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
   outlineMode: 1
   outlineColor: {r: 1, g: 0.4, b: 0, a: 1}
   outlineWidth: 3
-  precomputeOutline: 0
-  bakeKeys: []
-  bakeValues: []
+  precomputeOutline: 1
+  bakeKeys:
+  - {fileID: 2381890483179193753, guid: ffa31add60987fa469befe5f68a787aa, type: 3}
+  bakeValues:
+  - data:
+    - {x: -0.005701621, y: -0.005722168, z: 0.99996734}
+    - {x: 0.99978405, y: -0.020780014, z: 0.00000006115249}
+    - {x: -0.021433972, y: 0.9997703, z: 0}
+    - {x: -0.005701621, y: -0.005722168, z: 0.99996734}
+    - {x: -0.021433972, y: 0.9997703, z: 0}
+    - {x: -0.9997507, y: -0.022330116, z: 0}
+    - {x: -0.005701621, y: -0.005722168, z: 0.99996734}
+    - {x: -0.9997507, y: -0.022330116, z: 0}
+    - {x: -0.023513217, y: -0.99972355, z: 0.00000006124382}
+    - {x: -0.005701621, y: -0.005722168, z: 0.99996734}
+    - {x: -0.023513217, y: -0.99972355, z: 0.00000006124382}
+    - {x: 0.99978405, y: -0.020780014, z: 0.00000006115249}
+    - {x: -0.005701621, y: -0.005722168, z: -0.99996734}
+    - {x: -0.021433972, y: 0.9997703, z: 0}
+    - {x: 0.99978405, y: -0.020780014, z: 0.00000006115249}
+    - {x: -0.005701621, y: -0.005722168, z: -0.99996734}
+    - {x: -0.9997507, y: -0.022330116, z: 0}
+    - {x: -0.021433972, y: 0.9997703, z: 0}
+    - {x: -0.005701621, y: -0.005722168, z: -0.99996734}
+    - {x: -0.023513217, y: -0.99972355, z: 0.00000006124382}
+    - {x: -0.9997507, y: -0.022330116, z: 0}
+    - {x: -0.005701621, y: -0.005722168, z: -0.99996734}
+    - {x: 0.99978405, y: -0.020780014, z: 0.00000006115249}
+    - {x: -0.023513217, y: -0.99972355, z: 0.00000006124382}
+--- !u!64 &2579840484746833961
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3268163182884463369}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 2381890483179193753, guid: ffa31add60987fa469befe5f68a787aa, type: 3}

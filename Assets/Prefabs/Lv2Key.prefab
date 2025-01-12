@@ -241,6 +241,8 @@ GameObject:
   - component: {fileID: 4024864887058912024}
   - component: {fileID: -5343803316164109385}
   - component: {fileID: 4491799008482583212}
+  - component: {fileID: 2741377029022563262}
+  - component: {fileID: 4656653458628944267}
   m_Layer: 0
   m_Name: Lv2Key
   m_TagString: Props
@@ -290,12 +292,46 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   item: {fileID: 11400000, guid: b9b6ce94462efe848a64244d4c1443db, type: 2}
+  isIn: 0
+--- !u!114 &2741377029022563262
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6903376187282384920}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
   outlineMode: 1
   outlineColor: {r: 1, g: 0.4, b: 0, a: 1}
   outlineWidth: 3
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
+--- !u!65 &4656653458628944267
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6903376187282384920}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.07505401, y: 0.023248006, z: 0.008763977}
+  m_Center: {x: 0.00031141343, y: 0.00086243154, z: -0.0002360903}
 --- !u!1 &8370475351351548878
 GameObject:
   m_ObjectHideFlags: 0
