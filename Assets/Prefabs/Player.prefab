@@ -1624,6 +1624,7 @@ GameObject:
   - component: {fileID: 1504818015418550677}
   - component: {fileID: 8454222941935300450}
   - component: {fileID: 3415311854012492113}
+  - component: {fileID: -1039307123447161368}
   - component: {fileID: 5860006640494211146}
   m_Layer: 0
   m_Name: Player
@@ -1703,8 +1704,6 @@ MonoBehaviour:
   BottomClamp: -89
   mainCamera: {fileID: 0}
   HP: 3
-  portalPrefab: {fileID: 8878502152022807178, guid: 996489511e2e6b648a086007ad5c7d5f,
-    type: 3}
 --- !u!114 &8454222941935300450
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1740,6 +1739,25 @@ MonoBehaviour:
   analogMovement: 0
   cursorLocked: 1
   cursorInputForLook: 1
+--- !u!114 &-1039307123447161368
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5534576426513401023}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 684b8144af7521042bc70b9db30ec9a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mainCamera: {fileID: 0}
+  portalPrefab: {fileID: 8878502152022807178, guid: 996489511e2e6b648a086007ad5c7d5f,
+    type: 3}
+  jammerPrefab: {fileID: 4490465197478282416, guid: 43cd6699819d4d64a95422453715ae9e,
+    type: 3}
+  crosshairPrefab: {fileID: 4680632583163769665, guid: 3175a1ea96f590041b0e01b00bb2d9cd,
+    type: 3}
 --- !u!114 &5860006640494211146
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -12,9 +12,10 @@ GameObject:
   - component: {fileID: 1572147444124447376}
   - component: {fileID: 8373330508612973889}
   - component: {fileID: 3630037757178333709}
+  - component: {fileID: -2187249563115261243}
   m_Layer: 0
   m_Name: Lv1Key
-  m_TagString: Untagged
+  m_TagString: Props
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -96,3 +97,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb8fdca6f6e58f44da04e79bc6466ef2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rotateAngle: 60
+--- !u!114 &-2187249563115261243
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7803591490559144302}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  outlineMode: 1
+  outlineColor: {r: 1, g: 0.4, b: 0, a: 1}
+  outlineWidth: 3
+  precomputeOutline: 0
+  bakeKeys: []
+  bakeValues: []

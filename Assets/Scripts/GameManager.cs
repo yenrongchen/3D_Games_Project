@@ -10,7 +10,7 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        int nextLevel = 1;
+        //int nextLevel = 1;
     }
 
     // Update is called once per frame
@@ -47,6 +47,4 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene(0);
         nextLevel++;
     }
-
-
 }
