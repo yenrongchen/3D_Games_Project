@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 8719367086262249511}
   m_Layer: 0
   m_Name: RedGem
-  m_TagString: Untagged
+  m_TagString: Props
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -84,6 +84,7 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+<<<<<<< HEAD
 --- !u!114 &8719367086262249511
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -97,3 +98,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   item: {fileID: 11400000, guid: bbfc6b2a2e966f4499a751926a248063, type: 2}
+  outlineMode: 1
+  outlineColor: {r: 1, g: 0.4, b: 0, a: 1}
+  outlineWidth: 3
+  precomputeOutline: 0
+  bakeKeys: []
+  bakeValues: []

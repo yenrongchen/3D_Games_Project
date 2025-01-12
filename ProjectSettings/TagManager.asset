@@ -16,6 +16,8 @@ TagManager:
   - Key
   - Portal
   - Barrier
+  - Props
+  - OnHandProps
   layers:
   - Default
   - TransparentFX

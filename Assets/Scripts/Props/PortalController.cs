@@ -28,12 +28,12 @@ public class PortalController : MonoBehaviour
         return TeleportPosition;
     }
 
-    public bool checkCanTP()
+    public bool CheckCanTP()
     {
         return canTeleport;
     }
 
-    public void disableTeleport()
+    public void DisableTeleport()
     {
         canTeleport = false;
     }

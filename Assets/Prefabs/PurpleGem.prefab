@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 2958696337900529031}
   m_Layer: 0
   m_Name: PurpleGem
-  m_TagString: Untagged
+  m_TagString: Props
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -97,3 +97,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   item: {fileID: 11400000, guid: c723fd7f9250b8a4e89f62a76b6f22c0, type: 2}
+  outlineMode: 1
+  outlineColor: {r: 1, g: 0.4, b: 0, a: 1}
+  outlineWidth: 3
+  precomputeOutline: 0
+  bakeKeys: []
+  bakeValues: []

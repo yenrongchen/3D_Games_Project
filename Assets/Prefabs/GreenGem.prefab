@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 8622449855959944373}
   m_Layer: 0
   m_Name: GreenGem
-  m_TagString: Untagged
+  m_TagString: Props
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -97,3 +97,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   item: {fileID: 11400000, guid: 6b50abad7370bdd4991dd7e59238bfdf, type: 2}
+  outlineMode: 1
+  outlineColor: {r: 1, g: 0.4, b: 0, a: 1}
+  outlineWidth: 3
+  precomputeOutline: 0
+  bakeKeys: []
+  bakeValues: []

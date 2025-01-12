@@ -1,9 +1,18 @@
-﻿using System.Collections.Generic;
+﻿using Fungus;
+using System.Collections.Generic;
+using System.Linq;
+using Unity.VisualScripting;
+using Unity.VisualScripting.Antlr3.Runtime.Collections;
+using UnityEditor;
 using UnityEditor.PackageManager;
 using UnityEngine;
+using UnityEngine.EventSystems;
+
 #if ENABLE_INPUT_SYSTEM
 using UnityEngine.InputSystem;
 using UnityEngine.ProBuilder;
+using UnityEngine.UI;
+using static UnityEditor.Rendering.InspectorCurveEditor;
 //using Fungus;
 #endif
 
@@ -47,7 +56,6 @@ namespace StarterAssets
 
         [Header("HP")]
         public int HP = 3;
-
         private int hp;
 
         // cinemachine
@@ -60,25 +68,14 @@ namespace StarterAssets
 		private bool isWalking = true;
         private bool canMove = true;
 
+        // animation
+        private Animator animator;
+
         // check game status
         private bool isPaused;
 
-		// animation
-		private Animator animator;
-
-		// line renderer (for debug)
-        //private LineRenderer lr;
-
-        // portal
-        [Header("Portal")]
-        public GameObject portalPrefab;
-        private List<GameObject> portals = new List<GameObject>();
-        private Vector3 previousPortalPos;
-        private int portalCount = 0;
-        private bool isHoldingPortal = true;
-
-		// shoes
-		private bool isWearingShoes = false;
+        // shoes
+        private bool isWearingShoes = false;
 
 
 #if ENABLE_INPUT_SYSTEM
@@ -123,33 +120,24 @@ namespace StarterAssets
             animator = this.GetComponentInChildren<Animator>();
 
 			hp = HP;
-
-			//lr = GetComponent<LineRenderer>();
-			//lr.endWidth = 0.05f;
-			//lr.startWidth = 0.05f;
-			//lr.positionCount = 2;
 		}
 
         private void Update()
 		{
             isPaused = GameObject.Find("GameManager").GetComponent<GameManager>().getIsPaused();
-			if (!isPaused)
+			if (isPaused || !canMove)
 			{
-                if (!canMove)
-                {
-                    return;  // 禁止移动
-                }
-                if (Input.GetKeyDown(KeyCode.LeftShift))
-				{
-					isWalking = !isWalking;
-				}
-				GroundedCheck();
-                Move(isWalking);
-				CheckAction();
-				//ShowRayInfo();
-				PortalAction();
-            }
+				return;
+			}
 
+            if (Input.GetKeyDown(KeyCode.LeftShift))
+			{
+				isWalking = !isWalking;
+			}
+
+			GroundedCheck();
+            Move(isWalking);
+          
 			if (hp <= 0)
 			{
 				// Game Over
@@ -286,31 +274,6 @@ namespace StarterAssets
             Gizmos.DrawSphere(new Vector3(transform.position.x, transform.position.y - GroundedOffset, transform.position.z), GroundedRadius);
         }
 
-        private void CheckAction()
-		{
-			isPaused = GameObject.Find("GameManager").GetComponent<GameManager>().getIsPaused();
-
-            if (Input.GetKey(KeyCode.Q) && !isPaused)
-			{
-				// check inventory
-			}
-
-            if (Input.GetKey(KeyCode.F) && !isPaused)
-            {
-                // pick up tool
-            }
-
-            if (Input.GetKey(KeyCode.E) && !isPaused)
-            {
-                // interact with objects
-            }
-
-            if (Input.GetKey(KeyCode.Mouse1) && !isPaused)  // right click of mouse
-            {
-                // use tool
-            }
-        }
-
 		public Vector3 getPosition()
 		{
 			return transform.position;
@@ -319,90 +282,12 @@ namespace StarterAssets
 		public void Hurt()
 		{
 			hp--;
-			print(hp);
+			print(hp);  // TO BE DELETED //
 		}
 
 		public int getHP()
 		{
 			return hp;
 		}
-
-		private void ShowRayInfo()
-		{
-            Vector3 rayPos;
-            RaycastHit hit;
-            rayPos = mainCamera.ViewportToWorldPoint(new Vector3(0.5f, 0.5f, 0f));
-            if (Physics.Raycast(rayPos, mainCamera.transform.forward, out hit, 99))
-            {
-                //print(hit.transform.tag);
-				//lr.enabled = true;
-				//lr.SetPosition(0, rayPos);
-				//lr.SetPosition(1, hit.point);
-			}
-        }
-
-		private void PortalAction()
-		{
-            // take portal
-            // TODO: Take portal key bind
-            if (Input.GetKeyDown(KeyCode.B))
-			{
-                // TODO: destroy target portal (maybe use raycast?)
-                //Destroy(targetPortal);
-
-                GameObject[] portalsInScene = GameObject.FindGameObjectsWithTag("Portal");
-				if (portalsInScene.Length % 2 == 1)
-				{
-					portalsInScene[^1].GetComponent<PortalController>().disableTeleport();
-                }
-
-				// TODO: portal inventory increase 1
-            }
-
-			// place portal
-			// TODO: Place portal key bind
-			if (isHoldingPortal && Input.GetKeyDown(KeyCode.T))
-			{
-				// TODO: Portal placed position and check angle
-				Vector3 portalPos = new(transform.position.x, -1.7f, transform.position.z - 2f);
-				GameObject portal = Instantiate(portalPrefab, portalPos, Quaternion.Euler(0, 180, 0));
-				portals.Add(portal);
-				portalCount++;
-
-				if (portalCount % 2 == 1)
-				{
-					previousPortalPos = transform.position;
-				}
-				else
-				{
-                    portal.GetComponent<PortalController>().setTeleportPos(previousPortalPos);
-                    portals[^2].GetComponent<PortalController>().setTeleportPos(transform.position);
-                }
-			}
-
-            // retrieve portal
-            // TODO: Retrieve portal key bind
-            if (Input.GetKeyDown(KeyCode.G))
-			{
-                if (portalCount > 0)
-				{
-                    Destroy(portals[^1]);
-                    portals.RemoveAt(portalCount - 1);
-                    portalCount--;
-
-                    if (portalCount % 2 == 1)
-                    {
-                        portals[^1].GetComponent<PortalController>().disableTeleport();
-                    }
-                }
-            }
-		}
-
-		public void teleport(Vector3 targetPosition)
-		{
-			_controller.enabled = false;
-            _controller.transform.position = targetPosition;
-            _controller.enabled = true;
-        }
     }
 }

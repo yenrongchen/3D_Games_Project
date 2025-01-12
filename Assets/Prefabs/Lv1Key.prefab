@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 4209069872349221697}
   m_Layer: 0
   m_Name: Lv1Key
-  m_TagString: Untagged
+  m_TagString: Props
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -111,3 +111,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   item: {fileID: 11400000, guid: 5bf5454ff4235164586ce59d1a0e25ef, type: 2}
+  outlineMode: 1
+  outlineColor: {r: 1, g: 0.4, b: 0, a: 1}
+  outlineWidth: 3
+  precomputeOutline: 0
+  bakeKeys: []
+  bakeValues: []

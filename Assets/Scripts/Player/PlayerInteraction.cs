@@ -9,10 +9,10 @@ public class PlayerInteraction : MonoBehaviour
     {
         if (collision.transform.CompareTag("Portal"))
         {
-            if (collision.transform.GetComponent<PortalController>().checkCanTP())
+            if (collision.transform.GetComponent<PortalController>().CheckCanTP())
             {
                 Vector3 targetPosition = collision.transform.GetComponent<PortalController>().getTeleportPos();
-                GameObject.Find("Player").GetComponent<FirstPersonController>().teleport(targetPosition);
+                GameObject.Find("Player").GetComponent<PlayerActionController>().Teleport(targetPosition);
             }
         }
     }

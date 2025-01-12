@@ -179,7 +179,7 @@ GameObject:
   - component: {fileID: 5513277463088607469}
   m_Layer: 0
   m_Name: Rations
-  m_TagString: Untagged
+  m_TagString: Props
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -214,6 +214,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   item: {fileID: 11400000, guid: 3bd550a6fddf5cc438293ca6e451fed2, type: 2}
+  outlineMode: 1
+  outlineColor: {r: 1, g: 0.4, b: 0, a: 1}
+  outlineWidth: 3
+  precomputeOutline: 0
+  bakeKeys: []
+  bakeValues: []
 --- !u!65 &5513277463088607469
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -235,3 +241,5 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.24067783, y: 0.45314777, z: 0.2648393}
   m_Center: {x: -0.0027399063, y: 0.17563921, z: 0.024635851}
+  m_Name: 
+  m_EditorClassIdentifier: 
