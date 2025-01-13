@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 2367181132559071284}
   - component: {fileID: -5290063496870606707}
   m_Layer: 0
-  m_Name: WoodBoard-Props
+  m_Name: WoodBoard
   m_TagString: Props
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -289,5 +289,10 @@ namespace StarterAssets
 		{
 			return hp;
 		}
+
+		public void WearShoes()
+		{
+			isWearingShoes = true;
+		}
     }
 }

@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 4348170190061086471}
   m_Layer: 0
   m_Name: Lv1Key
-  m_TagString: Props
+  m_TagString: Key1
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -99,7 +99,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb8fdca6f6e58f44da04e79bc6466ef2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rotateAngle: 60
+  ID: 1
 --- !u!114 &4209069872349221697
 MonoBehaviour:
   m_ObjectHideFlags: 0

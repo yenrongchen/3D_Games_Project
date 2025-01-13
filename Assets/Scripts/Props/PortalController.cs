@@ -5,6 +5,7 @@ using UnityEngine;
 public class PortalController : MonoBehaviour
 {
     public Vector3 TeleportPosition;
+    public GameObject PairPortal;
     private bool canTeleport = false;
 
     // Start is called before the first frame update
@@ -36,5 +37,15 @@ public class PortalController : MonoBehaviour
     public void DisableTeleport()
     {
         canTeleport = false;
+    }
+
+    public void setPairPortal(GameObject pairPortal)
+    {
+        PairPortal = pairPortal;
+    }
+
+    public GameObject getPairPortal()
+    {
+        return PairPortal;
     }
 }

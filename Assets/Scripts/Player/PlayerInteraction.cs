@@ -7,6 +7,7 @@ public class PlayerInteraction : MonoBehaviour
 {
     private void OnCollisionEnter(Collision collision)
     {
+        // teleport
         if (collision.transform.CompareTag("Portal"))
         {
             if (collision.transform.GetComponent<PortalController>().CheckCanTP())

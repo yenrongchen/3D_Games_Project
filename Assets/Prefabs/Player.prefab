@@ -1758,6 +1758,12 @@ MonoBehaviour:
     type: 3}
   crosshairPrefab: {fileID: 4680632583163769665, guid: 3175a1ea96f590041b0e01b00bb2d9cd,
     type: 3}
+  woodBoardPrefab: {fileID: 8851307765202494986, guid: 43e66d9c4f5b24a48a3b1d76597fca47,
+    type: 3}
+  almondWaterPrefab: {fileID: 6410564937674912964, guid: d11b588357392d94f92b274863d40f73,
+    type: 3}
+  rationsPrefab: {fileID: 8173581417653031338, guid: c9a1bc2284936a745b8a31efb41eee5f,
+    type: 3}
 --- !u!114 &5860006640494211146
 MonoBehaviour:
   m_ObjectHideFlags: 0

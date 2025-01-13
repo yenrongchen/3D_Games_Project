@@ -181,7 +181,7 @@ GameObject:
   - component: {fileID: 5356338219019242914}
   m_Layer: 0
   m_Name: Lv2Key
-  m_TagString: Untagged
+  m_TagString: Key2
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

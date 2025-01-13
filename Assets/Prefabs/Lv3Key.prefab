@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 9026098862176495245}
   m_Layer: 0
   m_Name: Lv3Key
-  m_TagString: Props
+  m_TagString: Key3
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
