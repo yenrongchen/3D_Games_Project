@@ -96,9 +96,9 @@ public class MonsterController : MonoBehaviour
             Ray ray = new(rayStart, direction);
             RaycastHit hit;
 
-            if (Physics.Raycast(ray, out hit))
+            if (Physics.Raycast(ray, out hit, 80))
             {
-                if (hit.transform.tag == "Player")
+                if (hit.transform.CompareTag("Player"))
                 {
                     // facing player
                     transform.LookAt(playerPosition);

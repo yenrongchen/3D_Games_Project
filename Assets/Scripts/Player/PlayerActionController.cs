@@ -26,8 +26,8 @@ public class PlayerActionController : MonoBehaviour
     private CharacterController controller;
 
     // props
-    private List<string> tags = new() { "Props", "Jammer", "Key1", "Key2", "Key3", "PlacedJammer", "PlacedBoard" };
-    //private bool hasPropsOnHand = false;
+    private List<string> showOutline = new() { "Props", "Jammer", "Key1", "Key2", "Key3", "PlacedJammer", "PlacedBoard" };
+    private List<string> canPick = new() { "Props", "Jammer", "Key1", "Key2", "Key3" };
 
     // jammer
     private bool isHoldingJammer = false;
@@ -59,28 +59,38 @@ public class PlayerActionController : MonoBehaviour
 
         // raycast along with viewpoint
         RaycastHit hit;
-        Vector3 rayPosition;
-        rayPosition = mainCamera.ViewportToWorldPoint(new Vector3(0.5f, 0.5f, 0f));
-        if (Physics.Raycast(rayPosition, mainCamera.transform.forward, out hit, 99))
+        Vector3 rayOrigin = mainCamera.ViewportToWorldPoint(new Vector3(0.5f, 0.5f, 0f));
+        if (Physics.Raycast(rayOrigin, mainCamera.transform.forward, out hit, 80))
         {
             // show props outlines
             ShowOutline(hit);
 
             // pick props
-            if (Input.GetKey(KeyCode.F))
+            if (Input.GetKey(KeyCode.F) && !isHoldingJammer && !isHoldingPortal && !isHoldingBoard)
             {
                 PickProps(hit);
             }
 
             // retrieve props
-            if (Input.GetKey(KeyCode.R))
+            if (Input.GetKey(KeyCode.R) && !isHoldingJammer && !isHoldingPortal && !isHoldingBoard)
             {
                 RetrieveProps(hit);
             }
 
-
+            // jammer-specific action
             if (isHoldingJammer)
             {
+                // show crosshair
+                crosshair.SetActive(true);
+                crosshair.transform.position = hit.point;
+
+                // show outline of monsters and barrier when aiming to them
+                if (jammerTargetTags.Contains(hit.transform.tag))
+                {
+                    var outline = hit.transform.gameObject.GetComponent<Outline>();
+                    outline.enabled = true;
+                }
+
                 // attack cd count down
                 if (atkcd > 0)
                 {
@@ -94,9 +104,6 @@ public class PlayerActionController : MonoBehaviour
                     monster.GetComponent<MonsterController>().Paralyzed();
                     atkcd = jammerAtkCD;
                 }
-
-                // jammer-specific action
-                isHoldingJammer = JammerAction(hit);
             }
             else
             {
@@ -129,7 +136,7 @@ public class PlayerActionController : MonoBehaviour
             }
         }
 
-        foreach (string tag in tags)
+        foreach (string tag in showOutline)
         {
             GameObject[] allProps = GameObject.FindGameObjectsWithTag(tag);
             foreach (GameObject props in allProps)
@@ -168,7 +175,7 @@ public class PlayerActionController : MonoBehaviour
 
     private void ShowOutline(RaycastHit hit)
     {
-        if (tags.Contains(hit.transform.tag))
+        if (showOutline.Contains(hit.transform.tag))
         {
             var outline = hit.transform.gameObject.GetComponent<Outline>();
             outline.enabled = true;
@@ -184,13 +191,13 @@ public class PlayerActionController : MonoBehaviour
     private void PickProps(RaycastHit hit)
     {
         // pick jammer
-        if (hit.transform.CompareTag("Jammer") && !isHoldingJammer)
+        if (hit.transform.CompareTag("Jammer"))
         {
             // TODO: jammer inventory +1
         }
 
         // pick portal
-        if (hit.transform.CompareTag("Portal") && !isHoldingPortal)
+        if (hit.transform.CompareTag("Portal"))
         {
             GameObject pairPortal = hit.transform.gameObject.GetComponent<PortalController>().getPairPortal();
             if (pairPortal != null)
@@ -215,8 +222,9 @@ public class PlayerActionController : MonoBehaviour
 
         // TODO: gems inventory +1
 
+
         // destroy object
-        if (tags.Contains(hit.transform.tag) || hit.transform.CompareTag("Portal"))
+        if (canPick.Contains(hit.transform.tag) || hit.transform.CompareTag("Portal"))
         {
             GameObject targetProps = hit.transform.gameObject;
             Destroy(targetProps);
@@ -235,8 +243,7 @@ public class PlayerActionController : MonoBehaviour
             GameObject barrier = jammer.GetComponent<JammerController>().getTargetBarrier();
             if (barrier != null)
             {
-                barrier.GetComponent<MeshRenderer>().enabled = true;
-                barrier.GetComponent<MeshCollider>().enabled = true;
+                barrier.GetComponent<BarrierController>().RemoveJammer();
             }
 
             // TODO: jammer inventory +1
@@ -326,6 +333,10 @@ public class PlayerActionController : MonoBehaviour
         // place jammer when raycast doesn't hit anything
         if (isHoldingJammer)
         {
+            RaycastHit hit;
+            Vector3 rayOrigin = mainCamera.ViewportToWorldPoint(new Vector3(0.5f, 0.5f, 0f));
+            bool hasHit = Physics.Raycast(rayOrigin, mainCamera.transform.forward, out hit, 80);
+
             Vector3 temp = transform.position + transform.forward * 1.5f;
             Vector3 jammerPos = new(temp.x, transform.position.y + 0.47f, temp.z);
 
@@ -333,6 +344,12 @@ public class PlayerActionController : MonoBehaviour
 
             GameObject jammer = Instantiate(jammerPrefab, jammerPos, jammerRot);
             jammer.tag = "PlacedJammer";
+
+            if (hasHit && hit.transform.CompareTag("Barrier"))
+            {
+                hit.transform.GetComponent<BarrierController>().AddNewJammer();
+                jammer.GetComponent<JammerController>().setTargetBarrier(hit.transform.gameObject);
+            }
 
             GameObject holdedProps = GameObject.Find("OnHandProps");
             Destroy(holdedProps);
@@ -394,51 +411,6 @@ public class PlayerActionController : MonoBehaviour
         //hasPropsOnHand = false;
     }
 
-    private bool JammerAction(RaycastHit hit)
-    {
-        bool holding = true;
-
-        // show crosshair
-        crosshair.SetActive(true);
-        crosshair.transform.position = hit.point;
-
-        // show outline of monsters and barrier when aiming to them
-        if (jammerTargetTags.Contains(hit.transform.tag))
-        {
-            var outline = hit.transform.gameObject.GetComponent<Outline>();
-            outline.enabled = true;
-        }
-
-        // place jammer when raycast hit something
-        if (Input.GetKeyDown(KeyCode.Mouse1))
-        {
-            Vector3 temp = transform.position + transform.forward * 1.5f;
-            Vector3 jammerPos = new(temp.x, transform.position.y + 0.47f, temp.z);
-
-            Quaternion jammerRot = Quaternion.Euler(-90f, this.transform.rotation.eulerAngles.y, 0f);
-
-            GameObject jammer = Instantiate(jammerPrefab, jammerPos, jammerRot);
-            jammer.tag = "PlacedJammer";
-
-            if (hit.transform.tag == "Barrier")
-            {
-                // set barrier to invisible
-                hit.transform.GetComponent<MeshRenderer>().enabled = false;
-                hit.transform.GetComponent<MeshCollider>().enabled = false;
-                jammer.GetComponent<JammerController>().setTargetBarrier(hit.transform.gameObject);
-            }
-
-            GameObject holdedJammer = GameObject.Find("OnHandProps");
-            Destroy(holdedJammer);
-
-            holding = false;
-
-            // TODO: jammer inventory -1
-        }
-
-        return holding;
-    }
-
     private float GetClosestBaseAngle(float angle)
     {
         float[] baseAngles = { 0f, 90f, 180f, 270f, 360f };
@@ -458,7 +430,6 @@ public class PlayerActionController : MonoBehaviour
 
         return closestAngle == 360f ? 0f : closestAngle;
     }
-
 
     public void Teleport(Vector3 targetPosition)
     {
