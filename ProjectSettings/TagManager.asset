@@ -13,15 +13,16 @@ TagManager:
   - Bed
   - TableandChair
   - CrateBox
-  - Key
   - Portal
   - Barrier
   - Props
-  - OnHandProps
   - Key1
   - Key2
   - Key3
   - Jammer
+  - PlacedJammer
+  - PlacedPortal
+  - PlacedBoard
   layers:
   - Default
   - TransparentFX

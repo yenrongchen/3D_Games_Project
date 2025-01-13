@@ -58,6 +58,7 @@ public class MonsterController : MonoBehaviour
         cd = initAtkCD;
 
         offsetMonster = new Vector3(0f, monsterEyeHeight - 1.9f, 0f);
+
         parTime = paralyzedTime;
 
         // to be deleted //
