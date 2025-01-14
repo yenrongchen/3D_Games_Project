@@ -40,10 +40,6 @@ public class MonsterSpawner : MonoBehaviour
             case 31:
                 SpawnLv3e();
                 break;
-
-            default:
-                SpawnLv1();
-                break;
         }
     }
 

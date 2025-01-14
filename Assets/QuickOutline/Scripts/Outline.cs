@@ -54,13 +54,16 @@ public class Outline : MonoBehaviour {
   }
 
   [SerializeField]
-  private Mode outlineMode;
+  private Mode outlineMode = Mode.OutlineVisible;
 
   [SerializeField]
   private Color outlineColor = Color.white;
 
   [SerializeField, Range(0f, 10f)]
-  private float outlineWidth = 2f;
+  private float outlineWidth = 3f;
+
+  [SerializeField]
+  private int type = 0;
 
   [Header("Optional")]
 
@@ -87,7 +90,18 @@ public class Outline : MonoBehaviour {
 
     // Instantiate outline materials
     outlineMaskMaterial = Instantiate(Resources.Load<Material>(@"Materials/OutlineMask"));
-    outlineFillMaterial = Instantiate(Resources.Load<Material>(@"Materials/OutlineFill"));
+    if (type == 1)
+    {
+        outlineFillMaterial = Instantiate(Resources.Load<Material>(@"Materials/BarrierOutlineFill"));
+    }
+    else if(type == 2)
+    {
+        outlineFillMaterial = Instantiate(Resources.Load<Material>(@"Materials/MonsterOutlineFill"));
+    }
+    else
+    {
+        outlineFillMaterial = Instantiate(Resources.Load<Material>(@"Materials/OutlineFill"));
+    }
 
     outlineMaskMaterial.name = "OutlineMask (Instance)";
     outlineFillMaterial.name = "OutlineFill (Instance)";

@@ -23,6 +23,7 @@ TagManager:
   - PlacedJammer
   - PlacedPortal
   - PlacedBoard
+  - Monster
   layers:
   - Default
   - TransparentFX

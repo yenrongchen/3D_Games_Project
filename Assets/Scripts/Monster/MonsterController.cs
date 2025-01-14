@@ -16,8 +16,12 @@ public class MonsterController : MonoBehaviour
     private Vector3 direction;
     private float distance;
 
+    private bool playerWalking;
+    private float speed;
+    private float detectRange;
+
     [SerializeField]
-    private float speed = 1f;
+    private float baseSpeed = 1f;
 
     [SerializeField]
     private float monsterEyeHeight = 4f;
@@ -39,7 +43,7 @@ public class MonsterController : MonoBehaviour
     private float attackRange = 1.2f;
 
     [SerializeField]
-    private float detectRange = 5f;
+    private float baseDetectRange = 5f;
 
     [SerializeField]
     private float paralyzedTime = 2f;
@@ -86,6 +90,18 @@ public class MonsterController : MonoBehaviour
         }
         else
         {
+            playerWalking = GameObject.Find("Player").GetComponent<FirstPersonController>().getIsWalking();
+            if (playerWalking)
+            {
+                speed = baseSpeed * 1.25f;
+                detectRange = baseDetectRange * 1.25f;
+            }
+            else
+            {
+                speed = baseSpeed;
+                detectRange = baseDetectRange;
+            }
+
             playerPosition = GameObject.Find("Player").GetComponent<FirstPersonController>().getPosition() + offsetPlayer;
 
             rayStart = transform.position + offsetMonster;

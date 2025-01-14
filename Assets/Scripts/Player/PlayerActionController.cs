@@ -14,6 +14,7 @@ public class PlayerActionController : MonoBehaviour
     [Header("Props")]
     public GameObject portalPrefab;
     public GameObject jammerPrefab;
+    public GameObject jammerWithPartPrefab;
     public GameObject crosshairPrefab;
     public GameObject woodBoardPrefab;
     public GameObject almondWaterPrefab;
@@ -32,7 +33,7 @@ public class PlayerActionController : MonoBehaviour
     // jammer
     private bool isHoldingJammer = false;
     private GameObject crosshair;
-    private List<string> jammerTargetTags = new() { "Barrier", "Enemy" };
+    private List<string> jammerTargetTags = new() { "Barrier", "Monster" };
     private float atkcd = 0f;
 
     // portal
@@ -98,7 +99,7 @@ public class PlayerActionController : MonoBehaviour
                 }
 
                 // paralyze monster
-                if (Input.GetKey(KeyCode.Mouse0) && hit.transform.CompareTag("Enemy") && atkcd <= 0)
+                if (Input.GetKey(KeyCode.Mouse0) && hit.transform.CompareTag("Monster") && atkcd <= 0)
                 {
                     GameObject monster = hit.transform.gameObject;
                     monster.GetComponent<MonsterController>().Paralyzed();
@@ -208,6 +209,12 @@ public class PlayerActionController : MonoBehaviour
             // TODO: portal inventory +1
         }
 
+        // pick wood board
+        //if (hit.transform.CompareTag("Board"))
+        //{
+        //    // TODO: board inventory +1
+        //}
+
         // pick keys
         if (hit.transform.CompareTag("Key1") || hit.transform.CompareTag("Key2") || hit.transform.CompareTag("Key3"))
         {
@@ -217,10 +224,10 @@ public class PlayerActionController : MonoBehaviour
             // TODO: key inventory +1
         }
 
-        // rations and almond water
+        // pick rations and almond water
 
 
-        // TODO: gems inventory +1
+        // pick gems
 
 
         // destroy object
@@ -271,13 +278,12 @@ public class PlayerActionController : MonoBehaviour
         {
             GameObject targetBoard = hit.transform.gameObject;
             Destroy(targetBoard);
+            // hole can fall
         }
     }
 
     private void HoldProps()
     {
-        //hasPropsOnHand = true;
-
         // TODO: How to determine which props to hold
 
         // hold jammer
@@ -324,7 +330,30 @@ public class PlayerActionController : MonoBehaviour
 
             isHoldingPortal = true;
 
-            // TODO: jammer inventory decrease 1
+            // TODO: portal inventory decrease 1
+        }
+
+        // hold board
+        if (!isHoldingBoard)
+        {
+            GameObject board = Instantiate(woodBoardPrefab, mainCamera.transform);
+
+            // position (right-bottom corner of the screen)
+            Vector3 screenPosition = new(Screen.width * 0.85f, Screen.height * 0.1f, 0.6f);
+            Vector3 boardPosition = mainCamera.ScreenToWorldPoint(screenPosition);
+            board.transform.position = boardPosition;
+
+            // rotation and size
+            board.transform.rotation = Quaternion.Euler(-40f, this.transform.rotation.eulerAngles.y + 12f, 0f);
+            board.transform.localScale = new Vector3(0.2f, 0.04f, 0.35f);
+
+            // other settings
+            board.name = "OnHandProps";
+            board.transform.gameObject.GetComponent<BoxCollider>().enabled = false;
+
+            isHoldingBoard = true;
+
+            // TODO: board inventory decrease 1
         }
     }
 
@@ -342,13 +371,17 @@ public class PlayerActionController : MonoBehaviour
 
             Quaternion jammerRot = Quaternion.Euler(-90f, this.transform.rotation.eulerAngles.y, 0f);
 
-            GameObject jammer = Instantiate(jammerPrefab, jammerPos, jammerRot);
-            jammer.tag = "PlacedJammer";
-
             if (hasHit && hit.transform.CompareTag("Barrier"))
             {
+                GameObject jammer = Instantiate(jammerWithPartPrefab, jammerPos, jammerRot);
+                jammer.tag = "PlacedJammer";
                 hit.transform.GetComponent<BarrierController>().AddNewJammer();
                 jammer.GetComponent<JammerController>().setTargetBarrier(hit.transform.gameObject);
+            }
+            else
+            {
+                GameObject jammer = Instantiate(jammerPrefab, jammerPos, jammerRot);
+                jammer.tag = "PlacedJammer";
             }
 
             GameObject holdedProps = GameObject.Find("OnHandProps");
@@ -398,17 +431,22 @@ public class PlayerActionController : MonoBehaviour
 
         if (isHoldingBoard)
         {
-            // board.size = (1, 0.1, 1.75)
-            //GameObject board = Instantiate(woodBoardPrefab, pos, rot);
-            //board.tag = "PlacedBoard";
+            Vector3 temp = transform.position + transform.forward * 3f;
+            Vector3 boardPos = new(temp.x, transform.position.y + 0.05f, temp.z);
 
-            //GameObject holdedProps = GameObject.Find("OnHandProps");
-            //Destroy(holdedProps);
+            Quaternion boardRot = Quaternion.Euler(0f, this.transform.rotation.eulerAngles.y, 0f);
+
+            GameObject board = Instantiate(woodBoardPrefab, boardPos, boardRot);
+            board.transform.localScale = new Vector3(1, 0.1f, 1.75f);
+            board.tag = "PlacedBoard";
+
+            GameObject holdedProps = GameObject.Find("OnHandProps");
+            Destroy(holdedProps);
+
+            isHoldingBoard = false;
 
             // TODO: board inventory -1
         }
-
-        //hasPropsOnHand = false;
     }
 
     private float GetClosestBaseAngle(float angle)

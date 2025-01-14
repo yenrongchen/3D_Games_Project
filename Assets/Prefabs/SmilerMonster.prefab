@@ -1783,7 +1783,7 @@ GameObject:
   - component: {fileID: 7156555820866215897}
   m_Layer: 0
   m_Name: SmilerMonster
-  m_TagString: Enemy
+  m_TagString: Monster
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1838,13 +1838,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e819565f099a9204f955bdaad1678cee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 1.25
+  baseSpeed: 1.25
   monsterEyeHeight: 4.1
   initialAttackCDFrame: 30
   wholeAttackCDFrame: 82
   typeID: 2
   attackRange: 1.35
-  detectRange: 6
+  baseDetectRange: 6
   paralyzedTime: 1.75
 --- !u!65 &5827677190012785969
 BoxCollider:
@@ -1909,6 +1909,7 @@ MonoBehaviour:
   outlineMode: 1
   outlineColor: {r: 1, g: 0, b: 0, a: 1}
   outlineWidth: 2.5
+  type: 2
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []

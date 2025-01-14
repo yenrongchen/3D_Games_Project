@@ -76,6 +76,7 @@ namespace StarterAssets
 
         // shoes
         private bool isWearingShoes = false;
+		private float shoesSpeedBuff = 2f;
 
 
 #if ENABLE_INPUT_SYSTEM
@@ -205,19 +206,30 @@ namespace StarterAssets
             }
             else if (isWalking)
 			{
-				targetSpeed = MoveSpeed;
+                if (isWearingShoes)
+                {
+                    targetSpeed = MoveSpeed + shoesSpeedBuff;
+                }
+				else
+				{
+					targetSpeed = MoveSpeed;
+				}
 				animator.SetInteger("state", 1);
 			}
 			else
 			{
-				targetSpeed = SprintSpeed;
+                if (isWearingShoes)
+                {
+                    targetSpeed = SprintSpeed + shoesSpeedBuff;
+                }
+                else
+                {
+                    targetSpeed = SprintSpeed;
+                }
                 animator.SetInteger("state", 2);
             }
 
-			if (isWearingShoes)
-			{
-				targetSpeed += 2f;
-            }
+
 
 			// a reference to the players current horizontal velocity
 			float currentHorizontalSpeed = new Vector3(_controller.velocity.x, 0.0f, _controller.velocity.z).magnitude;
@@ -288,6 +300,11 @@ namespace StarterAssets
 		public int getHP()
 		{
 			return hp;
+		}
+
+		public bool getIsWalking()
+		{
+			return isWalking;
 		}
 
 		public void WearShoes()

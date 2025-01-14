@@ -1655,7 +1655,7 @@ GameObject:
   - component: {fileID: 5917294345252609761}
   m_Layer: 0
   m_Name: BacteriaMonster
-  m_TagString: Enemy
+  m_TagString: Monster
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1800,6 +1800,7 @@ MonoBehaviour:
   outlineMode: 1
   outlineColor: {r: 1, g: 0, b: 0, a: 1}
   outlineWidth: 2
+  type: 2
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []

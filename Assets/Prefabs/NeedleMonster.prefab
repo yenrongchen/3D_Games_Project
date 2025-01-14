@@ -1398,7 +1398,7 @@ GameObject:
   - component: {fileID: 4642138307981673533}
   m_Layer: 0
   m_Name: NeedleMonster
-  m_TagString: Enemy
+  m_TagString: Monster
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1453,13 +1453,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e819565f099a9204f955bdaad1678cee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 1.5
+  baseSpeed: 1.5
   monsterEyeHeight: 4
   initialAttackCDFrame: 31
   wholeAttackCDFrame: 136
   typeID: 3
   attackRange: 1.5
-  detectRange: 8
+  baseDetectRange: 8
   paralyzedTime: 1.5
 --- !u!65 &2750602370734245406
 BoxCollider:
@@ -1524,6 +1524,7 @@ MonoBehaviour:
   outlineMode: 1
   outlineColor: {r: 1, g: 0, b: 0, a: 1}
   outlineWidth: 2.25
+  type: 2
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
