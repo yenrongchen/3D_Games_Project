@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 1095943361971676667}
   - component: {fileID: 3695440398589270117}
   - component: {fileID: -6341079381246848299}
+  - component: {fileID: 1483377905170737579}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -64,3 +65,17 @@ MonoBehaviour:
     type: 3}
   needlePrefab: {fileID: 5751515525964739907, guid: 5499d6ff46ffc2d41904e65eac86d302,
     type: 3}
+--- !u!114 &1483377905170737579
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8490623835577622212}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 32254efbf2257324ea29b8d58a18ca96, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  canvasGroup: {fileID: 0}
+  timeToFade: 1
