@@ -299,10 +299,14 @@ namespace StarterAssets
 		public void Hurt()
 		{
 			hp--;
-			print(hp);  // TO BE DELETED //
 		}
 
-		public int getHP()
+		public int getMaxHP()
+		{
+			return HP;
+		}
+
+		public int getCurrentHP()
 		{
 			return hp;
 		}

@@ -1704,6 +1704,10 @@ MonoBehaviour:
   BottomClamp: -89
   mainCamera: {fileID: 0}
   HP: 3
+  shoesSpeedBuff: 2
+  shoesLastTime: 3
+  ShoesCountDownPrefab: {fileID: 5136963841615745856, guid: db827d4deb9935447b56209481ec3be5,
+    type: 3}
 --- !u!114 &8454222941935300450
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1767,6 +1771,8 @@ MonoBehaviour:
   rationsPrefab: {fileID: 8173581417653031338, guid: c9a1bc2284936a745b8a31efb41eee5f,
     type: 3}
   jammerAtkCD: 8
+  healingCanvas: {fileID: 5705346797616730052, guid: 9b028054c3bdb774f9194ad4514cea96,
+    type: 3}
 --- !u!114 &5860006640494211146
 MonoBehaviour:
   m_ObjectHideFlags: 0
