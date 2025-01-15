@@ -3,7 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem.XR;
-using Unity.VisualScripting.Antlr3.Runtime.Collections;
 using TMPro;
 using Fungus;
 using StarterAssets;
@@ -127,6 +126,7 @@ public class PlayerActionController : MonoBehaviour
             PlaceProps();
         }
 
+        // use props
         if (Input.GetKeyDown(KeyCode.E))
         {
             UseProps();
@@ -373,7 +373,7 @@ public class PlayerActionController : MonoBehaviour
         // hold almond water
         if (!isHoldingAlmond)
         {
-           GameObject almondWater = Instantiate(almondWaterPrefab, mainCamera.transform);
+            GameObject almondWater = Instantiate(almondWaterPrefab, mainCamera.transform);
 
             // position (right-bottom corner of the screen)
             Vector3 screenPosition = new(Screen.width * 0.85f, Screen.height * 0.2f, 0.6f);
@@ -522,14 +522,14 @@ public class PlayerActionController : MonoBehaviour
         }
 
         // wear shoes
-        //GameObject.Find("Player").GetComponent<FirstPersonController>().WearShoes();
+        GameObject.Find("Player").GetComponent<FirstPersonController>().WearShoes();
     }
 
     private IEnumerator Heal(float time, int type)
     {
         GameObject.Find("Player").GetComponent<FirstPersonController>().DisableMovement();
 
-        GameObject.Find("HealingPanel").GetComponent<ProgressBar>().StartCountdown(time);
+        GameObject.Find("HealingPanel").GetComponent<ProgressBar>().StartCounterCountdown(time);
         yield return new WaitForSeconds(time);
 
         GameObject.Find("Player").GetComponent<FirstPersonController>().Heal(type);
@@ -538,8 +538,8 @@ public class PlayerActionController : MonoBehaviour
         GameObject holdedProps = GameObject.Find("OnHandProps");
         Destroy(holdedProps);
 
-        yield return new WaitForSeconds(1);
-        Destroy(GameObject.FindGameObjectWithTag("Heal"));
+        yield return new WaitForSeconds(0.8f);
+        Destroy(GameObject.FindGameObjectWithTag("CountDownBar"));
     }
 
     private float GetClosestBaseAngle(float angle)

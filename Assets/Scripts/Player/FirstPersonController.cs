@@ -62,6 +62,7 @@ namespace StarterAssets
         [Header("Shoes")]
         public float shoesSpeedBuff = 2f;
         public float shoesLastTime = 3f;
+		public GameObject ShoesCountDownPrefab;
 
         // cinemachine
         private float _cinemachineTargetPitch;
@@ -335,8 +336,15 @@ namespace StarterAssets
 		{
             isWearingShoes = true;
 
-			yield return new WaitForSeconds(shoesLastTime);
-			// start countdown
+            Instantiate(ShoesCountDownPrefab, ShoesCountDownPrefab.transform.position, Quaternion.identity);
+
+            GameObject.Find("ShoesPanel").GetComponent<ProgressBar>().StartCountdown(shoesLastTime);
+            yield return new WaitForSeconds(shoesLastTime);
+
+            GameObject holdedProps = GameObject.Find("OnHandProps");
+            Destroy(holdedProps);
+
+            Destroy(GameObject.FindGameObjectWithTag("CountDownBar"));
 
             isWearingShoes = false;
         }

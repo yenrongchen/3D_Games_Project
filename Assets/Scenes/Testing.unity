@@ -1437,6 +1437,12 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 4680632583163769665, guid: 3175a1ea96f590041b0e01b00bb2d9cd,
         type: 3}
+    - target: {fileID: 1504818015418550677, guid: 7bdb120c647149e4b893d57650f6b1a8,
+        type: 3}
+      propertyPath: ShoesCountDownPrefab
+      value: 
+      objectReference: {fileID: 5136963841615745856, guid: db827d4deb9935447b56209481ec3be5,
+        type: 3}
     - target: {fileID: 3452140484678511037, guid: 7bdb120c647149e4b893d57650f6b1a8,
         type: 3}
       propertyPath: m_Radius

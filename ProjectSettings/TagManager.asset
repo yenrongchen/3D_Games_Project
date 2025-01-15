@@ -24,7 +24,7 @@ TagManager:
   - PlacedPortal
   - PlacedBoard
   - Monster
-  - Heal
+  - CountDownBar
   layers:
   - Default
   - TransparentFX
