@@ -2,23 +2,32 @@ using StarterAssets;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class MonsterController : MonoBehaviour
 {
     private Animator animator;
+
     private bool isParalyzed = false;
     private float parTime;
 
     private Vector3 rayStart;
-    private Vector3 playerPosition;
     private Vector3 offsetPlayer = new(0f, 0.5f, 0f);
     private Vector3 offsetMonster;
-    private Vector3 direction;
+    private Vector3 playerPositionForRay;
+    private Vector3 rayDirection;
+
+    private Vector3 playerPosition;
+    private Vector3 currentPosition;
+    private Vector3 moveDirection;
     private float distance;
 
     private bool playerWalking;
     private float speed;
     private float detectRange;
+
+    private float initialX;
+    private float initialZ;
 
     [SerializeField]
     private float baseSpeed = 1f;
@@ -48,9 +57,6 @@ public class MonsterController : MonoBehaviour
     [SerializeField]
     private float paralyzedTime = 2f;
 
-    // to be deleted //
-    //LineRenderer lr;
-
     // Start is called before the first frame update
     void Start()
     {
@@ -65,11 +71,8 @@ public class MonsterController : MonoBehaviour
 
         parTime = paralyzedTime;
 
-        // to be deleted //
-        //lr = GetComponent<LineRenderer>();
-        //lr.endWidth = 0.05f;
-        //lr.startWidth = 0.05f;
-        //lr.positionCount = 2;
+        initialX = this.transform.rotation.eulerAngles.x;
+        initialZ = this.transform.rotation.eulerAngles.z;
     }
 
     // Update is called once per frame
@@ -93,31 +96,36 @@ public class MonsterController : MonoBehaviour
             playerWalking = GameObject.Find("Player").GetComponent<FirstPersonController>().getIsWalking();
             if (playerWalking)
             {
-                speed = baseSpeed * 1.25f;
-                detectRange = baseDetectRange * 1.25f;
-            }
-            else
-            {
                 speed = baseSpeed;
                 detectRange = baseDetectRange;
             }
+            else
+            {
+                speed = baseSpeed * 1.25f;
+                detectRange = baseDetectRange * 1.25f;
+            }
 
-            playerPosition = GameObject.Find("Player").GetComponent<FirstPersonController>().getPosition() + offsetPlayer;
+            playerPosition = GameObject.Find("Player").GetComponent<FirstPersonController>().getPosition();
+            playerPositionForRay = playerPosition + offsetPlayer;
 
-            rayStart = transform.position + offsetMonster;
-            direction = (playerPosition - rayStart).normalized;
+            currentPosition = transform.position;
+            rayStart = currentPosition + offsetMonster;
+            rayDirection = (playerPositionForRay - rayStart).normalized;
 
-            distance = Mathf.Sqrt(Mathf.Pow(transform.position.x - playerPosition.x, 2f) + Mathf.Pow(transform.position.z - playerPosition.z, 2f));
-
-            Ray ray = new(rayStart, direction);
+            Ray ray = new(rayStart, rayDirection);
             RaycastHit hit;
 
             if (Physics.Raycast(ray, out hit, 80))
             {
+                playerPosition.y = 0f;
+                currentPosition.y = 0f;
+                distance = Vector3.Distance(playerPosition, currentPosition);
+                moveDirection = (playerPosition - currentPosition).normalized;
+
                 if (hit.transform.CompareTag("Player"))
                 {
                     // facing player
-                    transform.LookAt(playerPosition);
+                    transform.LookAt(playerPositionForRay);
 
                     if (distance <= attackRange)
                     {
@@ -137,16 +145,16 @@ public class MonsterController : MonoBehaviour
                     {
                         // chasing
                         animator.SetInteger("state", 1);
-                        this.transform.position += new Vector3(direction.x * speed * Time.deltaTime, 0f, direction.z * speed * Time.deltaTime);
+                        this.transform.position += new Vector3(moveDirection.x * speed * Time.deltaTime, 0f, moveDirection.z * speed * Time.deltaTime);
                         cd = initAtkCD;
                     }
                 }
                 else if (distance <= detectRange)
                 {
                     // close to player => approaching slowly
-                    transform.LookAt(playerPosition);
+                    transform.LookAt(playerPositionForRay);
                     animator.SetInteger("state", 1);
-                    this.transform.position += new Vector3(direction.x * speed / 2 * Time.deltaTime, 0f, direction.z * speed / 2 * Time.deltaTime);
+                    this.transform.position += new Vector3(moveDirection.x * speed / 2 * Time.deltaTime, 0f, moveDirection.z * speed / 2 * Time.deltaTime);
                     cd = initAtkCD;
                 }
                 else
@@ -155,11 +163,6 @@ public class MonsterController : MonoBehaviour
                     animator.SetInteger("state", 0);
                     cd = initAtkCD;
                 }
-
-                // to be deleted //
-                //lr.enabled = true;  // if hit object then show the line
-                //lr.SetPosition(0, rayStart);  //line start 
-                //lr.SetPosition(1, hit.point);       // line end
             }
             else
             {
@@ -167,6 +170,20 @@ public class MonsterController : MonoBehaviour
                 animator.SetInteger("state", 0);
                 cd = initAtkCD;
             }
+        }
+
+        if (this.transform.rotation.eulerAngles.x != initialX)
+        {
+            Vector3 rotation = this.transform.rotation.eulerAngles;
+            rotation.x = initialX;
+            this.transform.rotation = Quaternion.Euler(rotation);
+        }
+
+        if (this.transform.rotation.eulerAngles.z != initialZ)
+        {
+            Vector3 rotation = this.transform.rotation.eulerAngles;
+            rotation.z = initialZ;
+            this.transform.rotation = Quaternion.Euler(rotation);
         }
     }
 

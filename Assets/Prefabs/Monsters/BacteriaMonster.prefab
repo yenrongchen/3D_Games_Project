@@ -1651,7 +1651,7 @@ GameObject:
   - component: {fileID: 7822179996752936654}
   - component: {fileID: 5780741677191513027}
   - component: {fileID: 8970911552404388937}
-  - component: {fileID: 8263663919547739840}
+  - component: {fileID: 6519237819812016102}
   - component: {fileID: 5917294345252609761}
   m_Layer: 0
   m_Name: BacteriaMonster
@@ -1729,13 +1729,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e819565f099a9204f955bdaad1678cee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 1
+  baseSpeed: 1
   monsterEyeHeight: 4
   initialAttackCDFrame: 35
   wholeAttackCDFrame: 79
   typeID: 1
   attackRange: 1.2
-  detectRange: 5
+  baseDetectRange: 5
   paralyzedTime: 2
 --- !u!65 &8970911552404388937
 BoxCollider:
@@ -1758,7 +1758,7 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 2.4041843, y: 6.035683, z: 1.4406896}
   m_Center: {x: -0.07957339, y: 3.0635417, z: 0.0389421}
---- !u!54 &8263663919547739840
+--- !u!54 &6519237819812016102
 Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1783,8 +1783,8 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 14
-  m_CollisionDetection: 0
+  m_Constraints: 0
+  m_CollisionDetection: 1
 --- !u!114 &5917294345252609761
 MonoBehaviour:
   m_ObjectHideFlags: 0

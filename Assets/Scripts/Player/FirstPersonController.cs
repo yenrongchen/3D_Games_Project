@@ -11,6 +11,7 @@ using UnityEngine.EventSystems;
 
 #if ENABLE_INPUT_SYSTEM
 using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.XR;
 using UnityEngine.ProBuilder;
 using UnityEngine.UI;
 using static UnityEditor.Rendering.InspectorCurveEditor;
@@ -27,11 +28,11 @@ namespace StarterAssets
 	{
 		[Header("Player")]
 		[Tooltip("Move speed of the character in m/s")]
-		public float MoveSpeed = 4.0f;
+		public float MoveSpeed = 3f;
 		[Tooltip("Sprint speed of the character in m/s")]
-		public float SprintSpeed = 6.0f;
+		public float SprintSpeed = 5f;
 		[Tooltip("Rotation speed of the character")]
-		public float RotationSpeed = 1.5f;
+		public float RotationSpeed = 1.2f;
 		[Tooltip("Acceleration and deceleration")]
 		public float SpeedChangeRate = 10.0f;
 
@@ -333,7 +334,11 @@ namespace StarterAssets
 
 		public void WearShoes()
 		{
-			StartCoroutine(getShoesBuff());
+            if (GameObject.FindGameObjectWithTag("CountDownBar") != null)
+            {
+                return;
+            }
+            StartCoroutine(getShoesBuff());
 		}
 
 		private IEnumerator getShoesBuff()
@@ -351,6 +356,14 @@ namespace StarterAssets
             Destroy(GameObject.FindGameObjectWithTag("CountDownBar"));
 
             isWearingShoes = false;
+        }
+
+        public void Teleport(Vector3 targetPosition)
+        {
+			animator.SetInteger("state", 0);
+            _controller.enabled = false;
+            _controller.transform.position = targetPosition;
+            _controller.enabled = true;
         }
     }
 }

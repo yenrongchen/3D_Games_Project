@@ -6,12 +6,12 @@ using UnityEngine;
 public class PlayerInteraction : MonoBehaviour
 {
     private FadeInOut fadeInOut;
-    private GameObject player;
+    private FirstPersonController player;
 
     private void Start()
     {
         fadeInOut = GameObject.Find("GameManager").GetComponent<FadeInOut>();
-        player = GameObject.Find("Player");
+        player = GameObject.Find("Player").GetComponent<FirstPersonController>();
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -30,7 +30,7 @@ public class PlayerInteraction : MonoBehaviour
     private IEnumerator TeleportWithFade(Vector3 targetPosition)
     {
         // pause player control
-        player.GetComponent<FirstPersonController>().DisableMovement();
+        player.DisableMovement();
 
         // fade in
         fadeInOut.FadeIn();
@@ -38,13 +38,13 @@ public class PlayerInteraction : MonoBehaviour
         yield return new WaitForSeconds(fadeTime);
 
         // teleport
-        player.GetComponent<PlayerActionController>().Teleport(targetPosition);
+        player.Teleport(targetPosition);
 
         // fade out
         fadeInOut.FadeOut();
         yield return new WaitForSeconds(fadeTime);
 
         // resume player control
-        player.GetComponent<FirstPersonController>().EnableMovement();
+        player.EnableMovement();
     }
 }

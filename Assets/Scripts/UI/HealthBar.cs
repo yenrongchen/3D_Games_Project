@@ -28,7 +28,7 @@ public class HealthBar : MonoBehaviour
         hp = GameObject.Find("Player").GetComponent<FirstPersonController>().getCurrentHP();
         hpText.text = "HP: " + hp.ToString();
 
-        lerpSpeed = 3f * Time.deltaTime;
+        lerpSpeed = 5f * Time.deltaTime;
 
         hpBarFiller();
     }

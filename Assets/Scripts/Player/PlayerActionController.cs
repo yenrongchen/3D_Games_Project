@@ -27,9 +27,6 @@ public class PlayerActionController : MonoBehaviour
     [Header("UI")]
     public GameObject healingCanvas;
 
-    // character controller
-    private CharacterController controller;
-
     // props
     private List<string> showOutline = new() { "Props", "Jammer", "Key1", "Key2", "Key3", "PlacedJammer", "PlacedBoard" };
     private List<string> canPick = new() { "Props", "Jammer", "Key1", "Key2", "Key3" };
@@ -55,7 +52,6 @@ public class PlayerActionController : MonoBehaviour
 
     void Start()
     {
-        controller = GetComponent<CharacterController>();
         crosshair = Instantiate(crosshairPrefab, Vector3.zero, Quaternion.identity);
         crosshair.SetActive(false);
     }
@@ -393,6 +389,7 @@ public class PlayerActionController : MonoBehaviour
             isHoldingAlmond = true;
         }
 
+        // hold rations
         if (!isHoldingRations)
         {
             // hold rations
@@ -453,7 +450,7 @@ public class PlayerActionController : MonoBehaviour
         // place portal
         if (isHoldingPortal)
         {
-            Vector3 temp = transform.position + transform.forward * 2f;
+            Vector3 temp = transform.position + transform.forward * 1.6f;
             Vector3 portalPos = new(temp.x, transform.position.y - 1.7f, temp.z);
 
             float yRot = GetClosestBaseAngle(this.transform.rotation.eulerAngles.y);
@@ -508,6 +505,11 @@ public class PlayerActionController : MonoBehaviour
         // use almond water
         if (isHoldingAlmond)
         {
+            if (GameObject.FindGameObjectWithTag("CountDownBar") != null)
+            {
+                return;
+            }
+
             Instantiate(healingCanvas, healingCanvas.transform.position, Quaternion.identity);
             StartCoroutine(Heal(4f, 1));
             isHoldingAlmond = false;
@@ -516,6 +518,11 @@ public class PlayerActionController : MonoBehaviour
         // use rations
         if (isHoldingRations)
         {
+            if (GameObject.FindGameObjectWithTag("CountDownBar") != null)
+            {
+                return;
+            }
+
             Instantiate(healingCanvas, healingCanvas.transform.position, Quaternion.identity);
             StartCoroutine(Heal(6f, 2));
             isHoldingRations = false;
@@ -560,12 +567,5 @@ public class PlayerActionController : MonoBehaviour
         }
 
         return closestAngle == 360f ? 0f : closestAngle;
-    }
-
-    public void Teleport(Vector3 targetPosition)
-    {
-        controller.enabled = false;
-        controller.transform.position = targetPosition;
-        controller.enabled = true;
     }
 }
