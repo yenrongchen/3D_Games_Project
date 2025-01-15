@@ -5,6 +5,8 @@ using UnityEngine;
 using UnityEngine.InputSystem.XR;
 using Unity.VisualScripting.Antlr3.Runtime.Collections;
 using TMPro;
+using Fungus;
+using StarterAssets;
 
 public class PlayerActionController : MonoBehaviour
 {
@@ -22,6 +24,9 @@ public class PlayerActionController : MonoBehaviour
 
     [Header("Jammer settings")]
     public float jammerAtkCD = 8f;
+
+    [Header("UI")]
+    public GameObject healingCanvas;
 
     // character controller
     private CharacterController controller;
@@ -44,6 +49,10 @@ public class PlayerActionController : MonoBehaviour
 
     // wood board
     private bool isHoldingBoard = false;
+
+    // healer props
+    private bool isHoldingAlmond = false;
+    private bool isHoldingRations = false;
 
     void Start()
     {
@@ -118,8 +127,13 @@ public class PlayerActionController : MonoBehaviour
             PlaceProps();
         }
 
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            UseProps();
+        }
+
         // hold props
-        if (Input.GetKeyDown(KeyCode.E))  // KEY BIND NEED FIX
+        if (Input.GetKeyDown(KeyCode.C))  // KEY BIND NEED FIX
         {
             HoldProps();
         }
@@ -192,10 +206,7 @@ public class PlayerActionController : MonoBehaviour
     private void PickProps(RaycastHit hit)
     {
         // pick jammer
-        if (hit.transform.CompareTag("Jammer"))
-        {
-            // TODO: jammer inventory +1
-        }
+        // TODO: jammer inventory +1
 
         // pick portal
         if (hit.transform.CompareTag("Portal"))
@@ -210,10 +221,7 @@ public class PlayerActionController : MonoBehaviour
         }
 
         // pick wood board
-        //if (hit.transform.CompareTag("Board"))
-        //{
-        //    // TODO: board inventory +1
-        //}
+        // TODO: board inventory +1
 
         // pick keys
         if (hit.transform.CompareTag("Key1") || hit.transform.CompareTag("Key2") || hit.transform.CompareTag("Key3"))
@@ -225,10 +233,10 @@ public class PlayerActionController : MonoBehaviour
         }
 
         // pick rations and almond water
-
+        // TODO: inventory +1
 
         // pick gems
-
+        // TODO: inventory +1
 
         // destroy object
         if (canPick.Contains(hit.transform.tag) || hit.transform.CompareTag("Portal"))
@@ -297,7 +305,9 @@ public class PlayerActionController : MonoBehaviour
             jammer.transform.position = jammerPosition;
 
             // rotation
-            jammer.transform.rotation = Quaternion.Euler(-90f, this.transform.rotation.eulerAngles.y, 0f);
+            Vector3 playerRot = this.transform.rotation.eulerAngles;
+            Vector3 cameraRot = mainCamera.transform.rotation.eulerAngles;
+            jammer.transform.rotation = Quaternion.Euler(cameraRot.x - 90f, playerRot.y, 0f);
 
             // other settings
             jammer.name = "OnHandProps";
@@ -319,7 +329,9 @@ public class PlayerActionController : MonoBehaviour
             portal.transform.position = portalPosition;
 
             // rotation and size
-            portal.transform.rotation = Quaternion.Euler(-195f, this.transform.rotation.eulerAngles.y - 165f, -180f);
+            Vector3 playerRot = this.transform.rotation.eulerAngles;
+            Vector3 cameraRot = mainCamera.transform.rotation.eulerAngles;
+            portal.transform.rotation = Quaternion.Euler(-180f - cameraRot.x, playerRot.y - 180f, -180f);
             portal.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
 
             // other settings
@@ -344,7 +356,9 @@ public class PlayerActionController : MonoBehaviour
             board.transform.position = boardPosition;
 
             // rotation and size
-            board.transform.rotation = Quaternion.Euler(-40f, this.transform.rotation.eulerAngles.y + 12f, 0f);
+            Vector3 playerRot = this.transform.rotation.eulerAngles;
+            Vector3 cameraRot = mainCamera.transform.rotation.eulerAngles;
+            board.transform.rotation = Quaternion.Euler(cameraRot.x - 40f, playerRot.y, 0f);
             board.transform.localScale = new Vector3(0.2f, 0.04f, 0.35f);
 
             // other settings
@@ -354,6 +368,52 @@ public class PlayerActionController : MonoBehaviour
             isHoldingBoard = true;
 
             // TODO: board inventory decrease 1
+        }
+
+        // hold almond water
+        if (!isHoldingAlmond)
+        {
+           GameObject almondWater = Instantiate(almondWaterPrefab, mainCamera.transform);
+
+            // position (right-bottom corner of the screen)
+            Vector3 screenPosition = new(Screen.width * 0.85f, Screen.height * 0.2f, 0.6f);
+            Vector3 almondWaterPosition = mainCamera.ScreenToWorldPoint(screenPosition);
+            almondWater.transform.position = almondWaterPosition;
+
+            // rotation and size
+            Vector3 playerRot = this.transform.rotation.eulerAngles;
+            Vector3 cameraRot = mainCamera.transform.rotation.eulerAngles;
+            almondWater.transform.rotation = Quaternion.Euler(0f - cameraRot.x, playerRot.y - 180f, 0f);
+            almondWater.transform.localScale = new Vector3(0.025f, 0.025f, 0.025f);
+
+            // other settings
+            almondWater.name = "OnHandProps";
+            almondWater.transform.gameObject.GetComponent<BoxCollider>().enabled = false;
+
+            isHoldingAlmond = true;
+        }
+
+        if (!isHoldingRations)
+        {
+            // hold rations
+            GameObject rations = Instantiate(rationsPrefab, mainCamera.transform);
+
+            // position (right-bottom corner of the screen)
+            Vector3 screenPosition = new(Screen.width * 0.85f, Screen.height * 0.15f, 0.6f);
+            Vector3 rationsPosition = mainCamera.ScreenToWorldPoint(screenPosition);
+            rations.transform.position = rationsPosition;
+
+            // rotation and size
+            Vector3 playerRot = this.transform.rotation.eulerAngles;
+            Vector3 cameraRot = mainCamera.transform.rotation.eulerAngles;
+            rations.transform.rotation = Quaternion.Euler(90f - cameraRot.x, playerRot.y - 180f, cameraRot.z - 30f);
+            rations.transform.localScale = new Vector3(4f, 4f, 4f);
+
+            // other settings
+            rations.name = "OnHandProps";
+            rations.transform.gameObject.GetComponent<BoxCollider>().enabled = false;
+
+            isHoldingRations = true;
         }
     }
 
@@ -388,8 +448,6 @@ public class PlayerActionController : MonoBehaviour
             Destroy(holdedProps);
 
             isHoldingJammer = false;
-
-            // TODO: jammer inventory -1
         }
 
         // place portal
@@ -425,8 +483,6 @@ public class PlayerActionController : MonoBehaviour
             Destroy(holdedProps);
 
             isHoldingPortal = false;
-
-            // TODO: portal inventory -1
         }
 
         if (isHoldingBoard)
@@ -444,9 +500,46 @@ public class PlayerActionController : MonoBehaviour
             Destroy(holdedProps);
 
             isHoldingBoard = false;
-
-            // TODO: board inventory -1
         }
+    }
+
+    private void UseProps()
+    {
+        // use almond water
+        if (isHoldingAlmond)
+        {
+            Instantiate(healingCanvas, healingCanvas.transform.position, Quaternion.identity);
+            StartCoroutine(Heal(4f, 1));
+            isHoldingAlmond = false;
+        }
+
+        // use rations
+        if (isHoldingRations)
+        {
+            Instantiate(healingCanvas, healingCanvas.transform.position, Quaternion.identity);
+            StartCoroutine(Heal(6f, 2));
+            isHoldingRations = false;
+        }
+
+        // wear shoes
+        //GameObject.Find("Player").GetComponent<FirstPersonController>().WearShoes();
+    }
+
+    private IEnumerator Heal(float time, int type)
+    {
+        GameObject.Find("Player").GetComponent<FirstPersonController>().DisableMovement();
+
+        GameObject.Find("HealingPanel").GetComponent<ProgressBar>().StartCountdown(time);
+        yield return new WaitForSeconds(time);
+
+        GameObject.Find("Player").GetComponent<FirstPersonController>().Heal(type);
+        GameObject.Find("Player").GetComponent<FirstPersonController>().EnableMovement();
+
+        GameObject holdedProps = GameObject.Find("OnHandProps");
+        Destroy(holdedProps);
+
+        yield return new WaitForSeconds(1);
+        Destroy(GameObject.FindGameObjectWithTag("Heal"));
     }
 
     private float GetClosestBaseAngle(float angle)

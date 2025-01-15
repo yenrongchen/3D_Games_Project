@@ -5,7 +5,7 @@ using UnityEngine;
 public class FadeInOut : MonoBehaviour
 {
     public CanvasGroup canvasGroup;
-    public float timeToFade = 1f;
+    public float timeToFade = 0.8f;
 
     private bool fadeIn = false;
     private bool fadeOut = false;

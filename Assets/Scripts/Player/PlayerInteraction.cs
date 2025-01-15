@@ -17,7 +17,7 @@ public class PlayerInteraction : MonoBehaviour
     private void OnCollisionEnter(Collision collision)
     {
         // teleport
-        if (collision.transform.CompareTag("Portal"))
+        if (collision.transform.CompareTag("Portal") || collision.transform.CompareTag("PlacedPortal"))
         {
             if (collision.transform.GetComponent<PortalController>().CheckCanTP())
             {
@@ -42,7 +42,7 @@ public class PlayerInteraction : MonoBehaviour
 
         // fade out
         fadeInOut.FadeOut();
-        yield return new WaitForSeconds(fadeTime + 0.2f);
+        yield return new WaitForSeconds(fadeTime);
 
         // resume player control
         player.GetComponent<FirstPersonController>().EnableMovement();

@@ -24,6 +24,7 @@ TagManager:
   - PlacedPortal
   - PlacedBoard
   - Monster
+  - Heal
   layers:
   - Default
   - TransparentFX

@@ -1,4 +1,5 @@
 ﻿using Fungus;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Unity.VisualScripting;
@@ -58,13 +59,17 @@ namespace StarterAssets
         public int HP = 3;
         private int hp;
 
+        [Header("Shoes")]
+        public float shoesSpeedBuff = 2f;
+        public float shoesLastTime = 3f;
+
         // cinemachine
         private float _cinemachineTargetPitch;
 
 		// player
 		private float _speed;
 		private float _rotationVelocity;
-		private float _verticalVelocity;
+		private float _verticalVelocity = 0f;
 		private bool isWalking = true;
         private bool canMove = true;
 
@@ -76,7 +81,6 @@ namespace StarterAssets
 
         // shoes
         private bool isWearingShoes = false;
-		private float shoesSpeedBuff = 2f;
 
 
 #if ENABLE_INPUT_SYSTEM
@@ -110,7 +114,7 @@ namespace StarterAssets
 
 		private void Start()
 		{
-			_controller = GetComponent<CharacterController>();
+            _controller = GetComponent<CharacterController>();
 			_input = GetComponent<StarterAssetsInputs>();
 #if ENABLE_INPUT_SYSTEM
 			_playerInput = GetComponent<PlayerInput>();
@@ -264,7 +268,7 @@ namespace StarterAssets
 			}
 
 			// move the player
-			_controller.Move(inputDirection.normalized * (_speed * Time.deltaTime) + new Vector3(0.0f, _verticalVelocity, 0.0f) * Time.deltaTime);
+            _controller.Move(inputDirection.normalized * (_speed * Time.deltaTime) + new Vector3(0.0f, _verticalVelocity, 0.0f) * Time.deltaTime);
 		}
 
 		private static float ClampAngle(float lfAngle, float lfMin, float lfMax)
@@ -302,6 +306,21 @@ namespace StarterAssets
 			return hp;
 		}
 
+		public void Heal(int type)
+		{
+			if (type == 1)
+			{
+				if(hp < HP)
+				{
+                    hp++;
+                }
+			}
+			if (type == 2)
+			{
+				hp = HP;
+			}
+        }
+
 		public bool getIsWalking()
 		{
 			return isWalking;
@@ -309,7 +328,17 @@ namespace StarterAssets
 
 		public void WearShoes()
 		{
-			isWearingShoes = true;
+			StartCoroutine(getShoesBuff());
 		}
+
+		private IEnumerator getShoesBuff()
+		{
+            isWearingShoes = true;
+
+			yield return new WaitForSeconds(shoesLastTime);
+			// start countdown
+
+            isWearingShoes = false;
+        }
     }
 }
