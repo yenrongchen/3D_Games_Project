@@ -16,6 +16,7 @@ public class MonsterController : MonoBehaviour
     private Vector3 offsetMonster;
     private Vector3 playerPositionForRay;
     private Vector3 rayDirection;
+    private int ignoreLayer;
 
     private Vector3 playerPosition;
     private Vector3 currentPosition;
@@ -73,6 +74,8 @@ public class MonsterController : MonoBehaviour
 
         initialX = this.transform.rotation.eulerAngles.x;
         initialZ = this.transform.rotation.eulerAngles.z;
+
+        ignoreLayer = ~LayerMask.GetMask("Monster");
     }
 
     // Update is called once per frame
@@ -115,7 +118,7 @@ public class MonsterController : MonoBehaviour
             Ray ray = new(rayStart, rayDirection);
             RaycastHit hit;
 
-            if (Physics.Raycast(ray, out hit, 80))
+            if (Physics.Raycast(ray, out hit, 80, ignoreLayer))
             {
                 playerPosition.y = 0f;
                 currentPosition.y = 0f;

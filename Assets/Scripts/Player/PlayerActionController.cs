@@ -518,7 +518,8 @@ public class PlayerActionController : MonoBehaviour
             Vector3 temp = transform.position + transform.forward * 3f;
             Vector3 boardPos = new(temp.x, transform.position.y + 0.05f, temp.z);
 
-            Quaternion boardRot = Quaternion.Euler(0f, this.transform.rotation.eulerAngles.y, 0f);
+            float yRot = GetClosestBaseAngle(this.transform.rotation.eulerAngles.y);
+            Quaternion boardRot = Quaternion.Euler(0f, yRot, 0f);
 
             GameObject board = Instantiate(woodBoardPrefab, boardPos, boardRot);
             board.transform.localScale = new Vector3(1, 0.1f, 1.75f);

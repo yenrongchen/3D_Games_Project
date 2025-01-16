@@ -59,8 +59,8 @@ namespace StarterAssets
 		public float TopClamp = 75.0f;
 		[Tooltip("How far in degrees can you move the camera down")]
 		public float BottomClamp = -75.0f;
-        [Tooltip("Main Camera for obtaining current viewport")]
-        public Camera mainCamera;
+		[Tooltip("Animation curve for controlling camera shaking effect")]
+		public AnimationCurve curve;
 
         [Header("HP")]
         public int HP = 3;
@@ -73,9 +73,10 @@ namespace StarterAssets
 
         // cinemachine
         private float _cinemachineTargetPitch;
+        private GameObject cameraRoot;
 
-		// player
-		private float _speed;
+        // player
+        private float _speed;
 		private float _rotationVelocity;
 		private float _verticalVelocity;
         private float _terminalVelocity = 53.0f;
@@ -112,15 +113,6 @@ namespace StarterAssets
 			}
 		}
 
-		private void Awake()
-		{
-			// get a reference to our main camera
-			if (mainCamera == null)
-			{
-				mainCamera = Camera.main;
-			}
-		}
-
 		private void Start()
 		{
             _controller = GetComponent<CharacterController>();
@@ -132,8 +124,8 @@ namespace StarterAssets
 #endif
             
             animator = this.GetComponentInChildren<Animator>();
-
 			hp = HP;
+			cameraRoot = GameObject.Find("PlayerCameraRoot");
 		}
 
         private void Update()
@@ -302,7 +294,27 @@ namespace StarterAssets
 		public void Hurt()
 		{
 			hp--;
+			StartCoroutine(Shaking(0.3f));
 		}
+
+		private IEnumerator Shaking(float duration)
+		{
+			Vector3 orgPosition = cameraRoot.transform.position;
+			float timeElapsed = 0f;
+			float strength;
+
+
+            while (timeElapsed < duration)
+			{
+				timeElapsed += Time.deltaTime;
+
+                strength = curve.Evaluate(timeElapsed / duration);
+                cameraRoot.transform.position = orgPosition + Random.insideUnitSphere * strength;
+				yield return null;
+            }
+            
+            cameraRoot.transform.position = orgPosition;
+        }
 
 		public int getMaxHP()
 		{
