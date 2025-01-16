@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class Key : MonoBehaviour
 {
-     public PlayerController p;
+    public PlayerController p;
     private bool isInsideTrigger = false;
     // Start is called before the first frame update
     void Start()
@@ -21,8 +21,6 @@ public class Key : MonoBehaviour
             {
                 TriggerEventAction();
             }
-            
-
         }
     }
 
@@ -31,7 +29,6 @@ public class Key : MonoBehaviour
     private void TriggerEventAction()
     {
         //Flowchart.BroadcastFungusMessage("Key1");
-
     }
 
     private void OnTriggerEnter(Collider other)

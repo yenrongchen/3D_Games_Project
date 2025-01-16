@@ -137,8 +137,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 5.653167, y: 11.780568, z: 6.223583}
-  m_Center: {x: -0.121023655, y: 0.89201033, z: 0.12690783}
+  m_Size: {x: 5.653167, y: 11.947803, z: 6.223583}
+  m_Center: {x: -0.121023655, y: 0.3228706, z: 0.12690783}
 --- !u!114 &8356165005026498564
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -168,6 +168,7 @@ MonoBehaviour:
   outlineMode: 1
   outlineColor: {r: 1, g: 0.4, b: 0, a: 1}
   outlineWidth: 3
+  type: 0
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
