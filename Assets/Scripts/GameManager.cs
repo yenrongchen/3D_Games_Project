@@ -7,20 +7,21 @@ public class GameManager : MonoBehaviour
 {
     private bool isPaused = false;
     private int nextLevel = 1;
+
     // Start is called before the first frame update
     void Start()
     {
-        //int nextLevel = 1;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKey(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Z))
         {
             if (!isPaused)
             {
-                Time.timeScale = 0; // pause the game
+                // pause the game
+                Time.timeScale = 0;
                 isPaused = true;
                 // TODO: show menu
             }
@@ -28,13 +29,9 @@ public class GameManager : MonoBehaviour
             {
                 Time.timeScale = 1;
                 isPaused = false;
+                // TODO: hide menu
             }
         }
-    }
-
-    public bool getIsPaused()
-    {
-        return isPaused;
     }
 
     public void enterMaze()

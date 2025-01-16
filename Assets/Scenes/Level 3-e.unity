@@ -432,7 +432,7 @@ PrefabInstance:
     - target: {fileID: 8762286023885395322, guid: 9c489a8547f4d9e4387da15a4ff82c81,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -1.535
+      value: -2.87
       objectReference: {fileID: 0}
     - target: {fileID: 8762286023885395322, guid: 9c489a8547f4d9e4387da15a4ff82c81,
         type: 3}
@@ -442,7 +442,7 @@ PrefabInstance:
     - target: {fileID: 8762286023885395322, guid: 9c489a8547f4d9e4387da15a4ff82c81,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -14.915
+      value: -7.1419997
       objectReference: {fileID: 0}
     - target: {fileID: 8762286023885395322, guid: 9c489a8547f4d9e4387da15a4ff82c81,
         type: 3}
@@ -3643,7 +3643,7 @@ Transform:
   m_GameObject: {fileID: 1054996321}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.535, y: 0.64000005, z: -14.915}
+  m_LocalPosition: {x: -2.87, y: 0.64000005, z: -7.1419997}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -5602,7 +5602,7 @@ PrefabInstance:
     - target: {fileID: 3597333595213799674, guid: 7bdb120c647149e4b893d57650f6b1a8,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -1.535
+      value: -2.87
       objectReference: {fileID: 0}
     - target: {fileID: 3597333595213799674, guid: 7bdb120c647149e4b893d57650f6b1a8,
         type: 3}
@@ -5612,7 +5612,7 @@ PrefabInstance:
     - target: {fileID: 3597333595213799674, guid: 7bdb120c647149e4b893d57650f6b1a8,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -15.013
+      value: -7.24
       objectReference: {fileID: 0}
     - target: {fileID: 3597333595213799674, guid: 7bdb120c647149e4b893d57650f6b1a8,
         type: 3}
@@ -6496,7 +6496,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 6b9632d6457e07a41aa3698301c9e91c, type: 2}
+      objectReference: {fileID: 2100000, guid: 9b5c46d295179c74381cdeb1afb11a6b, type: 2}
     - target: {fileID: -7764975362432022695, guid: 1c3c91999810bb544b097d982ca569fc,
         type: 3}
       propertyPath: m_Materials.Array.size
@@ -7495,7 +7495,7 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 910498237229236420, guid: 1c3c91999810bb544b097d982ca569fc,
         type: 3}
       insertIndex: -1
-      addedObject: {fileID: 2128225325}
+      addedObject: {fileID: 2128225327}
     - targetCorrespondingSourceObject: {fileID: 1897574183137562964, guid: 1c3c91999810bb544b097d982ca569fc,
         type: 3}
       insertIndex: -1
@@ -10009,27 +10009,6 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 1998284085}
   m_PrefabAsset: {fileID: 0}
---- !u!65 &2128225325
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2128225323}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.01, y: 0.009999998, z: 0.009999998}
-  m_Center: {x: -2.3283064e-10, y: 0, z: 0}
 --- !u!65 &2128225326
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -10051,6 +10030,28 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.01, y: 0.009999998, z: 0.009999998}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!64 &2128225327
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2128225323}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 5768728368003595207, guid: 1c3c91999810bb544b097d982ca569fc, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

@@ -1693,6 +1693,8 @@ MonoBehaviour:
   SprintSpeed: 5
   RotationSpeed: 1.2
   SpeedChangeRate: 10
+  Gravity: -9.81
+  FallTimeout: 0.15
   Grounded: 1
   GroundedOffset: -0.14
   GroundedRadius: 0.4
@@ -1760,7 +1762,7 @@ MonoBehaviour:
     type: 3}
   jammerPrefab: {fileID: 4490465197478282416, guid: 43cd6699819d4d64a95422453715ae9e,
     type: 3}
-  jammerWithPartPrefab: {fileID: 2700914297251890840, guid: 980f89be478354d4c83b933b615af277,
+  jammerWithPartPrefab: {fileID: 4522826933082144465, guid: 980f89be478354d4c83b933b615af277,
     type: 3}
   crosshairPrefab: {fileID: 4680632583163769665, guid: 3175a1ea96f590041b0e01b00bb2d9cd,
     type: 3}

@@ -50,16 +50,28 @@ public class PlayerActionController : MonoBehaviour
     private bool isHoldingAlmond = false;
     private bool isHoldingRations = false;
 
+    // pick and retrieve distance
+    private Vector3 modPlayerPos;
+    private Vector3 modTargetPos;
+    private float distance;
+
+
+    void Awake()
+    {
+        if (mainCamera == null)
+        {
+            mainCamera = Camera.main;
+        }
+    }
+
     void Start()
     {
         crosshair = Instantiate(crosshairPrefab, Vector3.zero, Quaternion.identity);
         crosshair.SetActive(false);
     }
 
-    // Update is called once per frame
     void Update()
     {
-        // clear outlines of all objects
         CancelAllOutlines();
 
         // raycast along with viewpoint
@@ -70,22 +82,28 @@ public class PlayerActionController : MonoBehaviour
             // show props outlines
             ShowOutline(hit);
 
-            // pick props
-            if (Input.GetKey(KeyCode.F) && !isHoldingJammer && !isHoldingPortal && !isHoldingBoard)
-            {
-                PickProps(hit);
-            }
+            modPlayerPos = new(transform.position.x, 0f, transform.position.z);
+            modTargetPos = new(hit.transform.position.x, 0f, hit.transform.position.z);
+            distance = Vector3.Distance(modPlayerPos, modTargetPos);
 
-            // retrieve props
-            if (Input.GetKey(KeyCode.R) && !isHoldingJammer && !isHoldingPortal && !isHoldingBoard)
+            if (distance < 3.6f)
             {
-                RetrieveProps(hit);
+                // pick props
+                if (Input.GetKey(KeyCode.F) && !isHoldingJammer && !isHoldingPortal && !isHoldingBoard)
+                {
+                    PickProps(hit);
+                }
+
+                // retrieve props
+                if (Input.GetKey(KeyCode.R) && !isHoldingJammer && !isHoldingPortal && !isHoldingBoard)
+                {
+                    RetrieveProps(hit);
+                }
             }
 
             // jammer-specific action
             if (isHoldingJammer)
             {
-                // show crosshair
                 crosshair.SetActive(true);
                 crosshair.transform.position = hit.point;
 
@@ -182,6 +200,13 @@ public class PlayerActionController : MonoBehaviour
             var outline = port.GetComponentInChildren<Outline>();
             outline.enabled = false;
         }
+
+        GameObject[] allJammerWP = GameObject.FindGameObjectsWithTag("JammerWithPart");
+        foreach (GameObject jammer in allJammerWP)
+        {
+            var outline = jammer.GetComponentInChildren<Outline>();
+            outline.enabled = false;
+        }
     }
 
     private void ShowOutline(RaycastHit hit)
@@ -192,7 +217,7 @@ public class PlayerActionController : MonoBehaviour
             outline.enabled = true;
         }
 
-        if (hit.transform.CompareTag("Portal") || hit.transform.CompareTag("PlacedPortal"))
+        if (hit.transform.CompareTag("Portal") || hit.transform.CompareTag("PlacedPortal") || hit.transform.CompareTag("JammerWithPart"))
         {
             var outline = hit.transform.gameObject.GetComponentInChildren<Outline>();
             outline.enabled = true;
@@ -260,6 +285,21 @@ public class PlayerActionController : MonoBehaviour
             // TODO: jammer inventory +1
         }
 
+        if (hit.transform.CompareTag("JammerWithPart"))
+        {
+            GameObject jammer = hit.transform.gameObject;
+            Destroy(jammer);
+
+            // set barrier to visible
+            GameObject barrier = jammer.GetComponentInChildren<JammerController>().getTargetBarrier();
+            if (barrier != null)
+            {
+                barrier.GetComponent<BarrierController>().RemoveJammer();
+            }
+
+            // TODO: jammer inventory +1
+        }
+
         // retrieve portal
         if (hit.transform.CompareTag("PlacedPortal"))
         {
@@ -307,7 +347,7 @@ public class PlayerActionController : MonoBehaviour
 
             // other settings
             jammer.name = "OnHandProps";
-            jammer.transform.gameObject.GetComponent<BoxCollider>().enabled = false;
+            jammer.transform.gameObject.GetComponent<MeshCollider>().enabled = false;
 
             isHoldingJammer = true;
 
@@ -319,18 +359,15 @@ public class PlayerActionController : MonoBehaviour
         {
             GameObject portal = Instantiate(portalPrefab, mainCamera.transform);
 
-            // position (right-bottom corner of the screen)
             Vector3 screenPosition = new(Screen.width * 0.85f, Screen.height * -1f, 0.6f);
             Vector3 portalPosition = mainCamera.ScreenToWorldPoint(screenPosition);
             portal.transform.position = portalPosition;
 
-            // rotation and size
             Vector3 playerRot = this.transform.rotation.eulerAngles;
             Vector3 cameraRot = mainCamera.transform.rotation.eulerAngles;
             portal.transform.rotation = Quaternion.Euler(-180f - cameraRot.x, playerRot.y - 180f, -180f);
             portal.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
 
-            // other settings
             portal.name = "OnHandPortal";
             portal.transform.gameObject.GetComponent<BoxCollider>().enabled = false;
             portal.transform.Find("Particles").gameObject.SetActive(false);
@@ -346,18 +383,15 @@ public class PlayerActionController : MonoBehaviour
         {
             GameObject board = Instantiate(woodBoardPrefab, mainCamera.transform);
 
-            // position (right-bottom corner of the screen)
             Vector3 screenPosition = new(Screen.width * 0.85f, Screen.height * 0.1f, 0.6f);
             Vector3 boardPosition = mainCamera.ScreenToWorldPoint(screenPosition);
             board.transform.position = boardPosition;
 
-            // rotation and size
             Vector3 playerRot = this.transform.rotation.eulerAngles;
             Vector3 cameraRot = mainCamera.transform.rotation.eulerAngles;
             board.transform.rotation = Quaternion.Euler(cameraRot.x - 40f, playerRot.y, 0f);
             board.transform.localScale = new Vector3(0.2f, 0.04f, 0.35f);
 
-            // other settings
             board.name = "OnHandProps";
             board.transform.gameObject.GetComponent<BoxCollider>().enabled = false;
 
@@ -371,18 +405,15 @@ public class PlayerActionController : MonoBehaviour
         {
             GameObject almondWater = Instantiate(almondWaterPrefab, mainCamera.transform);
 
-            // position (right-bottom corner of the screen)
             Vector3 screenPosition = new(Screen.width * 0.85f, Screen.height * 0.2f, 0.6f);
             Vector3 almondWaterPosition = mainCamera.ScreenToWorldPoint(screenPosition);
             almondWater.transform.position = almondWaterPosition;
 
-            // rotation and size
             Vector3 playerRot = this.transform.rotation.eulerAngles;
             Vector3 cameraRot = mainCamera.transform.rotation.eulerAngles;
             almondWater.transform.rotation = Quaternion.Euler(0f - cameraRot.x, playerRot.y - 180f, 0f);
             almondWater.transform.localScale = new Vector3(0.025f, 0.025f, 0.025f);
 
-            // other settings
             almondWater.name = "OnHandProps";
             almondWater.transform.gameObject.GetComponent<BoxCollider>().enabled = false;
 
@@ -392,21 +423,17 @@ public class PlayerActionController : MonoBehaviour
         // hold rations
         if (!isHoldingRations)
         {
-            // hold rations
             GameObject rations = Instantiate(rationsPrefab, mainCamera.transform);
 
-            // position (right-bottom corner of the screen)
             Vector3 screenPosition = new(Screen.width * 0.85f, Screen.height * 0.15f, 0.6f);
             Vector3 rationsPosition = mainCamera.ScreenToWorldPoint(screenPosition);
             rations.transform.position = rationsPosition;
 
-            // rotation and size
             Vector3 playerRot = this.transform.rotation.eulerAngles;
             Vector3 cameraRot = mainCamera.transform.rotation.eulerAngles;
             rations.transform.rotation = Quaternion.Euler(90f - cameraRot.x, playerRot.y - 180f, cameraRot.z - 30f);
             rations.transform.localScale = new Vector3(4f, 4f, 4f);
 
-            // other settings
             rations.name = "OnHandProps";
             rations.transform.gameObject.GetComponent<BoxCollider>().enabled = false;
 
@@ -416,7 +443,7 @@ public class PlayerActionController : MonoBehaviour
 
     private void PlaceProps()
     {
-        // place jammer when raycast doesn't hit anything
+        // place jammer
         if (isHoldingJammer)
         {
             RaycastHit hit;
@@ -426,17 +453,20 @@ public class PlayerActionController : MonoBehaviour
             Vector3 temp = transform.position + transform.forward * 1.5f;
             Vector3 jammerPos = new(temp.x, transform.position.y + 0.47f, temp.z);
 
-            Quaternion jammerRot = Quaternion.Euler(-90f, this.transform.rotation.eulerAngles.y, 0f);
-
             if (hasHit && hit.transform.CompareTag("Barrier"))
             {
+                Quaternion jammerRot = Quaternion.Euler(0f, this.transform.rotation.eulerAngles.y, 0f);
+
                 GameObject jammer = Instantiate(jammerWithPartPrefab, jammerPos, jammerRot);
-                jammer.tag = "PlacedJammer";
+                jammer.tag = "JammerWithPart";
+
                 hit.transform.GetComponent<BarrierController>().AddNewJammer();
-                jammer.GetComponent<JammerController>().setTargetBarrier(hit.transform.gameObject);
+                jammer.GetComponentInChildren<JammerController>().setTargetBarrier(hit.transform.gameObject);
             }
             else
             {
+                Quaternion jammerRot = Quaternion.Euler(-90f, this.transform.rotation.eulerAngles.y, 0f);
+
                 GameObject jammer = Instantiate(jammerPrefab, jammerPos, jammerRot);
                 jammer.tag = "PlacedJammer";
             }
@@ -482,6 +512,7 @@ public class PlayerActionController : MonoBehaviour
             isHoldingPortal = false;
         }
 
+        // place board
         if (isHoldingBoard)
         {
             Vector3 temp = transform.position + transform.forward * 3f;

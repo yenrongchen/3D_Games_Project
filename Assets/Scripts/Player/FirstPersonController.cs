@@ -28,7 +28,7 @@ namespace StarterAssets
 	{
 		[Header("Player")]
 		[Tooltip("Move speed of the character in m/s")]
-		public float MoveSpeed = 3f;
+		public float MoveSpeed = 3.5f;
 		[Tooltip("Sprint speed of the character in m/s")]
 		public float SprintSpeed = 5f;
 		[Tooltip("Rotation speed of the character")]
@@ -36,7 +36,13 @@ namespace StarterAssets
 		[Tooltip("Acceleration and deceleration")]
 		public float SpeedChangeRate = 10.0f;
 
-		[Header("Player Grounded")]
+		[Header("Gravity")]
+        [Tooltip("The character uses its own gravity value. The engine default is -9.81f")]
+        public float Gravity = -15f;
+        [Tooltip("Time required to pass before entering the fall state. Useful for walking down stairs")]
+        public float FallTimeout = 0.15f;
+
+        [Header("Player Grounded")]
 		[Tooltip("If the character is grounded or not. Not part of the CharacterController built in grounded check")]
 		public bool Grounded = true;
 		[Tooltip("Useful for rough ground")]
@@ -50,9 +56,9 @@ namespace StarterAssets
 		[Tooltip("The follow target set in the Cinemachine Virtual Camera that the camera will follow")]
 		public GameObject CinemachineCameraTarget;
 		[Tooltip("How far in degrees can you move the camera up")]
-		public float TopClamp = 90.0f;
+		public float TopClamp = 75.0f;
 		[Tooltip("How far in degrees can you move the camera down")]
-		public float BottomClamp = -90.0f;
+		public float BottomClamp = -75.0f;
         [Tooltip("Main Camera for obtaining current viewport")]
         public Camera mainCamera;
 
@@ -71,18 +77,19 @@ namespace StarterAssets
 		// player
 		private float _speed;
 		private float _rotationVelocity;
-		private float _verticalVelocity = 0f;
-		private bool isWalking = true;
+		private float _verticalVelocity;
+        private float _terminalVelocity = 53.0f;
+
+        // timeout deltatime
+        private float _fallTimeoutDelta;
+
+        // player movement
         private bool canMove = true;
+        private bool isWalking = true;
+        private bool isWearingShoes = false;
 
         // animation
         private Animator animator;
-
-        // check game status
-        private bool isPaused;
-
-        // shoes
-        private bool isWearingShoes = false;
 
 
 #if ENABLE_INPUT_SYSTEM
@@ -131,8 +138,7 @@ namespace StarterAssets
 
         private void Update()
 		{
-            isPaused = GameObject.Find("GameManager").GetComponent<GameManager>().getIsPaused();
-			if (isPaused || !canMove)
+			if (!canMove)
 			{
 				return;
 			}
@@ -142,8 +148,9 @@ namespace StarterAssets
 				isWalking = !isWalking;
 			}
 
-			GroundedCheck();
-            Move(isWalking);
+			GravityCheck();
+            GroundedCheck();
+            Move();
           
 			if (hp <= 0)
 			{
@@ -151,22 +158,9 @@ namespace StarterAssets
 			}
         }
 
-        public void EnableMovement()
-        {
-            canMove = true;
-        }
-
-        public void DisableMovement()
-        {
-            canMove = false;
-        }
-
         private void LateUpdate()
 		{
-			if (!isPaused)
-			{
-				CameraRotation();
-			}
+			if (Time.timeScale != 0) CameraRotation();
 		}
 
 		private void CameraRotation()
@@ -191,6 +185,35 @@ namespace StarterAssets
 			}
 		}
 
+        private void GravityCheck()
+        {
+            if (Grounded)
+            {
+                // reset the fall timeout timer
+                _fallTimeoutDelta = FallTimeout;
+
+				// stop our velocity dropping infinitely when grounded
+				if (_verticalVelocity < 0.0f)
+                {
+                    _verticalVelocity = -2f;
+                }
+            }
+            else
+            {
+				// fall timeout
+				if (_fallTimeoutDelta >= 0.0f)
+				{
+					_fallTimeoutDelta -= Time.deltaTime;
+				}
+			}
+
+            // apply gravity over time if under terminal (multiply by delta time twice to linearly speed up over time)
+            if (_verticalVelocity < _terminalVelocity)
+            {
+                _verticalVelocity += Gravity * Time.deltaTime;
+            }
+        }
+
         private void GroundedCheck()
         {
             // set sphere position, with offset
@@ -198,12 +221,10 @@ namespace StarterAssets
             Grounded = Physics.CheckSphere(spherePosition, GroundedRadius, GroundLayers, QueryTriggerInteraction.Ignore);
         }
 
-        private void Move(bool isWalking)
+        private void Move()
 		{
-			// set target speed based on move or sprint
 			float targetSpeed;
 
-            // note: Vector2's == operator uses approximation so is not floating point error prone, and is cheaper than magnitude
             // if there is no input, set the target speed to 0
             if (_input.move == Vector2.zero)
             {
@@ -234,8 +255,6 @@ namespace StarterAssets
                 }
                 animator.SetInteger("state", 2);
             }
-
-
 
 			// a reference to the players current horizontal velocity
 			float currentHorizontalSpeed = new Vector3(_controller.velocity.x, 0.0f, _controller.velocity.z).magnitude;
@@ -280,23 +299,6 @@ namespace StarterAssets
 			return Mathf.Clamp(lfAngle, lfMin, lfMax);
 		}
 
-        private void OnDrawGizmosSelected()
-        {
-            Color transparentGreen = new Color(0.0f, 1.0f, 0.0f, 0.35f);
-            Color transparentRed = new Color(1.0f, 0.0f, 0.0f, 0.35f);
-
-            if (Grounded) Gizmos.color = transparentGreen;
-            else Gizmos.color = transparentRed;
-
-            // when selected, draw a gizmo in the position of, and matching radius of, the grounded collider
-            Gizmos.DrawSphere(new Vector3(transform.position.x, transform.position.y - GroundedOffset, transform.position.z), GroundedRadius);
-        }
-
-		public Vector3 getPosition()
-		{
-			return transform.position;
-		}
-
 		public void Hurt()
 		{
 			hp--;
@@ -332,7 +334,17 @@ namespace StarterAssets
 			return isWalking;
 		}
 
-		public void WearShoes()
+        public void EnableMovement()
+        {
+            canMove = true;
+        }
+
+        public void DisableMovement()
+        {
+            canMove = false;
+        }
+
+        public void WearShoes()
 		{
             if (GameObject.FindGameObjectWithTag("CountDownBar") != null)
             {
@@ -350,12 +362,14 @@ namespace StarterAssets
             GameObject.Find("ShoesPanel").GetComponent<ProgressBar>().StartCountdown(shoesLastTime);
             yield return new WaitForSeconds(shoesLastTime);
 
-            GameObject holdedProps = GameObject.Find("OnHandProps");
-            Destroy(holdedProps);
-
             Destroy(GameObject.FindGameObjectWithTag("CountDownBar"));
 
             isWearingShoes = false;
+        }
+
+        public Vector3 getPosition()
+        {
+            return transform.position;
         }
 
         public void Teleport(Vector3 targetPosition)

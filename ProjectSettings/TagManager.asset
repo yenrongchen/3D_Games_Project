@@ -25,6 +25,7 @@ TagManager:
   - PlacedBoard
   - Monster
   - CountDownBar
+  - JammerWithPart
   layers:
   - Default
   - TransparentFX

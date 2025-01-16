@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4052017715105232067}
   - component: {fileID: 51834440678171781}
   - component: {fileID: 5393930617544588069}
-  - component: {fileID: 9056452999736421978}
+  - component: {fileID: 3305595651190767869}
   - component: {fileID: 7325766842410415302}
   - component: {fileID: 9137042534553493381}
   - component: {fileID: -301092595638661198}
@@ -87,8 +87,8 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &9056452999736421978
-BoxCollider:
+--- !u!64 &3305595651190767869
+MeshCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -105,9 +105,10 @@ BoxCollider:
   m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.005656989, y: 0.0060593933, z: 0.009468207}
-  m_Center: {x: 0.000013987068, y: 0.00006616117, z: -0.0000068773534}
+  serializedVersion: 5
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -3072227933227308690, guid: 834c7fdb1824d9c458b86db672bb3a65, type: 3}
 --- !u!114 &7325766842410415302
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -137,6 +138,7 @@ MonoBehaviour:
   outlineMode: 1
   outlineColor: {r: 1, g: 0.4, b: 0, a: 1}
   outlineWidth: 3
+  type: 0
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
