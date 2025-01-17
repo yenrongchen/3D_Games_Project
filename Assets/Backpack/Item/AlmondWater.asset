@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f3ad39a0bb36854990fcf28460b40ad, type: 3}
   m_Name: AlmondWater
   m_EditorClassIdentifier: 
+  id: 4
   itemName: Almond Water
   itemIcon: {fileID: 21300000, guid: 45b397487bf6c3c41bc1786c95e6b0d5, type: 3}
   quantity: 1

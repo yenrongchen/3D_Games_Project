@@ -68,8 +68,8 @@ namespace StarterAssets
 
         [Header("Shoes")]
         public float shoesSpeedBuff = 2f;
-        public float shoesLastTime = 3f;
-		public GameObject ShoesCountDownPrefab;
+        public float shoesLastTime = 5f;
+		public GameObject ShoesCanvas;
 
         // cinemachine
         private float _cinemachineTargetPitch;
@@ -91,6 +91,8 @@ namespace StarterAssets
 
         // animation
         private Animator animator;
+
+		private bool freezing = false;
 
 
 #if ENABLE_INPUT_SYSTEM
@@ -124,13 +126,15 @@ namespace StarterAssets
 #endif
             
             animator = this.GetComponentInChildren<Animator>();
+
 			hp = HP;
+
 			cameraRoot = GameObject.Find("PlayerCameraRoot");
-		}
+        }
 
         private void Update()
 		{
-			if (!canMove)
+			if (!canMove || freezing)
 			{
 				return;
 			}
@@ -152,7 +156,11 @@ namespace StarterAssets
 
         private void LateUpdate()
 		{
-			if (Time.timeScale != 0) CameraRotation();
+			if (Time.timeScale == 0 || freezing)
+			{
+				return;
+			}
+			CameraRotation();
 		}
 
 		private void CameraRotation()
@@ -369,9 +377,9 @@ namespace StarterAssets
 		{
             isWearingShoes = true;
 
-            Instantiate(ShoesCountDownPrefab, ShoesCountDownPrefab.transform.position, Quaternion.identity);
+            GameObject shoesPanel = Instantiate(ShoesCanvas);
 
-            GameObject.Find("ShoesPanel").GetComponent<ProgressBar>().StartCountdown(shoesLastTime);
+            shoesPanel.GetComponentInChildren<ProgressBar>().StartCountdown(shoesLastTime);
             yield return new WaitForSeconds(shoesLastTime);
 
             Destroy(GameObject.FindGameObjectWithTag("CountDownBar"));
@@ -390,6 +398,16 @@ namespace StarterAssets
             _controller.enabled = false;
             _controller.transform.position = targetPosition;
             _controller.enabled = true;
+        }
+
+        public void Freeze()
+        {
+            freezing = true;
+        }
+
+        public void Unfreeze()
+        {
+            freezing = false;
         }
     }
 }

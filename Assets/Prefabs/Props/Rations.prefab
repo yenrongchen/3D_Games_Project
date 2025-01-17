@@ -175,9 +175,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8934145364116317211}
-  - component: {fileID: -6750355751565714111}
   - component: {fileID: 5513277463088607469}
   - component: {fileID: 1664302007717611013}
+  - component: {fileID: 7604315257919175863}
+  - component: {fileID: 3726397106679218482}
   m_Layer: 0
   m_Name: Rations
   m_TagString: Props
@@ -202,20 +203,6 @@ Transform:
   - {fileID: 2043116391638088250}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &-6750355751565714111
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8173581417653031338}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2d61bc992d6f137419227a3e9b24adaf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  item: {fileID: 11400000, guid: 3bd550a6fddf5cc438293ca6e451fed2, type: 2}
-  isIn: 0
 --- !u!65 &5513277463088607469
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -252,6 +239,33 @@ MonoBehaviour:
   outlineMode: 1
   outlineColor: {r: 1, g: 0.4, b: 0, a: 1}
   outlineWidth: 3
+  type: 0
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
+--- !u!114 &7604315257919175863
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8173581417653031338}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3f2aef07ea728fd4cb44918bbcd31104, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  item: {fileID: 11400000, guid: 3bd550a6fddf5cc438293ca6e451fed2, type: 2}
+--- !u!114 &3726397106679218482
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8173581417653031338}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d61bc992d6f137419227a3e9b24adaf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  item: {fileID: 11400000, guid: 3bd550a6fddf5cc438293ca6e451fed2, type: 2}

@@ -1689,11 +1689,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 55919ac34a26952479f3fc91f777b2fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MoveSpeed: 3
+  MoveSpeed: 3.5
   SprintSpeed: 5
   RotationSpeed: 1.2
   SpeedChangeRate: 10
-  Gravity: -9.81
+  Gravity: -15
   FallTimeout: 0.15
   Grounded: 1
   GroundedOffset: -0.14
@@ -1704,11 +1704,43 @@ MonoBehaviour:
   CinemachineCameraTarget: {fileID: 7958388483546926679}
   TopClamp: 89
   BottomClamp: -89
-  mainCamera: {fileID: 0}
+  curve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 1
+      outSlope: 1
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.12
+      value: 0.12
+      inSlope: -0.050651886
+      outSlope: -0.050651886
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.07442213
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: -0.13636364
+      outSlope: -0.13636364
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
   HP: 3
   shoesSpeedBuff: 2
-  shoesLastTime: 3
-  ShoesCountDownPrefab: {fileID: 5136963841615745856, guid: db827d4deb9935447b56209481ec3be5,
+  shoesLastTime: 5
+  ShoesCanvas: {fileID: 5136963841615745856, guid: db827d4deb9935447b56209481ec3be5,
     type: 3}
 --- !u!114 &8454222941935300450
 MonoBehaviour:
@@ -1764,15 +1796,13 @@ MonoBehaviour:
     type: 3}
   jammerWithPartPrefab: {fileID: 4522826933082144465, guid: 980f89be478354d4c83b933b615af277,
     type: 3}
-  crosshairPrefab: {fileID: 4680632583163769665, guid: 3175a1ea96f590041b0e01b00bb2d9cd,
-    type: 3}
   woodBoardPrefab: {fileID: 8851307765202494986, guid: 43e66d9c4f5b24a48a3b1d76597fca47,
     type: 3}
   almondWaterPrefab: {fileID: 6410564937674912964, guid: d11b588357392d94f92b274863d40f73,
     type: 3}
   rationsPrefab: {fileID: 8173581417653031338, guid: c9a1bc2284936a745b8a31efb41eee5f,
     type: 3}
-  jammerAtkCD: 8
+  jammerAtkCD: 10
   healingCanvas: {fileID: 5705346797616730052, guid: 9b028054c3bdb774f9194ad4514cea96,
     type: 3}
 --- !u!114 &5860006640494211146

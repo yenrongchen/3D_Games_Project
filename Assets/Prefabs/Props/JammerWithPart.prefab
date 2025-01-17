@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 4182968182197981866}
   - component: {fileID: 3025337589649876570}
   - component: {fileID: 1872770089180861102}
-  - component: {fileID: 345222732772935530}
   - component: {fileID: 5238981887902751917}
   - component: {fileID: 6551194518086001108}
   m_Layer: 0
@@ -86,20 +85,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &345222732772935530
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 960184293329272138}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2d61bc992d6f137419227a3e9b24adaf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  item: {fileID: 11400000, guid: 797230df3a39d654b92715662c919bda, type: 2}
-  isIn: 0
 --- !u!114 &5238981887902751917
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5029,6 +5014,8 @@ GameObject:
   m_Component:
   - component: {fileID: 5840112749898803935}
   - component: {fileID: 4438291873149068335}
+  - component: {fileID: 6353293215577356293}
+  - component: {fileID: 7648530920871914046}
   m_Layer: 0
   m_Name: JammerWithPart
   m_TagString: JammerWithPart
@@ -5074,3 +5061,29 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.5777434, y: 0.95484614, z: 0.58292997}
   m_Center: {x: 0.004143536, y: 0.00064875185, z: -0.024317324}
+--- !u!114 &6353293215577356293
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4522826933082144465}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3f2aef07ea728fd4cb44918bbcd31104, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  item: {fileID: 11400000, guid: 797230df3a39d654b92715662c919bda, type: 2}
+--- !u!114 &7648530920871914046
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4522826933082144465}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d61bc992d6f137419227a3e9b24adaf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  item: {fileID: 11400000, guid: 797230df3a39d654b92715662c919bda, type: 2}

@@ -13,6 +13,8 @@ GameObject:
   - component: {fileID: 6970007457927034555}
   - component: {fileID: -5089791349213121722}
   - component: {fileID: 526705284089926914}
+  - component: {fileID: 5426646556692352157}
+  - component: {fileID: -4092681857942167405}
   m_Layer: 0
   m_Name: Shoes
   m_TagString: Props
@@ -122,6 +124,33 @@ MonoBehaviour:
   outlineMode: 1
   outlineColor: {r: 1, g: 0.4, b: 0, a: 1}
   outlineWidth: 3
+  type: 0
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
+--- !u!114 &5426646556692352157
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7589295233281538620}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3f2aef07ea728fd4cb44918bbcd31104, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  item: {fileID: 11400000, guid: e3a7d1d471559dd4b84f776fe83f6920, type: 2}
+--- !u!114 &-4092681857942167405
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7589295233281538620}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d61bc992d6f137419227a3e9b24adaf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  item: {fileID: 11400000, guid: e3a7d1d471559dd4b84f776fe83f6920, type: 2}

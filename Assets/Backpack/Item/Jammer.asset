@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f3ad39a0bb36854990fcf28460b40ad, type: 3}
   m_Name: Jammer
   m_EditorClassIdentifier: 
+  id: 1
   itemName: Jammer
   itemIcon: {fileID: 21300000, guid: 395cbeefff13c814aa365046b219fc65, type: 3}
-  quantity: 0
+  quantity: 1

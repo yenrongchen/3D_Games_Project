@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f3ad39a0bb36854990fcf28460b40ad, type: 3}
   m_Name: Gem 2
   m_EditorClassIdentifier: 
+  id: 9
   itemName: Red Gem
   itemIcon: {fileID: 21300000, guid: 6fad8348630850346aa4e056bf5ec7e5, type: 3}
   quantity: 1

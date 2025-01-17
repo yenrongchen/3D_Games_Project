@@ -9851,6 +9851,7 @@ MonoBehaviour:
   outlineMode: 1
   outlineColor: {r: 1, g: 0.4, b: 0, a: 1}
   outlineWidth: 3
+  type: 0
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
@@ -9948,6 +9949,8 @@ GameObject:
   - component: {fileID: 2107438204459120224}
   - component: {fileID: 1144461768655735343}
   - component: {fileID: -3366124719197230284}
+  - component: {fileID: 6169216513414345533}
+  - component: {fileID: -4686263279966386232}
   m_Layer: 0
   m_Name: Portal
   m_TagString: Portal
@@ -10007,3 +10010,30 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TeleportPosition: {x: 0, y: 0, z: 0}
+  PairPortal: {fileID: 0}
+--- !u!114 &6169216513414345533
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8878502152022807178}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3f2aef07ea728fd4cb44918bbcd31104, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  item: {fileID: 11400000, guid: 47a2328e72523764f8922c325809d8dd, type: 2}
+--- !u!114 &-4686263279966386232
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8878502152022807178}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d61bc992d6f137419227a3e9b24adaf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  item: {fileID: 11400000, guid: 47a2328e72523764f8922c325809d8dd, type: 2}

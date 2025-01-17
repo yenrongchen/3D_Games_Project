@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f3ad39a0bb36854990fcf28460b40ad, type: 3}
   m_Name: Gem 3
   m_EditorClassIdentifier: 
+  id: 9
   itemName: Purple Gem
   itemIcon: {fileID: 21300000, guid: 1352ea5fc9cf01e43af52be8f3636d02, type: 3}
   quantity: 1

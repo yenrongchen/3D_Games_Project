@@ -13,6 +13,8 @@ GameObject:
   - component: {fileID: 7450341201522983210}
   - component: {fileID: 2367181132559071284}
   - component: {fileID: -5290063496870606707}
+  - component: {fileID: 8728884736027253650}
+  - component: {fileID: 3933583422398291078}
   m_Layer: 0
   m_Name: WoodBoard
   m_TagString: Props
@@ -121,6 +123,33 @@ MonoBehaviour:
   outlineMode: 0
   outlineColor: {r: 1, g: 0.4, b: 0, a: 1}
   outlineWidth: 3
+  type: 0
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
+--- !u!114 &8728884736027253650
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8851307765202494986}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3f2aef07ea728fd4cb44918bbcd31104, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  item: {fileID: 11400000, guid: ba31337f9ceec5a43a16e11baab92678, type: 2}
+--- !u!114 &3933583422398291078
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8851307765202494986}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d61bc992d6f137419227a3e9b24adaf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  item: {fileID: 11400000, guid: ba31337f9ceec5a43a16e11baab92678, type: 2}
