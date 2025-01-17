@@ -7,6 +7,7 @@ public class PlayerInteraction : MonoBehaviour
 {
     private FadeInOut fadeInOut;
     private FirstPersonController player;
+    private bool teleporting = false;
 
     private void Start()
     {
@@ -29,6 +30,8 @@ public class PlayerInteraction : MonoBehaviour
 
     private IEnumerator TeleportWithFade(Vector3 targetPosition)
     {
+        teleporting = true;
+
         // pause player control
         player.DisableMovement();
 
@@ -46,5 +49,12 @@ public class PlayerInteraction : MonoBehaviour
 
         // resume player control
         player.EnableMovement();
+
+        teleporting = false;
+    }
+
+    public bool CheckTeleporting()
+    {
+        return teleporting;
     }
 }

@@ -173,7 +173,8 @@ public class PlayerActionController : MonoBehaviour
         }
 
         // open or close backpack
-        if (Input.GetKeyDown(KeyCode.Q))
+        bool teleporting = GetComponentInChildren<PlayerInteraction>().CheckTeleporting();
+        if (Input.GetKeyDown(KeyCode.Q) && !teleporting)
         {
             if (isOpeningBackpack)
             {

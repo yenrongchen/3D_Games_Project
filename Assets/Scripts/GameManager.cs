@@ -1,17 +1,22 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
+    public int currentLevel;
+
     private bool isPaused = false;
     private int nextLevel = 1;
 
     // Start is called before the first frame update
     void Start()
     {
-
+        TextMeshProUGUI lvText = GameObject.Find("LevelText").GetComponent<TextMeshProUGUI>();
+        lvText.text = "LEVEL " + currentLevel.ToString();
     }
 
     // Update is called once per frame
