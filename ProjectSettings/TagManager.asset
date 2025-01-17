@@ -6,8 +6,6 @@ TagManager:
   tags:
   - CinemachineTarget
   - Laser
-  - Enemy
-  - AlmondWater
   - BeginDoor
   - Door
   - Bed

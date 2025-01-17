@@ -27,6 +27,7 @@ public class PlayerActionController : MonoBehaviour
     public GameObject healingCanvas;
 
     // props
+    private bool holdingProps = false;
     private List<string> showOutline = new() { "Props", "Jammer", "Key1", "Key2", "Key3", "PlacedJammer", "PlacedBoard" };
     private List<string> canPick = new() { "Props", "Jammer", "Key1", "Key2", "Key3", "Portal" };
     private List<string> canRetrieve = new() { "PlacedPortal", "PlacedBoard", "PlacedJammer", "JammerWithPart" };
@@ -34,8 +35,9 @@ public class PlayerActionController : MonoBehaviour
     // jammer
     private bool isHoldingJammer = false;
     private GameObject crosshair;
-    private List<string> jammerTargetTags = new() { "Barrier", "Monster" };
     private float atkcd = 0f;
+    private List<string> jammerTargetTags = new() { "Barrier", "Monster" };
+    private List<string> canDirectHold = new() { "Jammer", "PlacedJammer", "JammerWithPart" };
 
     // portal
     private bool isHoldingPortal = false;
@@ -93,7 +95,7 @@ public class PlayerActionController : MonoBehaviour
             modTargetPos = new(hit.transform.position.x, 0f, hit.transform.position.z);
             distance = Vector3.Distance(modPlayerPos, modTargetPos);
 
-            if (distance < 3.6f && !isHoldingJammer && !isHoldingPortal && !isHoldingBoard)
+            if (distance < 4f && !holdingProps)
             {
                 // pick props
                 if (Input.GetKeyDown(KeyCode.F) && canPick.Contains(hit.transform.tag))
@@ -106,6 +108,24 @@ public class PlayerActionController : MonoBehaviour
                 {
                     RetrieveProps(hit);
                 }
+            }
+
+            if (Input.GetKeyDown(KeyCode.Mouse0) && !holdingProps && canDirectHold.Contains(hit.transform.tag))
+            {
+                if (hit.transform.CompareTag("JammerWithPart"))
+                {
+                    // update barrier status
+                    GameObject jammer = hit.transform.gameObject;
+                    GameObject barrier = jammer.GetComponentInChildren<JammerController>().getTargetBarrier();
+                    if (barrier != null)
+                    {
+                        barrier.GetComponent<BarrierController>().RemoveJammer();
+                    }
+                }
+
+                Destroy(hit.transform.gameObject);
+
+                HoldJammer();
             }
 
             // jammer-specific action
@@ -163,6 +183,12 @@ public class PlayerActionController : MonoBehaviour
             {
                 OpenBackpack();
             }
+        }
+
+        // put back holding props
+        if (Input.GetKeyDown(KeyCode.C) && holdingProps)
+        {
+            PutBackProps();
         }
     }
 
@@ -263,20 +289,9 @@ public class PlayerActionController : MonoBehaviour
     private void RetrieveProps(RaycastHit hit)
     {
         // retrieve jammer
-        if (hit.transform.CompareTag("PlacedJammer"))
-        {
-            // set barrier to visible
-            GameObject jammer = hit.transform.gameObject;
-            GameObject barrier = jammer.GetComponent<JammerController>().getTargetBarrier();
-            if (barrier != null)
-            {
-                barrier.GetComponent<BarrierController>().RemoveJammer();
-            }
-        }
-
         if (hit.transform.CompareTag("JammerWithPart"))
         {
-            // set barrier to visible
+            // update barrier status
             GameObject jammer = hit.transform.gameObject;
             GameObject barrier = jammer.GetComponentInChildren<JammerController>().getTargetBarrier();
             if (barrier != null)
@@ -298,7 +313,7 @@ public class PlayerActionController : MonoBehaviour
             }
         }
 
-        // retrieve props
+        // store into backpack
         hit.transform.GetComponent<ItemPickup>().Pickup();
     }
 
@@ -321,6 +336,7 @@ public class PlayerActionController : MonoBehaviour
         jammer.transform.gameObject.GetComponent<MeshCollider>().enabled = false;
 
         isHoldingJammer = true;
+        holdingProps = true;
     }
 
     public void HoldPortal()
@@ -342,6 +358,7 @@ public class PlayerActionController : MonoBehaviour
         portal.transform.Find("DarkBackground").gameObject.SetActive(false);
 
         isHoldingPortal = true;
+        holdingProps = true;
     }
 
     public void HoldBoard()
@@ -361,6 +378,7 @@ public class PlayerActionController : MonoBehaviour
         board.transform.gameObject.GetComponent<BoxCollider>().enabled = false;
 
         isHoldingBoard = true;
+        holdingProps = true;
     }
 
     public void HoldAlmond()
@@ -380,6 +398,7 @@ public class PlayerActionController : MonoBehaviour
         almondWater.transform.gameObject.GetComponent<BoxCollider>().enabled = false;
 
         isHoldingAlmond = true;
+        holdingProps = true;
     }
 
     public void HoldRations()
@@ -399,6 +418,7 @@ public class PlayerActionController : MonoBehaviour
         rations.transform.gameObject.GetComponent<BoxCollider>().enabled = false;
 
         isHoldingRations = true;
+        holdingProps = true;
     }
 
     private void PlaceProps()
@@ -490,6 +510,8 @@ public class PlayerActionController : MonoBehaviour
 
             isHoldingBoard = false;
         }
+
+        holdingProps = false;
     }
 
     private void UseProps()
@@ -503,7 +525,6 @@ public class PlayerActionController : MonoBehaviour
             }
             Instantiate(healingCanvas);
             StartCoroutine(Heal(4f, 1));
-            isHoldingAlmond = false;
         }
 
         // use rations
@@ -515,28 +536,59 @@ public class PlayerActionController : MonoBehaviour
             }
             Instantiate(healingCanvas);
             StartCoroutine(Heal(6f, 2));
-            isHoldingRations = false;
         }
-
-        // wear shoes
-        GameObject.Find("Player").GetComponent<FirstPersonController>().WearShoes();
     }
 
     private IEnumerator Heal(float time, int type)
     {
-        GameObject.Find("Player").GetComponent<FirstPersonController>().DisableMovement();
+        FirstPersonController player = GameObject.Find("Player").GetComponent<FirstPersonController>();
+
+        player.DisableMovement();
 
         GameObject.Find("HealingPanel").GetComponent<ProgressBar>().StartCounterCountdown(time);
         yield return new WaitForSeconds(time);
 
-        GameObject.Find("Player").GetComponent<FirstPersonController>().Heal(type);
-        GameObject.Find("Player").GetComponent<FirstPersonController>().EnableMovement();
+        player.Heal(type);
+        player.EnableMovement();
 
         GameObject holdedProps = GameObject.Find("OnHandProps");
         Destroy(holdedProps);
 
+        isHoldingAlmond = false;
+        holdingProps = false;
+
         yield return new WaitForSeconds(0.8f);
         Destroy(GameObject.FindGameObjectWithTag("CountDownBar"));
+    }
+
+    private void PutBackProps()
+    {
+        GameObject props = GameObject.Find("OnHandProps") ?? GameObject.Find("OnHandPortal");
+        Item item = props.GetComponent<ItemController>().item;
+
+        InventoryManager.Instance.Add(item);
+
+        switch (item.id)
+        {
+            case 1:
+                isHoldingJammer = false;
+                break;
+            case 2:
+                isHoldingPortal = false;
+                break;
+            case 3:
+                isHoldingBoard = false;
+                break;
+            case 4:
+                isHoldingAlmond = false;
+                break;
+            case 5:
+                isHoldingRations = false;
+                break;
+        }
+
+        Destroy(props);
+        holdingProps = false;
     }
 
     private float GetClosestBaseAngle(float angle)
@@ -581,5 +633,10 @@ public class PlayerActionController : MonoBehaviour
         Cursor.visible = false;
 
         GetComponent<FirstPersonController>().Unfreeze();
+    }
+
+    public bool GetHolding()
+    {
+        return holdingProps;
     }
 }

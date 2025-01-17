@@ -1,3 +1,4 @@
+using StarterAssets;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -12,56 +13,63 @@ public class ItemButtonController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        this.GetComponent<Button>().onClick.AddListener(Hold);
+        this.GetComponent<Button>().onClick.AddListener(Actions);
 
         player = GameObject.Find("Player").GetComponent<PlayerActionController>();
     }
 
-    private void Hold()
+    private void Actions()
     {
-        if (ID == 1)
+        bool holding = player.GetHolding();
+        if (!holding)
         {
-            player.HoldJammer();
+            if (ID == 1)
+            {
+                player.HoldJammer();
+                InventoryManager.Instance.Remove(self);
+                player.CloseBackpack();
+            }
+
+            if (ID == 2)
+            {
+                player.HoldPortal();
+                InventoryManager.Instance.Remove(self);
+                player.CloseBackpack();
+            }
+
+            if (ID == 3)
+            {
+                player.HoldBoard();
+                InventoryManager.Instance.Remove(self);
+                player.CloseBackpack();
+            }
+
+            if (ID == 4)
+            {
+                player.HoldAlmond();
+                InventoryManager.Instance.Remove(self);
+                player.CloseBackpack();
+            }
+
+            if (ID == 5)
+            {
+                player.HoldRations();
+                InventoryManager.Instance.Remove(self);
+                player.CloseBackpack();
+            }
+        }
+
+        if (ID == 6)
+        {
+            GameObject.Find("Player").GetComponent<FirstPersonController>().WearShoes();
             InventoryManager.Instance.Remove(self);
             player.CloseBackpack();
         }
-
-        if (ID == 2)
-        {
-            player.HoldPortal();
-            InventoryManager.Instance.Remove(self);
-            player.CloseBackpack();
-        }
-
-        if (ID == 3)
-        {
-            player.HoldBoard();
-            InventoryManager.Instance.Remove(self);
-            player.CloseBackpack();
-        }
-
-        if (ID == 4)
-        {
-            player.HoldAlmond();
-            InventoryManager.Instance.Remove(self);
-            player.CloseBackpack();
-        }
-
-        if (ID == 5)
-        {
-            player.HoldRations();
-            InventoryManager.Instance.Remove(self);
-            player.CloseBackpack();
-        }
-    }
-
-    public void SetID(int id)
-    {
-        ID = id;
     }
 
     public void SetItem(Item item)
     {
         self = item;
+        ID = item.id;
     }
 }

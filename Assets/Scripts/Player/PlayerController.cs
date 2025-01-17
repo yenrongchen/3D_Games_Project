@@ -4,15 +4,15 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    public GameObject gameOverUI;  // 連結你的 "Game Over" 菜單 UI
+    public GameObject gameOverUI;
     private bool isGameOver = false;
     public bool getKey = false;
-    // Start is called before the first frame update
 
     public void takeKey()
     {
         getKey = true;
     }
+
     void Start()
     {
         gameOverUI.SetActive(false);

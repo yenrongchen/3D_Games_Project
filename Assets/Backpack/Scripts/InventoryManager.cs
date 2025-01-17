@@ -65,7 +65,6 @@ public class InventoryManager : MonoBehaviour
             itemName.text = item.itemName;
             itemQuan.text = item.quantity.ToString();
 
-            obj.GetComponent<ItemButtonController>().SetID(item.id);
             obj.GetComponent<ItemButtonController>().SetItem(item);
         }
     }
