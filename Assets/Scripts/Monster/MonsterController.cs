@@ -58,6 +58,8 @@ public class MonsterController : MonoBehaviour
     [SerializeField]
     private float paralyzedTime = 2f;
 
+    private bool freezing;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -81,6 +83,13 @@ public class MonsterController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        freezing = GameObject.Find("Player").GetComponent<FirstPersonController>().getFreezing();
+        if (freezing)
+        {
+            animator.SetInteger("state", 0);
+            return;
+        }
+
         if (isParalyzed)
         {
             animator.SetInteger("state", 3);

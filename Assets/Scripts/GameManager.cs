@@ -41,11 +41,11 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // pause or resume the game
         if (Input.GetKeyDown(KeyCode.Z))
         {
             if (!isPaused)
             {
-                // pause the game
                 Time.timeScale = 0;
                 isPaused = true;
                 // TODO: show menu

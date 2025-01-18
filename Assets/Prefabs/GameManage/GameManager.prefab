@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1095943361971676667}
   - component: {fileID: 3695440398589270117}
-  - component: {fileID: -6341079381246848299}
   - component: {fileID: 1483377905170737579}
   m_Layer: 0
   m_Name: GameManager
@@ -50,25 +49,6 @@ MonoBehaviour:
   lv1Gem: {fileID: 11400000, guid: 6b50abad7370bdd4991dd7e59238bfdf, type: 2}
   lv2Gem: {fileID: 11400000, guid: bbfc6b2a2e966f4499a751926a248063, type: 2}
   lv3Gem: {fileID: 11400000, guid: c723fd7f9250b8a4e89f62a76b6f22c0, type: 2}
---- !u!114 &-6341079381246848299
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8490623835577622212}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 87b7371925583524c9b3cc49d95be088, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  level: 1
-  bacteriaPrefab: {fileID: 4471235012659607821, guid: d02e21e474c46e443845886875a5366d,
-    type: 3}
-  smilerPrefab: {fileID: 6975796675026255657, guid: 96af7d65040596f4dac5ce041f705c79,
-    type: 3}
-  needlePrefab: {fileID: 5751515525964739907, guid: 5499d6ff46ffc2d41904e65eac86d302,
-    type: 3}
 --- !u!114 &1483377905170737579
 MonoBehaviour:
   m_ObjectHideFlags: 0

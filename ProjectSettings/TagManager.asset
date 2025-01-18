@@ -14,9 +14,6 @@ TagManager:
   - Portal
   - Barrier
   - Props
-  - Key1
-  - Key2
-  - Key3
   - Jammer
   - PlacedJammer
   - PlacedPortal
@@ -24,6 +21,8 @@ TagManager:
   - Monster
   - CountDownBar
   - JammerWithPart
+  - Key
+  - Gem
   layers:
   - Default
   - TransparentFX

@@ -15,7 +15,6 @@ using UnityEngine.InputSystem.XR;
 using UnityEngine.ProBuilder;
 using UnityEngine.UI;
 using static UnityEditor.Rendering.InspectorCurveEditor;
-//using Fungus;
 #endif
 
 namespace StarterAssets
@@ -408,5 +407,10 @@ namespace StarterAssets
         {
             freezing = false;
         }
+
+		public bool getFreezing()
+		{
+			return freezing;
+		}
     }
 }

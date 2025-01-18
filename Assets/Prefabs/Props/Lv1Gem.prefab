@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: -6800596521680418284}
   m_Layer: 0
   m_Name: Lv1Gem
-  m_TagString: Props
+  m_TagString: Gem
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

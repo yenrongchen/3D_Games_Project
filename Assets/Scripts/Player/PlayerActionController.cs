@@ -28,8 +28,8 @@ public class PlayerActionController : MonoBehaviour
 
     // props
     private bool holdingProps = false;
-    private List<string> showOutline = new() { "Props", "Jammer", "Key1", "Key2", "Key3", "PlacedJammer", "PlacedBoard" };
-    private List<string> canPick = new() { "Props", "Jammer", "Key1", "Key2", "Key3", "Portal" };
+    private List<string> showOutline = new() { "Props", "Jammer", "Key", "Gem", "PlacedJammer", "PlacedBoard" };
+    private List<string> canPick = new() { "Props", "Jammer", "Portal" };
     private List<string> canRetrieve = new() { "PlacedPortal", "PlacedBoard", "PlacedJammer", "JammerWithPart" };
 
     // jammer
@@ -105,9 +105,22 @@ public class PlayerActionController : MonoBehaviour
             if (distance < 2.5f && !holdingProps)
             {
                 // pick props
-                if (Input.GetKeyDown(KeyCode.F) && canPick.Contains(hit.transform.tag))
+                if (Input.GetKeyDown(KeyCode.F))
                 {
-                    PickProps(hit);
+                    if (canPick.Contains(hit.transform.tag))
+                    {
+                        PickProps(hit);
+                    }
+                    if (hit.transform.CompareTag("Key"))
+                    {
+                        GetComponent<FirstPersonController>().Freeze();
+                        Flowchart.BroadcastFungusMessage("Key");
+                    }
+                    if (hit.transform.CompareTag("Gem"))
+                    {
+                        GetComponent<FirstPersonController>().Freeze();
+                        Flowchart.BroadcastFungusMessage("Gem");
+                    }
                 }
 
                 // retrieve props
@@ -287,15 +300,29 @@ public class PlayerActionController : MonoBehaviour
             }
         }
 
-        // pick keys
-        if (hit.transform.CompareTag("Key1") || hit.transform.CompareTag("Key2") || hit.transform.CompareTag("Key3"))
-        {
-            GameObject circlebase = GameObject.Find("CircleBase");
-            if (circlebase != null) Destroy(circlebase);
-        }
-
         // pick props and store into backpack
         hit.transform.GetComponent<ItemPickup>().Pickup();
+    }
+
+    private void PickKey()
+    {
+        GameObject key = GameObject.FindGameObjectWithTag("Key");
+        key.GetComponent<ItemPickup>().Pickup();
+
+        Destroy(key);
+        GameObject circlebase = GameObject.Find("CircleBase");
+        if (circlebase != null) Destroy(circlebase);
+
+        GetComponent<FirstPersonController>().Unfreeze();
+    }
+
+    private void PickGem()
+    {
+        GameObject gem = GameObject.FindGameObjectWithTag("Gem");
+        gem.GetComponent<ItemPickup>().Pickup();
+
+        Destroy(gem);
+        GetComponent<FirstPersonController>().Unfreeze();
     }
 
     private void RetrieveProps(RaycastHit hit)
