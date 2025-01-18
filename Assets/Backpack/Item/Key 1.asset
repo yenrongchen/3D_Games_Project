@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Key 1
   m_EditorClassIdentifier: 
   id: 7
-  itemName: Silver Key
+  itemName: "\u9280\u9470\u5319"
   itemIcon: {fileID: 21300000, guid: 7a21a7a216b5dcd42add99cc919a169d, type: 3}
   quantity: 1

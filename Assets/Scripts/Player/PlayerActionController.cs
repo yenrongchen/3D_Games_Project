@@ -34,7 +34,6 @@ public class PlayerActionController : MonoBehaviour
 
     // jammer
     private bool isHoldingJammer = false;
-    private GameObject crosshair;
     private float atkcd = 0f;
     private List<string> jammerTargetTags = new() { "Barrier", "Monster" };
     private List<string> canDirectHold = new() { "Jammer", "PlacedJammer", "JammerWithPart" };
@@ -51,6 +50,7 @@ public class PlayerActionController : MonoBehaviour
     // healer props
     private bool isHoldingAlmond = false;
     private bool isHoldingRations = false;
+    private bool isHealing = false;
 
     // pick and retrieve distance
     private Vector3 modPlayerPos;
@@ -60,6 +60,10 @@ public class PlayerActionController : MonoBehaviour
     // backpack
     private bool isOpeningBackpack = false;
     private GameObject backpack;
+
+    // UI
+    private GameObject crosshair;
+    private GameObject skill;
 
 
     void Awake()
@@ -74,6 +78,9 @@ public class PlayerActionController : MonoBehaviour
     {
         crosshair = GameObject.Find("Crosshair");
         crosshair.SetActive(false);
+
+        skill = GameObject.Find("SkillIcon");
+        skill.SetActive(false);
 
         backpack = GameObject.Find("Backpack");
         backpack.SetActive(false);
@@ -110,17 +117,15 @@ public class PlayerActionController : MonoBehaviour
                 }
             }
 
-            if (Input.GetKeyDown(KeyCode.Mouse0) && !holdingProps && canDirectHold.Contains(hit.transform.tag))
+            // hold jammer directly
+            if (Input.GetKeyDown(KeyCode.Mouse0) && canDirectHold.Contains(hit.transform.tag) && !holdingProps && !isOpeningBackpack)
             {
                 if (hit.transform.CompareTag("JammerWithPart"))
                 {
                     // update barrier status
                     GameObject jammer = hit.transform.gameObject;
                     GameObject barrier = jammer.GetComponentInChildren<JammerController>().getTargetBarrier();
-                    if (barrier != null)
-                    {
-                        barrier.GetComponent<BarrierController>().RemoveJammer();
-                    }
+                    barrier.GetComponent<BarrierController>().RemoveJammer();
                 }
 
                 Destroy(hit.transform.gameObject);
@@ -132,6 +137,7 @@ public class PlayerActionController : MonoBehaviour
             if (isHoldingJammer)
             {
                 crosshair.SetActive(true);
+                skill.SetActive(true);
 
                 // show outline of monsters and barrier when aiming to them
                 if (jammerTargetTags.Contains(hit.transform.tag))
@@ -144,19 +150,24 @@ public class PlayerActionController : MonoBehaviour
                 if (atkcd > 0)
                 {
                     atkcd -= Time.deltaTime;
+                    skill.GetComponent<SkillCoolDown>().Countdown(atkcd);
                 }
 
                 // paralyze monster
-                if (Input.GetKeyDown(KeyCode.Mouse0) && hit.transform.CompareTag("Monster") && atkcd <= 0)
+                if (Input.GetKeyDown(KeyCode.Mouse0) && hit.transform.CompareTag("Monster"))
                 {
-                    GameObject monster = hit.transform.gameObject;
-                    monster.GetComponent<MonsterController>().Paralyzed();
-                    atkcd = jammerAtkCD;
+                    if (atkcd <= 0 && !isOpeningBackpack)
+                    {
+                        GameObject monster = hit.transform.gameObject;
+                        monster.GetComponent<MonsterController>().Paralyzed();
+                        atkcd = jammerAtkCD;
+                    }
                 }
             }
             else
             {
                 crosshair.SetActive(false);
+                skill.SetActive(false);
             }
         }
 
@@ -187,7 +198,7 @@ public class PlayerActionController : MonoBehaviour
         }
 
         // put back holding props
-        if (Input.GetKeyDown(KeyCode.C) && holdingProps)
+        if (Input.GetKeyDown(KeyCode.C) && holdingProps && !isHealing)
         {
             PutBackProps();
         }
@@ -545,6 +556,7 @@ public class PlayerActionController : MonoBehaviour
         FirstPersonController player = GameObject.Find("Player").GetComponent<FirstPersonController>();
 
         player.DisableMovement();
+        isHealing = true;
 
         GameObject.Find("HealingPanel").GetComponent<ProgressBar>().StartCounterCountdown(time);
         yield return new WaitForSeconds(time);
@@ -557,6 +569,7 @@ public class PlayerActionController : MonoBehaviour
 
         isHoldingAlmond = false;
         holdingProps = false;
+        isHealing = false;
 
         yield return new WaitForSeconds(0.8f);
         Destroy(GameObject.FindGameObjectWithTag("CountDownBar"));

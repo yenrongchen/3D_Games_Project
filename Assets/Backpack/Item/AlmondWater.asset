@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: AlmondWater
   m_EditorClassIdentifier: 
   id: 4
-  itemName: Almond Water
+  itemName: "\u674F\u4EC1\u6C34"
   itemIcon: {fileID: 21300000, guid: 45b397487bf6c3c41bc1786c95e6b0d5, type: 3}
   quantity: 1

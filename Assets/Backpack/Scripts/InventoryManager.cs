@@ -30,6 +30,24 @@ public class InventoryManager : MonoBehaviour
             items.Add(item);
         }
 
+        if (item.id == 10)
+        {
+            PlayerPrefs.SetInt("Lv1Gem", 1);
+            PlayerPrefs.Save();
+        }
+
+        if (item.id == 11)
+        {
+            PlayerPrefs.SetInt("Lv2Gem", 1);
+            PlayerPrefs.Save();
+        }
+
+        if (item.id == 12)
+        {
+            PlayerPrefs.SetInt("Lv3Gem", 1);
+            PlayerPrefs.Save();
+        }
+
         ListItems();
     }
 

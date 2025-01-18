@@ -53,12 +53,11 @@ public class MonsterSpawner : MonoBehaviour
         float maxZ = -20f;
 
         Vector3 opt1 = new(-25f, y, -19.5f);
-        Vector3 opt2 = new(-20f, y, -33f);
-        Vector3 opt3 = new(-8f, y, -10.5f);
+        Vector3 opt2 = new(-8f, y, -10.5f);
 
         SpawnWithinRange(minX, maxX, minZ, maxZ, y, bacteriaPrefab);
 
-        Vector3[] spawnPointList = { opt1, opt2, opt3 };
+        Vector3[] spawnPointList = { opt1, opt2 };
         SpawnWithChoice(spawnPointList, bacteriaPrefab);
     }
 

@@ -64,7 +64,6 @@ namespace StarterAssets
 
         [Header("HP")]
         public int HP = 3;
-        private int hp;
 
         [Header("Shoes")]
         public float shoesSpeedBuff = 2f;
@@ -80,6 +79,7 @@ namespace StarterAssets
 		private float _rotationVelocity;
 		private float _verticalVelocity;
         private float _terminalVelocity = 53.0f;
+        private int hp;
 
         // timeout deltatime
         private float _fallTimeoutDelta;
@@ -88,11 +88,10 @@ namespace StarterAssets
         private bool canMove = true;
         private bool isWalking = true;
         private bool isWearingShoes = false;
+        private bool freezing = false;
 
         // animation
         private Animator animator;
-
-		private bool freezing = false;
 
 
 #if ENABLE_INPUT_SYSTEM

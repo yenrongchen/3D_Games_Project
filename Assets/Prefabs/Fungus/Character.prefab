@@ -45,10 +45,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nameText: "\u63A2\u96AA\u5BB6"
-  nameColor: {r: 1, g: 1, b: 1, a: 1}
+  nameColor: {r: 0, g: 0, b: 0, a: 1}
   soundEffect: {fileID: 0}
   portraits:
-  - {fileID: 21300000, guid: 3c64e30cbefbe4e768ef68d85c85061e, type: 3}
+  - {fileID: 21300000, guid: 0d077ca394770e24186553cb2d6b625e, type: 3}
   portraitsFace: 0
   setSayDialog: {fileID: 0}
   description: 

@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Gem 1
   m_EditorClassIdentifier: 
   id: 10
-  itemName: Green Gem
+  itemName: "\u7DA0\u5BF6\u77F3"
   itemIcon: {fileID: 21300000, guid: f94407428c229b74d800e5cfa7c2d8c0, type: 3}
   quantity: 1

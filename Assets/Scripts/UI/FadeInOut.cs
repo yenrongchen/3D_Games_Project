@@ -54,4 +54,9 @@ public class FadeInOut : MonoBehaviour
     {
         return timeToFade;
     }
+
+    public void setTimeToFade(float timeToFade)
+    {
+        this.timeToFade = timeToFade;
+    }
 }

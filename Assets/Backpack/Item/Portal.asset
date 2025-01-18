@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Portal
   m_EditorClassIdentifier: 
   id: 2
-  itemName: Portal
+  itemName: "\u50B3\u9001\u9580"
   itemIcon: {fileID: 21300000, guid: ace7feb91db0f5a478299a78c73085e4, type: 3}
   quantity: 1

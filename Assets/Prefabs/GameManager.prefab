@@ -46,6 +46,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c811ebb25da9174a965e30911a91c4f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentLevel: 0
+  lv1Gem: {fileID: 11400000, guid: 6b50abad7370bdd4991dd7e59238bfdf, type: 2}
+  lv2Gem: {fileID: 11400000, guid: bbfc6b2a2e966f4499a751926a248063, type: 2}
+  lv3Gem: {fileID: 11400000, guid: c723fd7f9250b8a4e89f62a76b6f22c0, type: 2}
 --- !u!114 &-6341079381246848299
 MonoBehaviour:
   m_ObjectHideFlags: 0
