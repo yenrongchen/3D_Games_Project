@@ -113,7 +113,7 @@ public class MonsterController : MonoBehaviour
             }
             else
             {
-                speed = baseSpeed * 1.25f;
+                speed = baseSpeed * 1.5f;
                 detectRange = baseDetectRange * 1.25f;
             }
 

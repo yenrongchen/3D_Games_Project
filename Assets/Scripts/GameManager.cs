@@ -17,7 +17,7 @@ public class GameManager : MonoBehaviour
     private string nextLevel = "Level 1"; // to be fixed!!
 
     private FadeInOut fadeInOut;
-    private FirstPersonController playerFPC;
+    private FirstPersonController player;
 
     // Start is called before the first frame update
     void Start()
@@ -29,13 +29,10 @@ public class GameManager : MonoBehaviour
             lvText.text = "LEVEL " + currentLevel.ToString();
         }
 
-        fadeInOut = GetComponent<FadeInOut>();
-        playerFPC = GameObject.Find("Player").GetComponent<FirstPersonController>();
+        player = GameObject.Find("Player").GetComponent<FirstPersonController>();
 
-        if (currentLevel > 0)
-        {
-            StartCoroutine(FadeOut());
-        }
+        fadeInOut = GetComponent<FadeInOut>();
+        StartCoroutine(FadeOut());
     }
 
     // Update is called once per frame
@@ -61,31 +58,38 @@ public class GameManager : MonoBehaviour
 
     public void enterMaze()
     {
-        SceneManager.LoadScene(nextLevel);
-
         int gem1 = PlayerPrefs.GetInt("Lv1Gem", 0);
         if (gem1 == 1)
         {
             InventoryManager.Instance.Add(lv1Gem);
+            PlayerPrefs.DeleteKey("Lv1Gem");
         }
 
         int gem2 = PlayerPrefs.GetInt("Lv2Gem", 0);
         if (gem2 == 1)
         {
             InventoryManager.Instance.Add(lv2Gem);
+            PlayerPrefs.DeleteKey("Lv2Gem");
         }
 
         int gem3 = PlayerPrefs.GetInt("Lv3Gem", 0);
         if (gem3 == 1)
         {
             InventoryManager.Instance.Add(lv3Gem);
+            PlayerPrefs.DeleteKey("Lv3Gem");
         }
+        PlayerPrefs.Save();
+
+        SceneManager.LoadScene(nextLevel);        
     }
 
-    public void back()
+    public void EnterRoom()
     {
-        SceneManager.LoadScene(0);
-        //nextLevel++;
+        PlayerPrefs.SetInt("status", 1);
+
+        // record gems collected
+
+        SceneManager.LoadScene("WaitingRoom");
     }
 
     public void FadeInOutForSleep()
@@ -95,13 +99,16 @@ public class GameManager : MonoBehaviour
 
     private IEnumerator FadeForSleep()
     {
-        playerFPC.Freeze();
+        player.Freeze();
         fadeInOut.setTimeToFade(1f);
+
         fadeInOut.FadeIn();
         yield return new WaitForSeconds(1f);
+
         fadeInOut.FadeOut();
         yield return new WaitForSeconds(1f);
-        playerFPC.Unfreeze();
+
+        player.Unfreeze();
     }
 
     public void EnterMazeWithFade()
@@ -111,24 +118,23 @@ public class GameManager : MonoBehaviour
 
     private IEnumerator FadeForMaze()
     {
-        playerFPC.Freeze();
+        player.Freeze();
         fadeInOut.setTimeToFade(1.25f);
+
         fadeInOut.FadeIn();
         yield return new WaitForSeconds(1.25f);
+
         enterMaze();
     }
 
     private IEnumerator FadeOut()
     {
-        // pause player control
-        playerFPC.DisableMovement();
+        player.DisableMovement();
 
-        // fade out
         fadeInOut.FadeOut();
         yield return new WaitForSeconds(1.25f);
 
-        // resume player control
-        playerFPC.EnableMovement();
+        player.EnableMovement();
     }
 
     public void ClearGameData()
@@ -137,6 +143,7 @@ public class GameManager : MonoBehaviour
         PlayerPrefs.Save();
     }
 
+    // TO BE DELETED //
     void OnApplicationQuit()
     {
         PlayerPrefs.DeleteAll();

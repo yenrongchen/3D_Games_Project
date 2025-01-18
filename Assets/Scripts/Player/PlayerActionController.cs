@@ -314,6 +314,7 @@ public class PlayerActionController : MonoBehaviour
         if (circlebase != null) Destroy(circlebase);
 
         GetComponent<FirstPersonController>().Unfreeze();
+        GetComponentInChildren<MazeDialog>().Finish();
     }
 
     private void PickGem()
@@ -469,7 +470,7 @@ public class PlayerActionController : MonoBehaviour
             Vector3 rayOrigin = mainCamera.ViewportToWorldPoint(new Vector3(0.5f, 0.5f, 0f));
             bool hasHit = Physics.Raycast(rayOrigin, mainCamera.transform.forward, out hit, 80);
 
-            Vector3 temp = transform.position + transform.forward * 1.4f;
+            Vector3 temp = transform.position + transform.forward * 1.2f;
             Vector3 jammerPos = new(temp.x, transform.position.y + 0.47f, temp.z);
 
             if (hasHit && hit.transform.CompareTag("Barrier"))
@@ -499,7 +500,7 @@ public class PlayerActionController : MonoBehaviour
         // place portal
         if (isHoldingPortal)
         {
-            Vector3 temp = transform.position + transform.forward * 1.3f;
+            Vector3 temp = transform.position + transform.forward * 1.2f;
             Vector3 portalPos = new(temp.x, transform.position.y - 1.7f, temp.z);
 
             float yRot = GetClosestBaseAngle(this.transform.rotation.eulerAngles.y);
@@ -534,7 +535,7 @@ public class PlayerActionController : MonoBehaviour
         // place board
         if (isHoldingBoard)
         {
-            Vector3 temp = transform.position + transform.forward * 2.5f;
+            Vector3 temp = transform.position + transform.forward * 2f;
             Vector3 boardPos = new(temp.x, transform.position.y + 0.05f, temp.z);
 
             float yRot = GetClosestBaseAngle(this.transform.rotation.eulerAngles.y);

@@ -8,11 +8,25 @@ using StarterAssets;
 public class RoomDialog : MonoBehaviour
 {
     private Camera mainCamera;
-    
+
+    private void Awake()
+    {
+        mainCamera = Camera.main;
+    }
+
     // Start is called before the first frame update
     void Start()
     {
-        mainCamera = Camera.main;
+        int times = PlayerPrefs.GetInt("times", 0);
+        if (times == 0)
+        {
+            Flowchart.BroadcastFungusMessage("Initial");
+            PlayerPrefs.SetInt("times", 1);
+        }
+        else
+        {
+            Flowchart.BroadcastFungusMessage("Normal");
+        }
     }
 
     // Update is called once per frame
