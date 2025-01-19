@@ -29,6 +29,8 @@ public class GameManager : MonoBehaviour
             lvText.text = "LEVEL " + currentLevel.ToString();
         }
 
+        HideCursor();
+
         player = GameObject.Find("Player").GetComponent<FirstPersonController>();
 
         fadeInOut = GetComponent<FadeInOut>();
@@ -56,8 +58,10 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void enterMaze()
+    public void EnterMaze()
     {
+        SceneManager.LoadScene(nextLevel);
+
         int gem1 = PlayerPrefs.GetInt("Lv1Gem", 0);
         if (gem1 == 1)
         {
@@ -79,13 +83,14 @@ public class GameManager : MonoBehaviour
             PlayerPrefs.DeleteKey("Lv3Gem");
         }
         PlayerPrefs.Save();
-
-        SceneManager.LoadScene(nextLevel);        
     }
 
     public void EnterRoom()
     {
         PlayerPrefs.SetInt("status", 1);
+
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
 
         // record gems collected
 
@@ -100,13 +105,13 @@ public class GameManager : MonoBehaviour
     private IEnumerator FadeForSleep()
     {
         player.Freeze();
-        fadeInOut.setTimeToFade(1f);
+        fadeInOut.setTimeToFade(1.5f);
 
         fadeInOut.FadeIn();
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(1.5f);
 
         fadeInOut.FadeOut();
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(1.5f);
 
         player.Unfreeze();
     }
@@ -124,7 +129,7 @@ public class GameManager : MonoBehaviour
         fadeInOut.FadeIn();
         yield return new WaitForSeconds(1.25f);
 
-        enterMaze();
+        EnterMaze();
     }
 
     private IEnumerator FadeOut()
@@ -137,13 +142,18 @@ public class GameManager : MonoBehaviour
         player.EnableMovement();
     }
 
+    public void HideCursor()
+    {
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+    }
+
     public void ClearGameData()
     {
         PlayerPrefs.DeleteAll();
         PlayerPrefs.Save();
     }
 
-    // TO BE DELETED //
     void OnApplicationQuit()
     {
         PlayerPrefs.DeleteAll();

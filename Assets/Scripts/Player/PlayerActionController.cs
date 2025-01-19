@@ -102,7 +102,7 @@ public class PlayerActionController : MonoBehaviour
             modTargetPos = new(hit.transform.position.x, 0f, hit.transform.position.z);
             distance = Vector3.Distance(modPlayerPos, modTargetPos);
 
-            if (distance < 2.5f && !holdingProps)
+            if (distance < 2.2f && !holdingProps)
             {
                 // pick props
                 if (Input.GetKeyDown(KeyCode.F))
@@ -114,6 +114,8 @@ public class PlayerActionController : MonoBehaviour
                     if (hit.transform.CompareTag("Key"))
                     {
                         GetComponent<FirstPersonController>().Freeze();
+                        Cursor.lockState = CursorLockMode.None;
+                        Cursor.visible = true;
                         Flowchart.BroadcastFungusMessage("Key");
                     }
                     if (hit.transform.CompareTag("Gem"))
@@ -315,6 +317,9 @@ public class PlayerActionController : MonoBehaviour
 
         GetComponent<FirstPersonController>().Unfreeze();
         GetComponentInChildren<MazeDialog>().Finish();
+
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
     }
 
     private void PickGem()

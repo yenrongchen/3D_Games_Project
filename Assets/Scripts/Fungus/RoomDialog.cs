@@ -45,7 +45,6 @@ public class RoomDialog : MonoBehaviour
                 else
                 {
                     Flowchart.BroadcastFungusMessage("CanSleep");
-                    // heal all hp
                     PlayerPrefs.SetInt("status", 0);
                 }
             }
@@ -66,6 +65,9 @@ public class RoomDialog : MonoBehaviour
 
         if (collision.gameObject.CompareTag("BeginDoor"))
         {
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+            GameObject.Find("Player").GetComponent<FirstPersonController>().Freeze();
             Flowchart.BroadcastFungusMessage("BeginDoor");
         }
     }

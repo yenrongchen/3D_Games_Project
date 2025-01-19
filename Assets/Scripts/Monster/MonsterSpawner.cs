@@ -52,30 +52,31 @@ public class MonsterSpawner : MonoBehaviour
         float minZ = -26f;
         float maxZ = -20f;
 
-        Vector3 opt1 = new(-25f, y, -19.5f);
+        Vector3 opt1 = new(-20f, y, -13.7f);
         Vector3 opt2 = new(-8f, y, -10.5f);
+        Vector3 opt3 = new(-5f, y, -31.8f);
 
         SpawnWithinRange(minX, maxX, minZ, maxZ, y, bacteriaPrefab);
 
-        Vector3[] spawnPointList = { opt1, opt2 };
+        Vector3[] spawnPointList = { opt1, opt2, opt3 };
         SpawnWithChoice(spawnPointList, bacteriaPrefab);
     }
 
     private void SpawnLv2()
     {
-        float y = -0.5f;
+        float y = -0.55f;
 
-        float minX_1 = -4f;
-        float maxX_1 = 1f;
-        float minZ_1 = -8.6f;
-        float maxZ_1 = -5f;
+        float minX_1 = 4f;
+        float maxX_1 = 7.5f;
+        float minZ_1 = -18.5f;
+        float maxZ_1 = -16f;
 
         float minX_2 = -1.5f;
         float maxX_2 = 5f;
         float minZ_2 = 13.3f;
         float maxZ_2 = 18.5f;
 
-        Vector3 opt1 = new(4f, y, -18f);
+        Vector3 opt1 = new(-2.2f, y, -7.3f);
         Vector3 opt2 = new(-20f, y, -5f);
         Vector3 opt3 = new(-26f, y, 13f);
 
@@ -98,9 +99,9 @@ public class MonsterSpawner : MonoBehaviour
         float minZ = -19.2f;
         float maxZ = -16f;
 
-        Vector3 opt1 = new(-8.4f, y, -25.9f);
+        Vector3 opt1 = new(-8.4f, y, -25.7f);
         Vector3 opt2 = new(-26f, y, -10f);
-        Vector3 opt3 = new(0.5f, y, -7f);
+        Vector3 opt3 = new(-1.6f, y, -10f);
 
         // ensure at least one smiler
         SpawnWithinRange(minX, maxX, minZ, maxZ, y, smilerPrefab);

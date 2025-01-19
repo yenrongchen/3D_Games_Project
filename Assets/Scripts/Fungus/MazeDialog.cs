@@ -13,6 +13,8 @@ public class MazeDialog : MonoBehaviour
         {
             if (finished)
             {
+                Cursor.lockState = CursorLockMode.None;
+                Cursor.visible = true;
                 Flowchart.BroadcastFungusMessage("DoorEnd");
             }
             else
