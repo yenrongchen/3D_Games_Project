@@ -14,12 +14,12 @@ public class GameManager : MonoBehaviour
     public Item lv3Gem;
 
     private bool isPaused = false;
-    private string nextLevel = "Level 1"; // to be fixed!!
 
     private FadeInOut fadeInOut;
     private FirstPersonController player;
 
     private GameObject pauseCanvas;
+    private GameObject deathCanvas;
 
     // Start is called before the first frame update
     void Start()
@@ -35,11 +35,13 @@ public class GameManager : MonoBehaviour
 
         player = GameObject.Find("Player").GetComponent<FirstPersonController>();
 
-        fadeInOut = GetComponent<FadeInOut>();
-        StartCoroutine(FadeOut());
+        fadeInOut = GameObject.Find("FadeInOutCanvas").GetComponent<FadeInOut>();
 
         pauseCanvas = GameObject.Find("PauseCanvas");
         pauseCanvas.SetActive(false);
+
+        deathCanvas = GameObject.Find("DeathCanvas");
+        deathCanvas.SetActive(false);
 
         if (currentLevel > 1) CheckGems();
     }
@@ -68,13 +70,9 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void EnterMaze()
-    {
-        // which level?
-    }
-
     public void EnterRoom()
     {
+        // for initial dialogue
         if (currentLevel == 3)
         {
             PlayerPrefs.SetInt("times", 2);
@@ -83,13 +81,53 @@ public class GameManager : MonoBehaviour
         {
             PlayerPrefs.SetInt("times", 1);
         }
-        
+
+        // for sleep
+        PlayerPrefs.SetInt("status", 1);
+
+        // for level
+        PlayerPrefs.SetInt("level", currentLevel);
+
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
 
-        // record gems collected
-
         SceneManager.LoadScene("WaitingRoom");
+    }
+
+    public void EnterMaze()
+    {
+        int targetLevel = PlayerPrefs.GetInt("level", 0);
+
+        if (targetLevel == 0)
+        {
+            SceneManager.LoadScene("Level 1");
+        }
+        else if (targetLevel == 1)
+        {
+            int gem1 = PlayerPrefs.GetInt("Lv1Gem", 0);
+            if (gem1 == 0)
+            {
+                // not get gem, go to hard map
+                SceneManager.LoadScene("Level 2");
+            }
+            else
+            {
+                SceneManager.LoadScene("Level 2-e");
+            }
+        }
+        else
+        {
+            int gem2 = PlayerPrefs.GetInt("Lv2Gem", 0);
+            if (gem2 == 0)
+            {
+                // not get gem, go to hard map
+                SceneManager.LoadScene("Level 3");
+            }
+            else
+            {
+                SceneManager.LoadScene("Level 3-e");
+            }
+        }
     }
 
     public void FadeInOutForSleep()
@@ -124,18 +162,7 @@ public class GameManager : MonoBehaviour
         fadeInOut.FadeIn();
         yield return new WaitForSeconds(1.25f);
 
-        // need fix
-        SceneManager.LoadScene(nextLevel);
-    }
-
-    private IEnumerator FadeOut()
-    {
-        player.DisableMovement();
-
-        fadeInOut.FadeOut();
-        yield return new WaitForSeconds(1.25f);
-
-        player.EnableMovement();
+        EnterMaze();
     }
 
     public void HideCursor()
@@ -154,6 +181,21 @@ public class GameManager : MonoBehaviour
         {
             InventoryManager.Instance.Add(lv2Gem);
         }
+    }
+
+    public bool GetPaused()
+    {
+        return isPaused;
+    }
+
+    public void GameOver()
+    {
+        PlayerPrefs.DeleteAll();
+        PlayerPrefs.Save();
+        deathCanvas.SetActive(true);
+        player.Freeze();
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
     }
 
     public void ClearGameData()

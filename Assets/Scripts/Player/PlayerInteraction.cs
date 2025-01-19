@@ -11,7 +11,7 @@ public class PlayerInteraction : MonoBehaviour
 
     private void Start()
     {
-        fadeInOut = GameObject.Find("GameManager").GetComponent<FadeInOut>();
+        fadeInOut = GameObject.Find("FadeInOutCanvas").GetComponent<FadeInOut>();
         player = GameObject.Find("Player").GetComponent<FirstPersonController>();
     }
 
@@ -36,16 +36,16 @@ public class PlayerInteraction : MonoBehaviour
         player.DisableMovement();
 
         // fade in
+        fadeInOut.setTimeToFade(0.8f);
         fadeInOut.FadeIn();
-        float fadeTime = fadeInOut.getTimeToFade();
-        yield return new WaitForSeconds(fadeTime);
+        yield return new WaitForSeconds(0.8f);
 
         // teleport
         player.Teleport(targetPosition);
 
         // fade out
         fadeInOut.FadeOut();
-        yield return new WaitForSeconds(fadeTime);
+        yield return new WaitForSeconds(0.8f);
 
         // resume player control
         player.EnableMovement();

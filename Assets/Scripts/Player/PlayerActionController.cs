@@ -105,7 +105,7 @@ public class PlayerActionController : MonoBehaviour
             if (distance < 2.2f && !holdingProps)
             {
                 // pick props
-                if (Input.GetKeyDown(KeyCode.F))
+                if (Input.GetKey(KeyCode.F))
                 {
                     if (canPick.Contains(hit.transform.tag))
                     {
@@ -126,7 +126,7 @@ public class PlayerActionController : MonoBehaviour
                 }
 
                 // retrieve props
-                if (Input.GetKeyDown(KeyCode.R) && canRetrieve.Contains(hit.transform.tag))
+                if (Input.GetKey(KeyCode.R) && canRetrieve.Contains(hit.transform.tag))
                 {
                     RetrieveProps(hit);
                 }
@@ -200,7 +200,8 @@ public class PlayerActionController : MonoBehaviour
 
         // open or close backpack
         bool teleporting = GetComponentInChildren<PlayerInteraction>().CheckTeleporting();
-        if (Input.GetKeyDown(KeyCode.Q) && !teleporting)
+        bool paused = GameObject.Find("GameManager").GetComponent<GameManager>().GetPaused();
+        if (Input.GetKeyDown(KeyCode.Q) && !teleporting && !paused)
         {
             if (isOpeningBackpack)
             {

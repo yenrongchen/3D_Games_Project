@@ -1413,7 +1413,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4639358307565184303}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -0.081, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1715,23 +1715,23 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1
   CinemachineCameraTarget: {fileID: 7958388483546926679}
-  TopClamp: 89
-  BottomClamp: -89
+  TopClamp: 75
+  BottomClamp: -75
   curve:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
       time: 0
       value: 0
-      inSlope: 1
-      outSlope: 1
+      inSlope: 0.67194825
+      outSlope: 0.67194825
       tangentMode: 34
       weightedMode: 0
       inWeight: 0
       outWeight: 0.33333334
     - serializedVersion: 3
       time: 0.12
-      value: 0.12
+      value: 0.08063379
       inSlope: -0.050651886
       outSlope: -0.050651886
       tangentMode: 0
@@ -1741,8 +1741,8 @@ MonoBehaviour:
     - serializedVersion: 3
       time: 1
       value: 0
-      inSlope: -0.13636364
-      outSlope: -0.13636364
+      inSlope: -0.091629304
+      outSlope: -0.091629304
       tangentMode: 34
       weightedMode: 0
       inWeight: 0.33333334
@@ -2390,7 +2390,7 @@ Transform:
   m_GameObject: {fileID: 7707518200190585992}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.05, z: -0.1}
+  m_LocalPosition: {x: 0, y: 0.05, z: -0.11}
   m_LocalScale: {x: 0.95, y: 0.95, z: 0.95}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2480,7 +2480,7 @@ Transform:
   m_GameObject: {fileID: 7958388483546926679}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.7, z: 0.14}
+  m_LocalPosition: {x: 0, y: 1.7000002, z: 0.1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

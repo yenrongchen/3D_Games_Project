@@ -1,11 +1,6 @@
-﻿using Fungus;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using Unity.VisualScripting;
-using Unity.VisualScripting.Antlr3.Runtime.Collections;
-using UnityEditor;
-using UnityEditor.PackageManager;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -14,7 +9,6 @@ using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.XR;
 using UnityEngine.ProBuilder;
 using UnityEngine.UI;
-using static UnityEditor.Rendering.InspectorCurveEditor;
 #endif
 
 namespace StarterAssets
@@ -71,7 +65,7 @@ namespace StarterAssets
 
         // cinemachine
         private float _cinemachineTargetPitch;
-        private GameObject cameraRoot;
+		private GameObject cameraRoot;
 
         // player
         private float _speed;
@@ -79,6 +73,7 @@ namespace StarterAssets
 		private float _verticalVelocity;
         private float _terminalVelocity = 53.0f;
         private int hp;
+		private float orgY;
 
         // timeout deltatime
         private float _fallTimeoutDelta;
@@ -122,11 +117,10 @@ namespace StarterAssets
 #else
 			Debug.LogError( "Starter Assets package is missing dependencies. Please use Tools/Starter Assets/Reinstall Dependencies to fix it");
 #endif
-            
+
+            hp = HP;
+			orgY = this.transform.position.y;
             animator = this.GetComponentInChildren<Animator>();
-
-			hp = HP;
-
 			cameraRoot = GameObject.Find("PlayerCameraRoot");
         }
 
@@ -146,10 +140,10 @@ namespace StarterAssets
             GroundedCheck();
             Move();
           
-			if (hp <= 0)
+			if (hp <= 0 || orgY - transform.position.y > 5f)
 			{
-				// Game Over
-			}
+				GameObject.Find("GameManager").GetComponent<GameManager>().GameOver();
+            }
         }
 
         private void LateUpdate()
@@ -308,7 +302,6 @@ namespace StarterAssets
 			Vector3 orgPosition = cameraRoot.transform.position;
 			float timeElapsed = 0f;
 			float strength;
-
 
             while (timeElapsed < duration)
 			{

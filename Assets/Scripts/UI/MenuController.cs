@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -15,6 +16,8 @@ public class MenuController : MonoBehaviour
     private GameObject gameIllImg;
     private GameObject propsIllImg;
 
+    private FadeInOut fadeInOut;
+
     private void Awake()
     {
         start = GameObject.Find("StartBtn").GetComponent<Button>();
@@ -24,6 +27,8 @@ public class MenuController : MonoBehaviour
         titleScreen = GameObject.Find("TitleScreen");
         gameIllImg = GameObject.Find("GameIllustration");
         propsIllImg = GameObject.Find("PropsIllustration");
+
+        fadeInOut = GameObject.Find("FadeInOutCanvas").GetComponent<FadeInOut>();
     }
 
     void Start()
@@ -35,6 +40,18 @@ public class MenuController : MonoBehaviour
 
     private void StartGame()
     {
+        Resources.UnloadUnusedAssets();
+        GC.Collect();
+        StartCoroutine(StartGameWithFade());
+    }
+
+    private IEnumerator StartGameWithFade()
+    {
+        fadeInOut.setTimeToFade(1.25f);
+
+        fadeInOut.FadeIn();
+        yield return new WaitForSeconds(1.25f);
+
         SceneManager.LoadScene("WaitingRoom");
     }
 

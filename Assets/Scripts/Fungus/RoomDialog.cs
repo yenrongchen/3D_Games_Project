@@ -10,6 +10,9 @@ public class RoomDialog : MonoBehaviour
     private Camera mainCamera;
     private bool final = false;
 
+    private GameObject good;
+    private GameObject bad;
+
     private void Awake()
     {
         mainCamera = Camera.main;
@@ -32,6 +35,9 @@ public class RoomDialog : MonoBehaviour
             final = true;
             Flowchart.BroadcastFungusMessage("Final");
         }
+
+        good = GameObject.Find("good");
+        bad = GameObject.Find("bad");
     }
 
     // Update is called once per frame
@@ -76,10 +82,18 @@ public class RoomDialog : MonoBehaviour
             }
             else
             {
-                Cursor.lockState = CursorLockMode.None;
-                Cursor.visible = true;
-                GameObject.Find("Player").GetComponent<FirstPersonController>().Freeze();
-                Flowchart.BroadcastFungusMessage("BeginDoor");
+                int sleepStatus = PlayerPrefs.GetInt("status", 0);
+                if (sleepStatus == 0)
+                {
+                    Cursor.lockState = CursorLockMode.None;
+                    Cursor.visible = true;
+                    GameObject.Find("Player").GetComponent<FirstPersonController>().Freeze();
+                    Flowchart.BroadcastFungusMessage("BeginDoor");
+                }
+                else
+                {
+                    Flowchart.BroadcastFungusMessage("NeedSleep");
+                }
             }
         }
     }
@@ -87,9 +101,9 @@ public class RoomDialog : MonoBehaviour
     private IEnumerator ShowEnding()
     {
         // fade in
-        GameObject.Find("GameManager").GetComponent<FadeInOut>().setTimeToFade(1f);
-        GameObject.Find("GameManager").GetComponent<FadeInOut>().FadeIn();
-        yield return new WaitForSeconds(1f);
+        GameObject.Find("FadeInOutCanvas").GetComponent<FadeInOut>().setTimeToFade(1.2f);
+        GameObject.Find("FadeInOutCanvas").GetComponent<FadeInOut>().FadeIn();
+        yield return new WaitForSeconds(1.2f);
 
         // show ending
         int g1 = PlayerPrefs.GetInt("Lv1Gem", 0);
@@ -99,11 +113,18 @@ public class RoomDialog : MonoBehaviour
 
         if (sum == 3)
         {
-            // good end
+            good.SetActive(true);
+            yield return new WaitForSeconds(2f);
+            Flowchart.BroadcastFungusMessage("Good");
         }
         else
         {
-            // bad end
+            bad.SetActive(true);
+            yield return new WaitForSeconds(2f);
+            Flowchart.BroadcastFungusMessage("Bad");
         }
+
+        PlayerPrefs.DeleteAll();
+        PlayerPrefs.Save();
     }
 }

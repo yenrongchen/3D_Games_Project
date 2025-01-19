@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,6 +10,8 @@ public class PauseController : MonoBehaviour
     private Button restartBtn;
     private Button mainMenuBtn;
 
+    private FadeInOut fadeInOut;
+
     void Start()
     {
         restartBtn = GameObject.Find("RestartBtn").GetComponent<Button>();
@@ -16,10 +19,14 @@ public class PauseController : MonoBehaviour
 
         restartBtn.onClick.AddListener(Restart);
         mainMenuBtn.onClick.AddListener(MainMenu);
+
+        fadeInOut = GameObject.Find("FadeInOutCanvas").GetComponent<FadeInOut>();
     }
 
     private void Restart()
     {
+        Resources.UnloadUnusedAssets();
+        GC.Collect();
         string currentSceneName = SceneManager.GetActiveScene().name;
         SceneManager.LoadScene(currentSceneName);
     }
@@ -28,6 +35,16 @@ public class PauseController : MonoBehaviour
     {
         PlayerPrefs.DeleteAll();
         PlayerPrefs.Save();
+        StartCoroutine(GoToMenu());
+    }
+
+    private IEnumerator GoToMenu()
+    {
+        fadeInOut.setTimeToFade(1f);
+
+        fadeInOut.FadeIn();
+        yield return new WaitForSeconds(1f);
+
         SceneManager.LoadScene("Menu");
     }
 }
