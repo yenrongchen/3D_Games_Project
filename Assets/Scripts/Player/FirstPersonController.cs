@@ -25,7 +25,7 @@ namespace StarterAssets
 		[Tooltip("Sprint speed of the character in m/s")]
 		public float SprintSpeed = 5f;
 		[Tooltip("Rotation speed of the character")]
-		public float RotationSpeed = 1.2f;
+		public float RotationSpeed = 1f;
 		[Tooltip("Acceleration and deceleration")]
 		public float SpeedChangeRate = 10.0f;
 
@@ -294,26 +294,26 @@ namespace StarterAssets
 		public void Hurt()
 		{
 			hp--;
-			StartCoroutine(Shaking(0.3f));
+			//StartCoroutine(Shaking(0.3f));
 		}
 
-		private IEnumerator Shaking(float duration)
-		{
-			Vector3 orgPosition = cameraRoot.transform.position;
-			float timeElapsed = 0f;
-			float strength;
+		//private IEnumerator Shaking(float duration)
+		//{
+		//	Vector3 orgPosition = cameraRoot.transform.position;
+		//	float timeElapsed = 0f;
+		//	float strength;
 
-            while (timeElapsed < duration)
-			{
-				timeElapsed += Time.deltaTime;
+  //          while (timeElapsed < duration)
+		//	{
+		//		timeElapsed += Time.deltaTime;
 
-                strength = curve.Evaluate(timeElapsed / duration);
-                cameraRoot.transform.position = orgPosition + Random.insideUnitSphere * strength;
-				yield return null;
-            }
+  //              strength = curve.Evaluate(timeElapsed / duration);
+  //              cameraRoot.transform.position = orgPosition + Random.insideUnitSphere * strength;
+		//		yield return null;
+  //          }
             
-            cameraRoot.transform.position = orgPosition;
-        }
+  //          cameraRoot.transform.position = orgPosition;
+  //      }
 
 		public int getMaxHP()
 		{

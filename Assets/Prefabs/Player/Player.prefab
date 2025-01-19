@@ -1704,7 +1704,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MoveSpeed: 3.2
   SprintSpeed: 4.8
-  RotationSpeed: 1.2
+  RotationSpeed: 1
   SpeedChangeRate: 10
   Gravity: -15
   FallTimeout: 0.15

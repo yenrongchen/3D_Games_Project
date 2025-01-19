@@ -58,12 +58,14 @@ public class MenuController : MonoBehaviour
     private void ShowGameIll()
     {
         titleScreen.SetActive(false);
+        propsIllImg.SetActive(false);
         gameIllImg.SetActive(true);
     }
 
     private void ShowPropsIll()
     {
         titleScreen.SetActive(false);
+        gameIllImg.SetActive(false);
         propsIllImg.SetActive(true);
     }
 }

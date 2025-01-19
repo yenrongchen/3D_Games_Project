@@ -30,6 +30,8 @@ public class MonsterController : MonoBehaviour
     private float initialX;
     private float initialZ;
 
+    private float initY;
+
     [SerializeField]
     private float baseSpeed = 1f;
 
@@ -77,12 +79,20 @@ public class MonsterController : MonoBehaviour
         initialX = this.transform.rotation.eulerAngles.x;
         initialZ = this.transform.rotation.eulerAngles.z;
 
+        initY = this.transform.position.y;
+
         ignoreLayer = ~LayerMask.GetMask("Monster");
     }
 
     // Update is called once per frame
     void Update()
     {
+        // fall into the hole then die
+        if (initY - transform.position.y > 5f)
+        {
+            Destroy(gameObject);
+        }
+
         freezing = GameObject.Find("Player").GetComponent<FirstPersonController>().getFreezing();
         if (freezing)
         {

@@ -102,7 +102,7 @@ public class PlayerActionController : MonoBehaviour
             modTargetPos = new(hit.transform.position.x, 0f, hit.transform.position.z);
             distance = Vector3.Distance(modPlayerPos, modTargetPos);
 
-            if (distance < 2.2f && !holdingProps)
+            if (distance < 2.4f && !holdingProps)
             {
                 // pick props
                 if (Input.GetKey(KeyCode.F))
