@@ -22,7 +22,10 @@ public class InventoryManager : MonoBehaviour
         var existingItem = items.Find(i => i.itemName == item.itemName);
         if (existingItem != null)
         {
-            existingItem.quantity += 1;
+            if (existingItem.id < 10)
+            {
+                existingItem.quantity += 1;
+            }
         }
         else
         {

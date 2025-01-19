@@ -19,6 +19,8 @@ public class GameManager : MonoBehaviour
     private FadeInOut fadeInOut;
     private FirstPersonController player;
 
+    private GameObject pauseCanvas;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -35,6 +37,11 @@ public class GameManager : MonoBehaviour
 
         fadeInOut = GetComponent<FadeInOut>();
         StartCoroutine(FadeOut());
+
+        pauseCanvas = GameObject.Find("PauseCanvas");
+        pauseCanvas.SetActive(false);
+
+        if (currentLevel > 1) CheckGems();
     }
 
     // Update is called once per frame
@@ -47,48 +54,36 @@ public class GameManager : MonoBehaviour
             {
                 Time.timeScale = 0;
                 isPaused = true;
-                // TODO: show menu
+                Cursor.lockState = CursorLockMode.None;
+                Cursor.visible = true;
+                pauseCanvas.SetActive(true);
             }
             else
             {
                 Time.timeScale = 1;
                 isPaused = false;
-                // TODO: hide menu
+                HideCursor();
+                pauseCanvas.SetActive(false);
             }
         }
     }
 
     public void EnterMaze()
     {
-        SceneManager.LoadScene(nextLevel);
-
-        int gem1 = PlayerPrefs.GetInt("Lv1Gem", 0);
-        if (gem1 == 1)
-        {
-            InventoryManager.Instance.Add(lv1Gem);
-            PlayerPrefs.DeleteKey("Lv1Gem");
-        }
-
-        int gem2 = PlayerPrefs.GetInt("Lv2Gem", 0);
-        if (gem2 == 1)
-        {
-            InventoryManager.Instance.Add(lv2Gem);
-            PlayerPrefs.DeleteKey("Lv2Gem");
-        }
-
-        int gem3 = PlayerPrefs.GetInt("Lv3Gem", 0);
-        if (gem3 == 1)
-        {
-            InventoryManager.Instance.Add(lv3Gem);
-            PlayerPrefs.DeleteKey("Lv3Gem");
-        }
-        PlayerPrefs.Save();
+        // which level?
     }
 
     public void EnterRoom()
     {
-        PlayerPrefs.SetInt("status", 1);
-
+        if (currentLevel == 3)
+        {
+            PlayerPrefs.SetInt("times", 2);
+        }
+        else
+        {
+            PlayerPrefs.SetInt("times", 1);
+        }
+        
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
 
@@ -129,7 +124,8 @@ public class GameManager : MonoBehaviour
         fadeInOut.FadeIn();
         yield return new WaitForSeconds(1.25f);
 
-        EnterMaze();
+        // need fix
+        SceneManager.LoadScene(nextLevel);
     }
 
     private IEnumerator FadeOut()
@@ -146,6 +142,18 @@ public class GameManager : MonoBehaviour
     {
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+    }
+
+    public void CheckGems()
+    {
+        if (PlayerPrefs.GetInt("Lv1Gem", 0) != 0)
+        {
+            InventoryManager.Instance.Add(lv1Gem);
+        }
+        if (PlayerPrefs.GetInt("Lv2Gem", 0) != 0)
+        {
+            InventoryManager.Instance.Add(lv2Gem);
+        }
     }
 
     public void ClearGameData()

@@ -8,6 +8,7 @@ using StarterAssets;
 public class RoomDialog : MonoBehaviour
 {
     private Camera mainCamera;
+    private bool final = false;
 
     private void Awake()
     {
@@ -21,11 +22,15 @@ public class RoomDialog : MonoBehaviour
         if (times == 0)
         {
             Flowchart.BroadcastFungusMessage("Initial");
-            PlayerPrefs.SetInt("times", 1);
         }
-        else
+        else if (times == 1)
         {
             Flowchart.BroadcastFungusMessage("Normal");
+        }
+        else 
+        {
+            final = true;
+            Flowchart.BroadcastFungusMessage("Final");
         }
     }
 
@@ -65,10 +70,40 @@ public class RoomDialog : MonoBehaviour
 
         if (collision.gameObject.CompareTag("BeginDoor"))
         {
-            Cursor.lockState = CursorLockMode.None;
-            Cursor.visible = true;
-            GameObject.Find("Player").GetComponent<FirstPersonController>().Freeze();
-            Flowchart.BroadcastFungusMessage("BeginDoor");
+            if (final)
+            {
+                StartCoroutine(ShowEnding());
+            }
+            else
+            {
+                Cursor.lockState = CursorLockMode.None;
+                Cursor.visible = true;
+                GameObject.Find("Player").GetComponent<FirstPersonController>().Freeze();
+                Flowchart.BroadcastFungusMessage("BeginDoor");
+            }
+        }
+    }
+
+    private IEnumerator ShowEnding()
+    {
+        // fade in
+        GameObject.Find("GameManager").GetComponent<FadeInOut>().setTimeToFade(1f);
+        GameObject.Find("GameManager").GetComponent<FadeInOut>().FadeIn();
+        yield return new WaitForSeconds(1f);
+
+        // show ending
+        int g1 = PlayerPrefs.GetInt("Lv1Gem", 0);
+        int g2 = PlayerPrefs.GetInt("Lv2Gem", 0);
+        int g3 = PlayerPrefs.GetInt("Lv3Gem", 0);
+        int sum = g1 + g2 + g3;
+
+        if (sum == 3)
+        {
+            // good end
+        }
+        else
+        {
+            // bad end
         }
     }
 }
