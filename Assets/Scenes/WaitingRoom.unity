@@ -376,11 +376,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   version: 1
-  scrollPos: {x: 25.711945, y: -35.09767}
+  scrollPos: {x: 29.634207, y: -94.8384}
   variablesScrollPos: {x: 0, y: 0}
   variablesExpanded: 1
   blockViewHeight: 244.00002
-  zoom: 1
+  zoom: 0.94000006
   scrollViewRect:
     serializedVersion: 2
     x: -343
@@ -432,7 +432,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: 443.13947
     y: 455.0001
-    width: 146.8
+    width: 143.617
     height: 40
   tint: {r: 1, g: 1, b: 1, a: 1}
   useCustomTint: 0
@@ -513,7 +513,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: 181.3818
     y: 101.16968
-    width: 135.6
+    width: 135.10638
     height: 40
   tint: {r: 1, g: 1, b: 1, a: 1}
   useCustomTint: 0
@@ -566,7 +566,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemId: 14
   indentLevel: 0
-  storyText: "\u9084\u662F\u518D\u7E7C\u7E8C\u770B\u770B\u597D\u4E86...\u8AAA\u4E0D\u5B9A\u6709\u6F0F\u6389\u4EC0\u9EBC\u6709\u7528\u7684\u6771\u897F"
+  storyText: "\u9084\u662F\u518D\u7E7C\u7E8C\u770B\u770B\u597D\u4E86...\u8AAA\u4E0D\u5B9A\u6709\u6F0F\u6389\u4EC0\u9EBC\u6709\u7528\u7684\u6771\u897F\u3002"
   description: 
   character: {fileID: 797952649}
   portrait: {fileID: 21300000, guid: 0d077ca394770e24186553cb2d6b625e, type: 3}
@@ -595,7 +595,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: 308
     y: 424
-    width: 76.4
+    width: 75.53191
     height: 40
   tint: {r: 1, g: 1, b: 1, a: 1}
   useCustomTint: 0
@@ -674,7 +674,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: 304.04242
     y: 373.33334
-    width: 86
+    width: 84.04256
     height: 40
   tint: {r: 1, g: 1, b: 1, a: 1}
   useCustomTint: 0
@@ -728,7 +728,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: 132.35754
     y: 398.19995
-    width: 110
+    width: 108.723404
     height: 40
   tint: {r: 1, g: 1, b: 1, a: 1}
   useCustomTint: 0
@@ -812,7 +812,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: 453.96973
     y: 283.27872
-    width: 102.8
+    width: 101.91489
     height: 40
   tint: {r: 1, g: 1, b: 1, a: 1}
   useCustomTint: 0
@@ -840,7 +840,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: 440.7088
     y: 182.50813
-    width: 134.8
+    width: 132.55319
     height: 40
   tint: {r: 1, g: 1, b: 1, a: 1}
   useCustomTint: 0
@@ -996,7 +996,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: 448.89386
     y: 368.92126
-    width: 128.4
+    width: 125.744675
     height: 40
   tint: {r: 1, g: 1, b: 1, a: 1}
   useCustomTint: 0
@@ -1115,7 +1115,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: 174.02113
     y: 182.48488
-    width: 145.2
+    width: 144.46808
     height: 40
   tint: {r: 1, g: 1, b: 1, a: 1}
   useCustomTint: 0
@@ -1415,7 +1415,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: 176.58476
     y: 258.15753
-    width: 132.4
+    width: 130.85106
     height: 40
   tint: {r: 1, g: 1, b: 1, a: 1}
   useCustomTint: 0
@@ -1487,7 +1487,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: 201.39442
     y: 524.8255
-    width: 113.2
+    width: 111.276596
     height: 40
   tint: {r: 1, g: 1, b: 1, a: 1}
   useCustomTint: 0
@@ -1556,7 +1556,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: 607.7944
     y: 551.2257
-    width: 94
+    width: 91.702126
     height: 40
   tint: {r: 1, g: 1, b: 1, a: 1}
   useCustomTint: 0
@@ -1625,7 +1625,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: 433.39438
     y: 551.2256
-    width: 102
+    width: 100.21277
     height: 40
   tint: {r: 1, g: 1, b: 1, a: 1}
   useCustomTint: 0
@@ -2725,7 +2725,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &870086156
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2930,7 +2930,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1081615956
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3998,7 +3998,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 0
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 5
+  m_SortingOrder: 3
   m_TargetDisplay: 0
 --- !u!224 &1941768693
 RectTransform:

@@ -37,7 +37,9 @@ public class RoomDialog : MonoBehaviour
         }
 
         good = GameObject.Find("good");
+        good.SetActive(false);
         bad = GameObject.Find("bad");
+        bad.SetActive(false);
     }
 
     // Update is called once per frame
